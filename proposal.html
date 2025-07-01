@@ -111,6 +111,7 @@
       color: #666;
       margin-top: 4px;
     }
+
     .greeting {
       margin-bottom: 8px;
       font-weight: 600;
@@ -120,7 +121,7 @@
     .proposal-intro {
       color: #444;
       margin-bottom: 32px;
-      font-size: 22px;
+      font-size: 22px; /* Легко меняется! */
       line-height: 1.5;
     }
     .section-title {
@@ -147,13 +148,20 @@
       font-size: 17px;
       table-layout: fixed;
     }
+    .proposal-table th,
+    .proposal-table td {
+      border: 1px solid #33333322;
+      text-align: left;
+      word-break: break-word;
+      padding: 13px 10px;
+    }
     .proposal-table .section-row {
       background: var(--mainCellColor, #4C514F);
     }
     .proposal-table .section-row td {
       color: #fff;
       font-weight: bold;
-      font-size: 1.15em;
+      font-size: 1.17em;
       text-align: center;
       border: none;
       padding: 17px 10px 16px 10px;
@@ -242,7 +250,7 @@
       if(data.mainFontColor)   document.documentElement.style.setProperty('--mainFontColor', data.mainFontColor);
     }
 
-    // пример JSON, все секции
+    // твой JSON
     const proposalJson = {
       "mainCellColor": "#4C514F",
       "cellBackground": "#f3f3f3",
@@ -334,17 +342,19 @@
       document.getElementById('proposalIntro').textContent = data.proposalIntro || "";
     }
 
+    // ФИКС! Только шапка, секции — без внутренних заголовков!
     function renderTable(data) {
       let html = '';
-      // Одна строка-шапка (название секции слева)
-      html += `<table class="proposal-table"><tr class="section-row">`;
-      html += `<td style="color:#fff;font-weight:bold;font-size:1.15em;">Loan Info</td>`;
-      data.columns.forEach(col => html += `<td style="color:#fff;font-weight:bold;font-size:1.15em;text-align:center;">${col}</td>`);
+      html += `<table class="proposal-table">`;
+
+      // ОДНА шапка: Loan Info | Program 1 | Program 2 | Program 3
+      html += `<tr class="section-row">`;
+      html += `<td style="color:#fff;font-weight:bold;font-size:1.17em;">Loan Info</td>`;
+      data.columns.forEach(col => html += `<td style="color:#fff;font-weight:bold;font-size:1.17em;text-align:center;">${col}</td>`);
       html += `</tr>`;
 
-      // Все секции подряд, без внутренних заголовков, но с gap между секциями
-      data.sections.forEach((section, idx) => {
-        if (idx !== 0) {
+      data.sections.forEach((section, secIdx) => {
+        if (secIdx !== 0) {
           html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
         }
         section.rows.forEach(row => {
@@ -355,7 +365,6 @@
           html += `</tr>`;
         });
       });
-
       html += `</table>`;
       document.getElementById('proposalTableWrap').innerHTML = html;
     }
