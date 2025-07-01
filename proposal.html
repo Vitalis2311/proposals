@@ -20,7 +20,7 @@
       color: var(--mainFontColor);
     }
     .container {
-      max-width: 1250px;
+      max-width: 1500px;
       margin: 40px auto;
       background: #fff;
       border-radius: 20px;
@@ -148,25 +148,26 @@
       font-size: 17px;
       table-layout: fixed;
     }
-.proposal-table th,
-.proposal-table td {
-  border: 1px solid #33333322;
-  text-align: left;
-  word-break: break-word;
-  padding: 13px 10px;
-}
-.proposal-table th {
-  background: var(--mainCellColor, #4C514F);
-  color: #fff;
-  font-weight: 600;
-  font-size: 1.18em;
-  text-align: left; /* <--- поменял только это! */
-  letter-spacing: 0.5px;
-  border-bottom: 2.5px solid #fff;
-}
-    .proposal-table .section-row td {
+    .proposal-table th,
+    .proposal-table td {
+      border: 1px solid #33333322;
+      text-align: left;
+      word-break: break-word;
+      padding: 13px 10px;
+    }
+    .proposal-table th {
       background: var(--mainCellColor, #4C514F);
       color: #fff;
+      font-weight: 600;
+      font-size: 1.18em;
+      text-align: left;
+      letter-spacing: 0.5px;
+      border-bottom: 2.5px solid #fff;
+    }
+    .proposal-table .section-row td,
+    .proposal-table .section-row {
+      background: var(--mainCellColor, #4C514F) !important;
+      color: #fff !important;
       font-weight: bold;
       font-size: 1.17em;
       border-top: 7px solid #fff;
@@ -191,6 +192,7 @@
       background: var(--cellBackground, #f3f3f3);
       font-weight: 400;
       color: #1e1e1e;
+      text-align: left;
     }
     .proposal-table td.field {
       font-weight: 600;
@@ -323,9 +325,8 @@
             { label: "3Rd Party Fees", values: ["$1,200.00", "$1,300.00", "$1,200.00"] },
             { label: "Escrows & Prepaid Interest", values: ["$800.00", "$850.00", "$900.00"] },
             { label: "Cash to Close", highlight: true, values: ["$10,800.00", "$12,200.00", "$11,300.00"] },
-{ label: "Closing Costs Included in Loan", values: ["$2,000.00", "$1,000.00", "$0.00"] },
-{ label: "Pre-Paids and Impounds in Loan", values: ["$3,500.00", "$2,800.00", "$1,000.00"] }
-
+            { label: "Closing Costs Included in Loan", values: ["$2,000.00", "$1,000.00", "$0.00"] },
+            { label: "Pre-Paids and Impounds in Loan", values: ["$3,500.00", "$2,800.00", "$1,000.00"] }
           ]
         },
         {
@@ -355,37 +356,46 @@
       document.getElementById('proposalIntro').textContent = data.proposalIntro || "";
     }
 
-    // --- Генерация таблицы
-function renderTable(data) {
-  let html = '';
-  html += '<table class="proposal-table">';
+    // --- Генерация таблицы ---
+    function renderTable(data) {
+      let html = '';
+      html += '<table class="proposal-table">';
 
-  // Loan Info + Program 1, 2, 3 в одной строке
-  html += '<tr>';
-  html += `<th style="width:19.5%">Loan Info</th>`;
-  data.columns.forEach(col => html += `<th style="width:26.5%">${col}</th>`);
-  html += '</tr>';
+      // Первая строка: Program (темная, как секция)
+      const loanInfo = data.sections[0];
+      html += '<tr class="section-row">';
+      html += `<td class="field">${loanInfo.rows[0].label}</td>`;
+      loanInfo.rows[0].values.forEach(v => html += `<td class="value">${v}</td>`);
+      html += '</tr>';
 
-  data.sections.forEach((section, secIdx) => {
-    if (secIdx !== 0) {
-      html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
+      // Остальные строки Loan Info
+      for(let i=1; i<loanInfo.rows.length; i++) {
+        const row = loanInfo.rows[i];
+        html += `<tr>`;
+        html += `<td class="field">${row.label}</td>`;
+        row.values.forEach(v => html += `<td class="value">${v}</td>`);
+        html += `</tr>`;
+      }
+
+      // Остальные секции (Rate & Term и далее)
+      data.sections.slice(1).forEach((section, secIdx) => {
+        html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
+        html += `<tr class="section-row"><td colspan="${data.columns.length + 1}">${section.name}</td></tr>`;
+        section.rows.forEach(row => {
+          let highlight = row.highlight ? 'highlight-row' : '';
+          html += `<tr class="${highlight}">`;
+          html += `<td class="field">${row.label}</td>`;
+          row.values.forEach(v => html += `<td class="value">${v}</td>`);
+          html += `</tr>`;
+        });
+      });
+
+      html += '</table>';
+      document.getElementById('proposalTableWrap').innerHTML = html;
     }
-    // НЕ выводим строку-секцию, только строки данных
-    section.rows.forEach(row => {
-      let highlight = row.highlight ? 'highlight-row' : '';
-      html += `<tr class="${highlight}">`;
-      html += `<td class="field">${row.label}</td>`;
-      row.values.forEach(v => html += `<td class="value">${v}</td>`);
-      html += `</tr>`;
-    });
-  });
-  html += '</table>';
-  document.getElementById('proposalTableWrap').innerHTML = html;
-}
-    // --- Основная инициализация
+
+    // --- Основная инициализация ---
     (function main() {
-      // Используй свой fetch, пример:
-      // fetch('https://.../test.json').then(r=>r.json()).then(data=>{ setColorsFromJson(data); fillHeader(data); renderTable(data); });
       setColorsFromJson(proposalJson);
       fillHeader(proposalJson);
       renderTable(proposalJson);
