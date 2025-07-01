@@ -148,22 +148,22 @@
       font-size: 17px;
       table-layout: fixed;
     }
-    .proposal-table th,
-    .proposal-table td {
-      border: 1px solid #33333322;
-      text-align: left;
-      word-break: break-word;
-      padding: 13px 10px;
-    }
-    .proposal-table th {
-      background: var(--mainCellColor, #4C514F);
-      color: #fff;
-      font-weight: 600;
-      font-size: 1.18em;
-      text-align: center;
-      letter-spacing: 0.5px;
-      border-bottom: 2.5px solid #fff;
-    }
+.proposal-table th,
+.proposal-table td {
+  border: 1px solid #33333322;
+  text-align: left;
+  word-break: break-word;
+  padding: 13px 10px;
+}
+.proposal-table th {
+  background: var(--mainCellColor, #4C514F);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.18em;
+  text-align: left; /* <--- поменял только это! */
+  letter-spacing: 0.5px;
+  border-bottom: 2.5px solid #fff;
+}
     .proposal-table .section-row td {
       background: var(--mainCellColor, #4C514F);
       color: #fff;
