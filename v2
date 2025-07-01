@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loan Proposal</title>
+  <meta name="viewport" content="width=1500">
+  <style>
+    :root {
+      --mainCellColor: #4C514F;
+      --cellBackground: #f3f3f3;
+      --cellSecondColor: #7CC242;
+      --brandFontColor: #7CC242;
+      --mainFontColor: #4E5351;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      color: var(--mainFontColor);
+    }
+    .container {
+      max-width: 1500px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      padding: 40px 50px 35px 50px;
+      box-sizing: border-box;
+    }
+.proposal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+  .logo-block {
+      width: 380px;
+      min-width: 300px;
+      max-width: 550px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+.logo-block img {
+  max-height: 250px;     /* максимальная высота */
+  max-width: 550px;      /* максимальная ширина (или auto) */
+  width: auto;
+  height: auto;
+  display: block;
+}
+.lo-block {
+  flex: 1;
+  display: flex;
+  align-items: center;      /* Центрирует фото по вертикали с текстом */
+  justify-content: flex-end;
+  gap: 35px;
+}
+.lo-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--brandFontColor, #7CC242);
+  background: #fff;
+  margin-right: 14px;
+  flex-shrink: 0;
+}
+.lo-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lo-info {
+  min-width: 220px;
+  max-width: 360px;
+  font-size: 16px;
+  line-height: 1.4;
+  margin-right: 30px;
+}
+.lo-info .label {
+  color: #b2b2b2;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  letter-spacing: 0.7px;
+  display: block;
+}
+.lo-info .lo-name {
+  font-size: 23px;
+  font-weight: bold;
+  color: var(--brandFontColor, #7CC242);
+  margin-bottom: 2px;
+  line-height: 1.15;
+}
+.lo-info .company {
+  font-weight: bold;
+  color: #222;
+}
+.lo-info .lo-contact {
+  margin-top: 3px;
+  color: #1a1a1a;
+}
+.lo-info .lo-contact span {
+  display: block;
+  font-size: 15px;
+}
+.lo-info .lo-contact .nmls-dre {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+    .greeting {
+      margin-bottom: 8px;
+      margin-top: 8px;
+      font-weight: 600;
+      color: #222;
+      font-size: 24px;
+    }
+    .proposal-intro {
+      color: #444;
+      margin-bottom: 32px;
+      font-size: 22px; /* Легко меняется! */
+      line-height: 1.5;
+    }
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--brandFontColor, #7CC242);
+      margin: 30px 0 40px 0;
+      text-align: left;
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+    .proposal-table-wrap {
+      margin-bottom: 28px;
+      margin-top: 18px;
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .proposal-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      font-size: 17px;
+      table-layout: fixed;
+    }
+.proposal-table th,
+.proposal-table td {
+  border: 1px solid #33333322;
+  text-align: left;
+  word-break: break-word;
+  padding: 13px 18px 13px 18px; /* БЫЛО 13px 10px */
+}
+.proposal-table th {
+  background: var(--mainCellColor, #4C514F);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.0em;
+  text-align: left; /* <--- поменял только это! */
+  letter-spacing: 0.5px;
+  border-bottom: 2.5px solid #fff;
+}
+    .proposal-table .section-row td {
+      background: var(--mainCellColor, #4C514F);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.17em;
+      border-top: 7px solid #fff;
+      border-bottom: 1px solid var(--mainCellColor, #4C514F);
+      text-align: left;
+      padding-top: 16px;
+      padding-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+    .proposal-table tr.gap-row td {
+      background: #fff !important;
+      height: 24px;
+      border: none;
+      padding: 0;
+    }
+    .proposal-table .highlight-row td {
+      background: var(--cellSecondColor, #7CC242) !important;
+      font-weight: bold;
+      color: #fff !important;
+    }
+    .proposal-table td {
+      background: var(--cellBackground, #f3f3f3);
+      font-weight: 400;
+      color: #1e1e1e;
+    }
+    .proposal-table td.field {
+      font-weight: 600;
+      color: #353535;
+      background: #f8f8f8;
+      width: 19.5%;
+      text-align: left;
+    }
+    .proposal-table td.value {
+      width: 26.5%;
+      text-align: left;
+    }
+    .footer-note {
+      margin-top: 38px;
+      color: #636363;
+      background: #fff;
+      font-size: 13.6px;
+      text-align: left;
+      padding: 20px 28px 0 3px;
+      border-top: 1.7px solid #e5e5e5;
+      opacity: 0.85;
+      line-height: 1.45;
+      border-radius: 0 0 12px 12px;
+    }
+    @media (max-width: 1520px) {
+      .container { max-width: 99vw; padding: 1vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="proposal-header">
+      <div class="logo-block">
+        <img src="" id="brandLogo" alt="Company Logo">
+      </div>
+      <div class="lo-block">
+        <div class="lo-photo">
+          <img src="" id="loPhoto" alt="LO Photo">
+        </div>
+        <div class="lo-info">
+          <span class="label">THE REPORT WAS CREATED FOR YOU BY</span>
+          <div class="lo-name" id="loName"></div>
+          <div class="company" id="brandCompanyName"></div>
+          <div class="lo-contact">
+            <span id="loAddress"></span>
+            <span id="loEmail"></span>
+            <span id="loPhone"></span>
+            <span class="nmls-dre"><span id="loNmls"></span> | <span id="loDre"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="greeting" id="greeting"></div>
+    <div class="proposal-intro" id="proposalIntro"></div>
+    <div class="section-title">RATE & CLOSING COST OPTIONS</div>
+    <div class="proposal-table-wrap" id="proposalTableWrap"></div>
+    <div class="footer-note" id="footerNote">
+      The results provided above are intended for comparison purposes only and accuracy is not guaranteed. The loan comparison does not ensure the availability of, or your eligibility for, any specific product offered by any particular lender and/or is not a commitment to lend. Rates are subject to change based off credit score. The APR is estimated. Lender closing cost credits are not guaranteed and can change without notice.
+    </div>
+  </div>
+  <script>
+    // --- Функция для установки CSS-переменных из JSON
+    function setColorsFromJson(data) {
+      if(data.mainCellColor)  document.documentElement.style.setProperty('--mainCellColor', data.mainCellColor);
+      if(data.cellBackground)  document.documentElement.style.setProperty('--cellBackground', data.cellBackground);
+      if(data.cellSecondColor) document.documentElement.style.setProperty('--cellSecondColor', data.cellSecondColor);
+      if(data.brandFontColor)  document.documentElement.style.setProperty('--brandFontColor', data.brandFontColor);
+      if(data.mainFontColor)   document.documentElement.style.setProperty('--mainFontColor', data.mainFontColor);
+    }
+    // --- Заполняем шапку (логотип, LO, и т.д.)
+    function fillHeader(data) {
+      document.getElementById('brandLogo').src = data.brandLogo;
+      document.getElementById('loPhoto').src = data.loPhoto;
+      document.getElementById('loName').textContent = data.loFullName || "";
+      document.getElementById('brandCompanyName').textContent = data.brandCompanyName || "";
+      document.getElementById('loAddress').textContent = data.loAddress || "";
+      document.getElementById('loEmail').textContent = data.loEmail || "";
+      document.getElementById('loPhone').textContent = data.loPhone || "";
+      document.getElementById('loNmls').textContent = "NMLS: " + (data.nmls || "");
+      document.getElementById('loDre').textContent = "DRE: " + (data.dre || "");
+      document.getElementById('greeting').textContent = data.greeting || "";
+      document.getElementById('proposalIntro').textContent = data.proposalIntro || "";
+    }
+
+    // --- Новая функция генерации таблицы из плоского JSON
+    function renderTable(data) {
+      // ВАЖНО: Порядок и названия должны совпадать с JSON!
+      const labels = [
+        "Appraised Value", "Loan Amount", "Equity", "Loan-To-Value",
+        "Rate", "APR", "Term", "Points", "Discount Point",
+        "PI", "Hazard Insurance", "Mortgage Insurance", "HOA", "Property Taxes",
+        "Extra Monthly Payment", "Total Monthly Payment",
+        "Closing Costs", "Lender Fees", "3Rd Party Fees", "Escrows & Prepaid Interest",
+        "Cash to Close", "Closing Costs Included in Loan", "Pre-Paids and Impounds in Loan",
+        "Payment Savings", "Power Refi Savings", "Interest Saved over 5 Years", "Interest Saved over Life of Loan"
+      ];
+
+      // Строки, которые выделяются цветом
+      const green = [
+        "Rate", "Extra Monthly Payment", "Total Monthly Payment", "Cash to Close",
+        "Payment Savings", "Power Refi Savings", "Interest Saved over 5 Years", "Interest Saved over Life of Loan"
+      ];
+
+      let html = '<table class="proposal-table">';
+      html += '<tr><th>Program</th>';
+      data.programs.forEach(p => html += `<th>${p}</th>`);
+      html += '</tr>';
+      labels.forEach(label => {
+        let highlight = green.includes(label) ? 'highlight-row' : '';
+        html += `<tr class="${highlight}"><td class="field">${label}</td>`;
+        data[label].forEach(val => html += `<td class="value">${val}</td>`);
+        html += '</tr>';
+      });
+      html += '</table>';
+      document.getElementById('proposalTableWrap').innerHTML = html;
+    }
+
+    // --- Основная инициализация
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(window.location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    (async function main() {
+      const proposalId = getUrlParameter('id');
+      if (!proposalId) {
+        document.body.innerHTML = "<h2>Proposal ID not specified!</h2>";
+        return;
+      }
+      const url = `https://marketing2025.blob.core.windows.net/proposals/${proposalId}.json`;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Data not found');
+        const data = await response.json();
+        setColorsFromJson(data);
+        fillHeader(data);
+        renderTable(data);
+      } catch (err) {
+        document.body.innerHTML = "<h2>Proposal not found</h2>";
+      }
+    })();
+  </script>
+</body>
+</html>
