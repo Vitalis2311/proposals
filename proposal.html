@@ -263,86 +263,6 @@
       if(data.brandFontColor)  document.documentElement.style.setProperty('--brandFontColor', data.brandFontColor);
       if(data.mainFontColor)   document.documentElement.style.setProperty('--mainFontColor', data.mainFontColor);
     }
-
-    // --- Демо-JSON (замени на fetch)
-    const proposalJson = {
-      "mainCellColor": "#4C514F",
-      "cellBackground": "#f3f3f3",
-      "cellSecondColor": "#7CC242",
-      "brandFontColor": "#7CC242",
-      "mainFontColor": "#4E5351",
-      "brandLogo": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748",
-      "loPhoto": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526",
-      "loFullName": "John Doe",
-      "brandCompanyName": "Arbor Financial Group",
-      "loAddress": "1234 Main St, Irvine, CA 92614",
-      "loEmail": "jdoe@arborfg.com",
-      "loPhone": "(555) 555-5555",
-      "nmls": "123456",
-      "dre": "DRE1234",
-      "greeting": "Hi Jane Smith!",
-      "proposalIntro": "Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.",
-      "columns": [
-        "Program 1", "Program 2", "Program 3"
-      ],
-      "sections": [
-        {
-          "name": "Loan Info",
-          "rows": [
-            { label: "Program", values: ["Conv 30 Yr Fixed", "FHA 30 Yr Fixed", "VA 30 Yr Fixed"] },
-            { label: "Appraised Value", values: ["$999,999.00", "$899,000.00", "$799,000.00"] },
-            { label: "Loan Amount", values: ["$660,000.00", "$500,000.00", "$450,000.00"] },
-            { label: "Equity", values: ["$339,999.00", "$399,000.00", "$349,000.00"] },
-            { label: "Loan-To-Value", values: ["66%", "56%", "56%"] }
-          ]
-        },
-        {
-          "name": "Rate & Term",
-          "rows": [
-            { label: "Rate", highlight: true, values: ["4.0%", "4.5%", "3.8%"] },
-            { label: "APR", values: ["4.05%", "4.5%", "3.95%"] },
-            { label: "Term", values: ["298", "300", "295"] },
-            { label: "Points", values: ["1.0", "1.0", "0.5"] },
-            { label: "Discount Point", values: ["0.0%", "0.0%", "0.2%"] }
-          ]
-        },
-        {
-          "name": "Monthly Payment",
-          "rows": [
-            { label: "PI", values: ["$3,497.00", "$3,250.00", "$3,100.00"] },
-            { label: "Hazard Insurance", values: ["$85.00", "$100.00", "$100.00"] },
-            { label: "Mortgage Insurance", values: ["$0.00", "$120.00", "$0.00"] },
-            { label: "HOA", values: ["$0.00", "$50.00", "$0.00"] },
-            { label: "Property Taxes", values: ["$800.00", "$720.00", "$600.00"] },
-            { label: "Extra Monthly Payment", highlight: true, values: ["$261.00", "$0.00", "$0.00"] },
-            { label: "Total Monthly Payment", highlight: true, values: ["$4,643.00", "$4,230.00", "$3,800.00"] }
-          ]
-        },
-        {
-          "name": "Closing Costs",
-          "rows": [
-            { label: "Closing Costs", values: ["$5,000.00", "$7,500.00", "$6,000.00"] },
-            { label: "Lender Fees", values: ["$2,500.00", "$2,500.00", "$2,400.00"] },
-            { label: "3Rd Party Fees", values: ["$1,200.00", "$1,300.00", "$1,200.00"] },
-            { label: "Escrows & Prepaid Interest", values: ["$800.00", "$850.00", "$900.00"] },
-            { label: "Cash to Close", highlight: true, values: ["$10,800.00", "$12,200.00", "$11,300.00"] },
-{ label: "Closing Costs Included in Loan", values: ["$2,000.00", "$1,000.00", "$0.00"] },
-{ label: "Pre-Paids and Impounds in Loan", values: ["$3,500.00", "$2,800.00", "$1,000.00"] }
-
-          ]
-        },
-        {
-          "name": "Payment Savings",
-          "rows": [
-            { label: "Payment Savings", highlight: true, values: ["$261.00", "$261.00", "$261.00"] },
-            { label: "Power Refi Savings", highlight: true, values: ["$154,872.00", "$154,872.00", "$154,872.00"] },
-            { label: "Interest Saved over 5 Years", highlight: true, values: ["$34,823.00", "$34,823.00", "$34,823.00"] },
-            { label: "Interest Saved over Life of Loan", highlight: true, values: ["$318,569.00", "$318,569.00", "$318,569.00"] }
-          ]
-        }
-      ]
-    };
-
     // --- Заполняем шапку (логотип, LO, и т.д.)
     function fillHeader(data) {
       document.getElementById('brandLogo').src = data.brandLogo;
@@ -389,13 +309,31 @@ function renderTable(data) {
   document.getElementById('proposalTableWrap').innerHTML = html;
 }
     // --- Основная инициализация
-    (function main() {
-      // Используй свой fetch, пример:
-      // fetch('https://.../test.json').then(r=>r.json()).then(data=>{ setColorsFromJson(data); fillHeader(data); renderTable(data); });
-      setColorsFromJson(proposalJson);
-      fillHeader(proposalJson);
-      renderTable(proposalJson);
-    })();
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(window.location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+(async function main() {
+    const proposalId = getUrlParameter('id');
+    if (!proposalId) {
+        document.body.innerHTML = "<h2>Proposal ID not specified!</h2>";
+        return;
+    }
+    const url = `https://marketing2025.blob.core.windows.net/proposals/${proposalId}.json`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Data not found');
+        const data = await response.json();
+        setColorsFromJson(data);
+        fillHeader(data);
+        renderTable(data);
+    } catch (err) {
+        document.body.innerHTML = "<h2>Proposal not found</h2>";
+    }
+})();
   </script>
 </body>
 </html>
