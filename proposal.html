@@ -274,7 +274,7 @@ function renderProposalTables(json) {
 (function main() {
   // Получить id из query
   const params = new URLSearchParams(window.location.search);
-  const id = params.get('id') || 'test';
+  const id = params.get('id') || 'test2';
   fetch(`https://marketing2025.blob.core.windows.net/proposals/${id}.json`)
     .then(r => {
       if (!r.ok) throw new Error("Not found");
