@@ -27,68 +27,95 @@
       box-shadow: 0 4px 24px #0002;
       padding: 38px 46px 28px 46px;
     }
-    .header-row {
+    /* Новая шапка */
+    .header-row2 {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: stretch;
       margin-bottom: 18px;
       gap: 20px;
     }
-    .logo-box img {
-      max-height: 60px;
+    .logo-box2 {
       background: #fff;
-      border-radius: 7px;
-    }
-    .lo-box {
       display: flex;
       align-items: center;
-      gap: 20px;
-      min-width: 350px;
+      justify-content: center;
+      padding: 16px 36px;
+      border-radius: 8px;
+      border: 1.5px dashed #bbb;
+      min-width: 340px;
+      min-height: 120px;
+    }
+    .logo-box2 img {
+      max-height: 78px;
+      max-width: 100%;
+      display: block;
+    }
+    .lo-card {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      background: #fff;
+      border-radius: 8px;
+      border: 1.5px dashed #bbb;
+      min-width: 370px;
+      min-height: 120px;
+      padding: 16px 18px;
+      gap: 18px;
+    }
+    .lo-photo-square {
+      background: #eef3fa;
+      border-radius: 7px;
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      border: 1.5px solid #dde4ea;
     }
     .lo-photo {
-      width: 70px;
-      height: 70px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--brandFontColor);
       background: #eee;
-      box-shadow: 0 2px 6px #0001;
+      border: 2px solid #fff;
     }
-    .lo-info {
+    .lo-details {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      font-size: 1.1em;
-      gap: 2px;
+      justify-content: center;
+      gap: 1.5px;
+      font-size: 1.01em;
     }
-    .lo-name {
-      font-weight: 700;
+    .lo-created {
+      font-size: 0.95em;
+      color: #555;
+      margin-bottom: 1px;
+      letter-spacing: 0.7px;
+    }
+    .lo-fullname {
       color: var(--brandFontColor);
-      font-size: 1.28em;
+      font-weight: bold;
+      font-size: 1.18em;
       margin-bottom: 2px;
     }
-    .lo-contacts {
-      color: #555;
-      font-size: 0.98em;
+    .lo-company {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 2px;
+    }
+    .lo-address, .lo-email, .lo-phone {
+      color: #444;
+      font-size: 1em;
     }
     .lo-numbers {
-      color: #777;
-      font-size: 0.95em;
+      color: #555;
+      font-size: 0.97em;
       margin-top: 2px;
     }
-    .company {
-      font-size: 1.22em;
-      font-weight: bold;
-      color: var(--brandFontColor);
-      margin: 16px 0 2px 0;
-      letter-spacing: 1px;
-    }
-    .lo-address {
-      font-size: 0.98em;
-      color: #444;
-      margin-top: 3px;
-      margin-bottom: 12px;
-    }
+    /* --- остальное --- */
     .greeting {
       margin: 18px 0 5px 0;
       font-size: 1.16em;
@@ -162,12 +189,15 @@
     }
     @media (max-width: 1200px) {
       .container { padding: 3vw 1vw; }
-      .header-row { flex-direction: column; gap: 10px; align-items: stretch; }
-      .lo-box { min-width: unset; flex-direction: row; }
-      .lo-photo { width: 60px; height: 60px; }
+      .header-row2 { flex-direction: column; gap: 10px; align-items: stretch; }
+      .lo-card { min-width: unset; flex-direction: row; }
+      .lo-photo-square { width: 56px; height: 56px; }
+      .lo-photo { width: 44px; height: 44px; }
+      .logo-box2 { min-width: unset; min-height: 70px; padding: 10px 10px; }
     }
     @media (max-width: 700px) {
       .container { padding: 8vw 1vw; }
+      .logo-box2 { padding: 4vw 2vw; }
       .company, .big-title-wide { font-size: 1em; }
       table, th, td { font-size: 0.96em; }
     }
@@ -175,24 +205,24 @@
 </head>
 <body>
   <div class="container">
-    <!-- Шапка -->
-    <div class="header-row">
-      <div class="logo-box">
+    <!-- Новая шапка -->
+    <div class="header-row2">
+      <div class="logo-box2">
         <img id="brandLogo" src="" alt="Logo" />
-        <div class="company" id="brandCompanyName"></div>
-        <div class="lo-address" id="loAddress"></div>
       </div>
-      <div class="lo-box">
-        <img id="loPhoto" class="lo-photo" src="" alt="LO Photo" />
-        <div class="lo-info">
-          <div class="lo-name" id="loFullName"></div>
-          <div class="lo-contacts">
-            <span id="loEmail"></span><br>
-            <span id="loPhone"></span>
-          </div>
+      <div class="lo-card">
+        <div class="lo-photo-square">
+          <img id="loPhoto" class="lo-photo" src="" alt="LO Photo" />
+        </div>
+        <div class="lo-details">
+          <div class="lo-created">THE REPORT WAS CREATED FOR YOU BY</div>
+          <div class="lo-fullname" id="loFullName"></div>
+          <div class="lo-company" id="brandCompanyName"></div>
+          <div class="lo-address" id="loAddress"></div>
+          <div class="lo-email" id="loEmail"></div>
+          <div class="lo-phone" id="loPhone"></div>
           <div class="lo-numbers">
-            NMLS: <span id="nmls"></span>
-            | DRE: <span id="dre"></span>
+            <span id="nmls"></span> | DRE: <span id="dre"></span>
           </div>
         </div>
       </div>
