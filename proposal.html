@@ -1,176 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Loan Proposal Table</title>
-  <style>
-    body {
-      background: #f5f5f5;
-      font-family: Aptos, Arial, sans-serif;
-    }
-    .proposal-table {
-      width: 1500px;
-      margin: 48px auto;
-      border-collapse: separate;
-      border-spacing: 0;
-      background: #fff;
-      box-shadow: 0 2px 24px #0001;
-      border-radius: 18px;
-      overflow: hidden;
-    }
-    .section-header {
-      background: #4C514F; /* бренд-цвет из JSON */
-    }
-    .section-header td {
-      color: #fff;
-      font-weight: bold;
-      font-size: 1.18em;
-      padding: 18px 10px 16px 18px;
-      border: none;
-    }
-    .section-name {
-      text-align: left;
-      min-width: 250px;
-    }
-    .program-name {
-      text-align: center;
-    }
-    .proposal-table td {
-      padding: 12px 10px;
-      border: none;
-      border-bottom: 1.5px solid #d1d1d1; /* Тонкая разделительная линия */
-      font-size: 1.04em;
-      color: #232323;
-    }
-    .proposal-table tr:last-child td {
-      border-bottom: none;
-    }
-    .highlight-row td {
-      background: #7CC242 !important; /* цвет выделения из JSON */
-      color: #fff;
-      font-weight: bold;
-    }
-    .section-gap {
-      height: 28px;
-      background: #fff;
-      border: none;
-    }
-    /* Footer disclaimer */
-    .proposal-disclaimer {
-      width: 1500px;
-      margin: 18px auto 28px auto;
-      font-size: 0.99em;
-      color: #888;
-      line-height: 1.5;
-      text-align: left;
-    }
-  </style>
-</head>
-<body>
-  <table class="proposal-table">
-    <tbody id="proposalTableWrap"></tbody>
-  </table>
-  <div class="proposal-disclaimer">
-    The results provided above are intended for comparison purposes only and accuracy is not guaranteed. The loan comparison does not ensure the availability of, or your eligibility for, any specific product offered by any particular lender and/or is not a commitment to lend. Rates are subject to change based off credit score. The APR is estimated. Lender closing cost credits are not guaranteed and can change without notice.
-  </div>
-  <script>
-    // --- Пример данных из JSON ---
-    const proposalJson = {
-      mainCellColor: "#4C514F", // Цвет секции
-      cellSecondColor: "#7CC242", // Цвет выделения
-      programs: ["Program 1", "Program 2", "Program 3"],
-      sections: [
-        {
-          name: "Loan Info",
-          rows: [
-            { label: "Appraised Value", values: ["$999,999.00", "$999,999.00", "$999,999.00"] },
-            { label: "Loan Amount", values: ["$660,000.00", "$660,000.00", "$660,000.00"] },
-            { label: "Equity", values: ["$440,000.00", "$440,000.00", "$440,000.00"] },
-            { label: "Loan-To-Value", values: ["66%", "66%", "66%"] },
-          ]
-        },
-        {
-          name: "Rate, APR, Term",
-          rows: [
-            { label: "Rate", values: ["4%", "4%", "4%"], highlight: true },
-            { label: "APR", values: ["4%", "4%", "4%"] },
-            { label: "Term", values: ["298", "298", "298"] },
-          ]
-        },
-        {
-          name: "Monthly Breakdown",
-          rows: [
-            { label: "PI", values: ["$3,497.00", "$3,497.00", "$3,497.00"] },
-            { label: "Hazard Insurance", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Mortgage Insurance", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "HOA", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Property Taxes", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Extra Monthly Payment", values: ["$261.00", "$261.00", "$261.00"], highlight: true },
-            { label: "Total Monthly Payment", values: ["$3,758.00", "$3,758.00", "$3,758.00"], highlight: true },
-          ]
-        },
-        {
-          name: "Closing Costs",
-          rows: [
-            { label: "Points", values: ["0.00% ($0.00)", "0.00% ($0.00)", "0.00% ($0.00)"] },
-            { label: "Lender Credit", values: ["0.00% ($0.00)", "0.00% ($0.00)", "0.00% ($0.00)"] },
-            { label: "Lender Fees", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "3rd Party Fees", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Total Closing Costs", values: ["$0.00", "$0.00", "$0.00"], highlight: true },
-            { label: "Escrows & Prepaid Interest", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Estimated Total Cash to Close", values: ["$0.00", "$0.00", "$0.00"], highlight: true },
-          ]
-        },
-        {
-          name: "Other Savings",
-          rows: [
-            { label: "Closing Costs Included in Loan", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Pre-Paids and Impounds in Loan", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Payment Savings", values: ["$261.00", "$261.00", "$261.00"], highlight: true },
-            { label: "Power Refi Savings", values: ["$154,872.00", "$154,872.00", "$154,872.00"], highlight: true },
-            { label: "Interest Saved over 5 Years", values: ["$34,823.00", "$34,823.00", "$34,823.00"] },
-            { label: "Interest Saved over Life of Loan", values: ["$318,569.00", "$318,569.00", "$318,569.00"], highlight: true },
-          ]
-        }
-      ]
-    };
+<style>
+  .proposal-table {
+    width: 1500px;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: Aptos, Arial, sans-serif;
+    background: #fff;
+  }
+  .section-header {
+    background: #4C514F; /* Брендовый тёмный фон из JSON */
+  }
+  .section-header td {
+    color: #fff; /* Белый текст */
+    font-weight: bold;
+    font-size: 1.15em;
+    padding: 18px 10px;
+    border: none;
+  }
+  .section-name {
+    text-align: left;
+    min-width: 250px;
+    font-size: 1.15em;
+    letter-spacing: 0.01em;
+  }
+  .program-name {
+    text-align: center;
+    font-size: 1.15em;
+    letter-spacing: 0.01em;
+  }
+</style>
 
-    // --- Динамический рендер ---
-    function renderTable(data) {
-      // применяем цвета из JSON
-      document.querySelectorAll('.section-header').forEach(th => {
-        th.style.background = data.mainCellColor || '#4C514F';
-      });
-      document.querySelectorAll('.highlight-row td').forEach(td => {
-        td.style.background = data.cellSecondColor || '#7CC242';
-      });
-
-      let html = "";
-      data.sections.forEach((section, idx) => {
-        // Разделитель между секциями
-        if (idx !== 0) {
-          html += `<tr class="section-gap"><td colspan="${1 + data.programs.length}"></td></tr>`;
-        }
-        // Шапка секции: одна строка
-        html += `<tr class="section-header">`;
-        html += `<td class="section-name">${section.name}</td>`;
-        data.programs.forEach(pr => {
-          html += `<td class="program-name">${pr}</td>`;
-        });
-        html += `</tr>`;
-        // Контент секции
-        section.rows.forEach(row => {
-          const rowClass = row.highlight ? 'highlight-row' : '';
-          html += `<tr class="${rowClass}"><td>${row.label}</td>`;
-          row.values.forEach(v => html += `<td>${v}</td>`);
-          html += `</tr>`;
-        });
-      });
-      document.getElementById('proposalTableWrap').innerHTML = html;
-    }
-
-    // --- Инициализация ---
-    renderTable(proposalJson);
-  </script>
-</body>
-</html>
+<table class="proposal-table">
+  <tr class="section-header">
+    <td class="section-name">Loan Info</td>
+    <td class="program-name">Program 1</td>
+    <td class="program-name">Program 2</td>
+    <td class="program-name">Program 3</td>
+  </tr>
+  <!-- Дальше идут обычные строки данных секции Loan Info -->
+  <tr>
+    <td>Appraised Value</td>
+    <td>$999,999.00</td>
+    <td>$999,999.00</td>
+    <td>$999,999.00</td>
+  </tr>
+  <!-- ... и так далее -->
+</table>
