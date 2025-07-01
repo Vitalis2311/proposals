@@ -209,8 +209,9 @@
   margin-bottom: 24px;
 }
 .logo-true img {
-  height: 150px; /* подбери под свой логотип */
-  max-width: 400px;
+  height: 120px;    /* только высота */
+  width: auto;      /* ширина авто — пропорции не ломаются */
+  max-width: 100%;  /* чтобы не вылезала за контейнер */
   display: block;
 }
 .lo-true {
@@ -219,8 +220,8 @@
   gap: 24px;
 }
 .lo-photo-true {
-  height: 150px;  /* Ровно как у лого! */
-  width: 150px;
+  height: 120px;  /* Ровно как у лого! */
+  width: 120px;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid #eee;
