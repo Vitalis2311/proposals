@@ -43,8 +43,10 @@
   justify-content: flex-start;
 }
 .logo-block img {
-  max-width: 320px;
-  border-radius: 14px;
+  height: 200px;    /* высота лого */
+  width: auto;      /* ширина — автоматически по картинке */
+  display: block;
+  max-width: 100%;  /* не выйдет за пределы .logo-block */
 }
 .lo-block {
   flex: 1;
