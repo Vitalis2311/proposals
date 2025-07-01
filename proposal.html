@@ -2,293 +2,332 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Refi Proposal - Multi-Scenario</title>
-  <meta name="viewport" content="width=900, initial-scale=1">
+  <title>Loan Proposal</title>
+  <meta name="viewport" content="width=1200">
   <style>
     body {
-      font-family: Aptos, Arial, sans-serif;
-      background: #f3f3f3;
-      color: var(--mainFontColor, #444);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7f7f7;
       margin: 0;
       padding: 0;
     }
     .container {
-      max-width: 900px;
-      margin: 40px auto;
+      width: 1150px;
+      margin: 30px auto;
       background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 6px 38px #0001;
-      padding: 32px 36px 44px 36px;
+      border-radius: 16px;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.07);
+      padding: 36px 42px 42px 42px;
+      box-sizing: border-box;
     }
-    .header-true {
+    .proposal-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+    .logo-block {
+      width: 390px;
+      margin-right: 40px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 48px;
-      margin-bottom: 28px;
-    }
-    .logo-true img {
-      height: 120px;
-      width: auto;
-      display: block;
-      border-radius: 18px;
-      background: #fff;
-      border: none;
-    }
-    .lo-true {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-    .lo-photo-true {
-      height: 120px;
-      width: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #eee;
-      box-shadow: 0 1px 8px #0001;
-      background: #fff;
-    }
-    .lo-details-true {
-      display: flex;
-      flex-direction: column;
       justify-content: center;
-      gap: 1.5px;
     }
-    .lo-report-by {
-      font-size: 0.86em;
-      color: #888;
-      font-weight: 400;
-      letter-spacing: 0.09em;
+    .logo-block img {
+      height: 90px;
+      width: auto;
+      max-width: 350px;
+      display: block;
+    }
+    .lo-block {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-top: 5px;
+    }
+    .lo-photo {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #7CC242;
+      background: #fff;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .lo-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .lo-info {
+      line-height: 1.45;
+      font-size: 14.8px;
+    }
+    .lo-info .label {
+      color: #9ca09a;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
       margin-bottom: 2px;
+      letter-spacing: 0.5px;
+      display: block;
     }
-    .lo-fullname-true {
-      color: var(--brandFontColor, #7CC242);
-      font-size: 1.55em;
+    .lo-info .lo-name {
+      font-size: 20px;
       font-weight: bold;
-      margin-bottom: 2px;
+      color: #7CC242;
+      margin-bottom: 0;
     }
-    .lo-company-true {
-      font-size: 1.07em;
+    .lo-info .company {
       font-weight: bold;
-      color: #222;
-      margin-bottom: 2px;
+      color: #424643;
     }
-    .lo-address-true, .lo-email-true, .lo-phone-true {
-      font-size: 0.97em;
-      color: #444;
-    }
-    .lo-numbers-true {
-      font-size: 0.97em;
-      color: #666;
+    .lo-info .lo-contact {
       margin-top: 2px;
+      color: #1a1a1a;
     }
+    .lo-info .lo-contact span {
+      display: block;
+    }
+
     .greeting {
-      font-size: 1.2em;
-      color: var(--brandFontColor, #7CC242);
-      margin-top: 24px;
-      margin-bottom: 8px;
-      font-weight: bold;
-      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #222;
+      font-size: 16px;
     }
-    .description {
-      font-size: 1.05em;
-      margin-bottom: 16px;
+    .proposal-intro {
       color: #555;
+      margin-bottom: 16px;
+      font-size: 15.5px;
+      line-height: 1.5;
     }
     .section-title {
-      margin-top: 28px;
-      margin-bottom: 8px;
-      font-size: 1.22em;
-      color: var(--brandFontColor, #7CC242);
-      font-weight: bold;
-      letter-spacing: 0.01em;
-      border-left: 7px solid var(--brandFontColor, #7CC242);
-      padding-left: 9px;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #7CC242;
+      margin: 22px 0 14px 0;
+      text-align: left;
+      letter-spacing: 1px;
+      line-height: 1.1;
     }
-    table.proposal-table {
+    .proposal-table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0;
-      margin-bottom: 26px;
+      margin-top: 12px;
       background: #fff;
-      font-size: 1.07em;
-      box-shadow: 0 1px 7px #0001;
-      border-radius: 14px;
-      overflow: hidden;
+      font-size: 15.5px;
+      table-layout: fixed;
     }
-    table.proposal-table th, table.proposal-table td {
-      padding: 10px 12px;
+    .proposal-table th,
+    .proposal-table td {
+      border: 1px solid #33333326;
+      padding: 10px 10px;
       text-align: left;
-      border: none;
-      transition: background 0.1s;
+      word-break: break-word;
     }
-    table.proposal-table th {
-      background: var(--mainCellColor, #4C514F);
+    .proposal-table th {
+      background: #4C514F;
       color: #fff;
-      font-size: 1.12em;
       font-weight: bold;
-      border-bottom: 1.5px solid #d8d8d8;
-      letter-spacing: 0.02em;
+      font-size: 16.5px;
+      text-align: center;
+      letter-spacing: 0.5px;
     }
-    table.proposal-table td {
-      background: var(--cellBackground, #f3f3f3);
-      color: var(--mainFontColor, #4E5351);
-      font-size: 1.04em;
-      font-weight: 500;
-    }
-    table.proposal-table tr.highlight td {
-      background: var(--cellSecondColor, #7CC242) !important;
-      color: #fff !important;
+    .proposal-table .section-row td {
+      background: #eaeaea;
+      color: #4C514F;
       font-weight: bold;
+      font-size: 16.5px;
+      border-bottom: 2px solid #4C514F;
+      text-align: left;
+      padding-top: 17px;
+      padding-bottom: 6px;
+      letter-spacing: 0.2px;
     }
-    table.proposal-table tr.section-divider td {
-      background: #fff;
-      border-top: 2.5px solid #eee;
-      height: 12px;
-      padding: 0;
+    .proposal-table .highlight-row td {
+      background: #C7F4A3;
+      font-weight: bold;
+      color: #222;
     }
-    @media (max-width: 1000px) {
-      .container { max-width: 100vw; padding: 9px; }
+    .proposal-table td {
+      background: #f3f3f3;
+    }
+    .proposal-table tr:not(.section-row):not(.highlight-row) td {
+      font-weight: 400;
+      color: #222;
+    }
+    .proposal-table td.field {
+      font-weight: bold;
+      color: #353535;
+      background: #f8f8f8;
+      width: 20%;
+    }
+    .proposal-table td.value {
+      width: 26.66%;
+      text-align: right;
+    }
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .container { width: 99vw; padding: 1vw; }
     }
   </style>
 </head>
 <body>
-<div class="container" id="main-container" style="display:none;">
-  <div class="header-true">
-    <div class="logo-true">
-      <img id="brandLogo" src="" alt="Logo">
-    </div>
-    <div class="lo-true">
-      <img id="loPhoto" class="lo-photo-true" src="" alt="LO Photo">
-      <div class="lo-details-true">
-        <div class="lo-report-by">THE REPORT WAS CREATED FOR YOU BY</div>
-        <div class="lo-fullname-true" id="loFullName"></div>
-        <div class="lo-company-true" id="brandCompanyName"></div>
-        <div class="lo-address-true" id="loAddress"></div>
-        <div class="lo-email-true" id="loEmail"></div>
-        <div class="lo-phone-true" id="loPhone"></div>
-        <div class="lo-numbers-true">
-          <span id="nmls"></span> | DRE: <span id="dre"></span>
+  <div class="container">
+    <div class="proposal-header">
+      <div class="logo-block">
+        <img src="https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748" id="brandLogo" alt="Company Logo">
+      </div>
+      <div class="lo-block">
+        <div class="lo-photo">
+          <img src="https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526" id="loPhoto" alt="LO Photo">
+        </div>
+        <div class="lo-info">
+          <span class="label">THE REPORT WAS CREATED FOR YOU BY</span>
+          <div class="lo-name" id="loName">John Doe</div>
+          <div class="company" id="brandCompanyName">Arbor Financial Group</div>
+          <div class="lo-contact">
+            <span id="loAddress">1234 Main St, Irvine, CA 92614</span>
+            <span id="loEmail">jdoe@arborfg.com</span>
+            <span id="loPhone">(555) 555-5555</span>
+            <span><span id="loNmls">NMLS: 123456</span> | <span id="loDre">DRE: DRE1234</span></span>
+          </div>
         </div>
       </div>
     </div>
+    <div class="greeting" id="greeting">Hi Jane Smith!</div>
+    <div class="proposal-intro" id="proposalIntro">
+      Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.
+    </div>
+    <div class="section-title">RATE & CLOSING COST OPTIONS</div>
+
+    <table class="proposal-table" id="proposalTable"></table>
   </div>
-  <div class="greeting" id="greeting"></div>
-  <div class="description">Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.</div>
-  <div id="proposal-tables"></div>
-</div>
-<script>
-const sectionMap = [
-  {
-    title: "Loan Info",
-    fields: [
-      "Program", "Appraised Value", "Loan Amount", "Equity", "Loan-To-Value"
-    ]
-  },
-  {
-    title: "Rate & Term",
-    fields: [
-      "Rate", "APR", "Term", "Points", "Discount Point"
-    ]
-  },
-  {
-    title: "Monthly Payment",
-    fields: [
-      "PI", "Hazard Insurance", "Mortgage Insurance", "HOA", "Property Taxes", "Extra Monthly Payment", "Total Monthly Payment"
-    ]
-  },
-  {
-    title: "Closing Costs",
-    fields: [
-      "Closing Costs", "Lender Fees", "3Rd Party Fees", "Escrows & Prepaid Interest", "Cash to Close", "Closing Costs Included in Loan", "Pre-Paids and Impounds in Loan"
-    ]
-  },
-  {
-    title: "Final Calculations",
-    fields: [
-      "Payment Savings", "Power Refi Savings", "Interest Saved in 5 Years", "Interest Saved over Life of Loan"
-    ]
-  }
-];
 
-function fillStaticFields(json) {
-  // Цвета
-  for (const k of [
-    "mainCellColor", "cellBackground", "cellSecondColor", "brandFontColor", "mainFontColor"
-  ]) {
-    if (json[k]) document.documentElement.style.setProperty('--'+k, json[k]);
-  }
-  // Лого и LO
-  document.getElementById('brandLogo').src = json.logoUrl || '';
-  document.getElementById('loPhoto').src = json.loPhotoUrl || '';
-  document.getElementById('loFullName').textContent = json.loFullName || '';
-  document.getElementById('brandCompanyName').textContent = json.brandCompanyName || '';
-  document.getElementById('loAddress').textContent = json.loAddress || '';
-  document.getElementById('loEmail').textContent = json.loEmail || '';
-  document.getElementById('loPhone').textContent = json.loPhone || '';
-  document.getElementById('nmls').textContent = json.nmls || '';
-  document.getElementById('dre').textContent = json.dre || '';
-  document.getElementById('greeting').textContent = json.greeting || '';
-}
+  <script>
+    // --- Демо-JSON (замени на fetch)
+    const proposalJson = {
+      "brandLogo": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748",
+      "loPhoto": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526",
+      "loFullName": "John Doe",
+      "brandCompanyName": "Arbor Financial Group",
+      "loAddress": "1234 Main St, Irvine, CA 92614",
+      "loEmail": "jdoe@arborfg.com",
+      "loPhone": "(555) 555-5555",
+      "nmls": "123456",
+      "dre": "DRE1234",
+      "greeting": "Hi Jane Smith!",
+      "proposalIntro": "Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.",
 
-function getNumScenarios(json) {
-  let count = 0;
-  for (let i = 1; i <= 3; i++) {
-    if (json[`Scenario ${i} Name`] || json[`Program ${i}`]) count = i;
-  }
-  return count || 1;
-}
+      "columns": [
+        "Program 1", "Program 2", "Program 3"
+      ],
+      "sections": [
+        {
+          "name": "Loan Info",
+          "rows": [
+            { label: "Program", values: ["Conv 30 Yr Fixed", "FHA 30 Yr Fixed", "VA 30 Yr Fixed"] },
+            { label: "Appraised Value", values: ["$999,999.00", "$899,000.00", "$799,000.00"] },
+            { label: "Loan Amount", values: ["$660,000.00", "$500,000.00", "$450,000.00"] },
+            { label: "Equity", values: ["$339,999.00", "$399,000.00", "$349,000.00"] },
+            { label: "Loan-To-Value", values: ["66%", "56%", "56%"] }
+          ]
+        },
+        {
+          "name": "Rate & Term",
+          "rows": [
+            { label: "Rate", highlight: true, values: ["4.0%", "4.5%", "3.8%"] },
+            { label: "APR", values: ["4.05%", "4.5%", "3.95%"] },
+            { label: "Term", values: ["298", "300", "295"] },
+            { label: "Points", values: ["1.0", "1.0", "0.5"] },
+            { label: "Discount Point", values: ["0.0%", "0.0%", "0.2%"] }
+          ]
+        },
+        {
+          "name": "Monthly Payment",
+          "rows": [
+            { label: "PI", values: ["$3,497.00", "$3,250.00", "$3,100.00"] },
+            { label: "Hazard Insurance", values: ["$85.00", "$100.00", "$100.00"] },
+            { label: "Mortgage Insurance", values: ["$0.00", "$120.00", "$0.00"] },
+            { label: "HOA", values: ["$0.00", "$50.00", "$0.00"] },
+            { label: "Property Taxes", values: ["$800.00", "$720.00", "$600.00"] },
+            { label: "Extra Monthly Payment", highlight: true, values: ["$261.00", "$0.00", "$0.00"] },
+            { label: "Total Monthly Payment", highlight: true, values: ["$4,643.00", "$4,230.00", "$3,800.00"] }
+          ]
+        },
+        {
+          "name": "Closing Costs",
+          "rows": [
+            { label: "Closing Costs", values: ["$5,000.00", "$7,500.00", "$6,000.00"] },
+            { label: "Lender Fees", values: ["$2,500.00", "$2,500.00", "$2,400.00"] },
+            { label: "3Rd Party Fees", values: ["$1,200.00", "$1,300.00", "$1,200.00"] },
+            { label: "Escrows & Prepaid Interest", values: ["$800.00", "$850.00", "$900.00"] },
+            { label: "Cash to Close", highlight: true, values: ["$10,800.00", "$12,200.00", "$11,300.00"] },
+            { label: "Closing Costs Included in Loan", values: ["No", "Yes", "No"] },
+            { label: "Pre-Paids and Impounds in Loan", values: ["No", "Yes", "No"] }
+          ]
+        },
+        {
+          "name": "Payment Savings",
+          "rows": [
+            { label: "Payment Savings", highlight: true, values: ["$261.00", "$261.00", "$261.00"] },
+            { label: "Power Refi Savings", highlight: true, values: ["$154,872.00", "$154,872.00", "$154,872.00"] },
+            { label: "Interest Saved over 5 Years", highlight: true, values: ["$34,823.00", "$34,823.00", "$34,823.00"] },
+            { label: "Interest Saved over Life of Loan", highlight: true, values: ["$318,569.00", "$318,569.00", "$318,569.00"] }
+          ]
+        }
+      ]
+    };
 
-function renderProposalTables(json) {
-  const numScenarios = getNumScenarios(json);
-  const scenarioNames = [];
-  for (let i = 1; i <= numScenarios; i++) {
-    scenarioNames.push(json[`Scenario ${i} Name`] || `Option ${i}`);
-  }
-  const tablesDiv = document.getElementById('proposal-tables');
-  tablesDiv.innerHTML = "";
-  sectionMap.forEach((section, idx) => {
-    const table = document.createElement('table');
-    table.className = "proposal-table";
-    let thead = `<thead><tr><th></th>`;
-    scenarioNames.forEach(n => {
-      thead += `<th>${n}</th>`;
-    });
-    thead += `</tr></thead>`;
-    let tbody = `<tbody>`;
-    section.fields.forEach(fld => {
-      let isHighlight = (fld === "Total Monthly Payment" || fld === "Cash to Close" || fld === "Power Refi Savings" || fld === "Payment Savings" || fld === "Interest Saved over Life of Loan" || fld === "Interest Saved in 5 Years");
-      tbody += `<tr${isHighlight ? ' class="highlight"' : ''}><td>${fld}</td>`;
-      for (let i = 1; i <= numScenarios; i++) {
-        let val = json[`${fld} ${i}`];
-        tbody += `<td>${val !== undefined ? val : ""}</td>`;
-      }
-      tbody += `</tr>`;
-    });
-    tbody += `</tbody>`;
-    tablesDiv.innerHTML += `<div class="section-title">${section.title}</div>` + table.outerHTML.replace("</table>", thead + tbody + "</table>");
-  });
-}
+    // --- Заполняем шапку (логотип, LO, и т.д.)
+    function fillHeader(data) {
+      document.getElementById('brandLogo').src = data.brandLogo;
+      document.getElementById('loPhoto').src = data.loPhoto;
+      document.getElementById('loName').textContent = data.loFullName;
+      document.getElementById('brandCompanyName').textContent = data.brandCompanyName;
+      document.getElementById('loAddress').textContent = data.loAddress;
+      document.getElementById('loEmail').textContent = data.loEmail;
+      document.getElementById('loPhone').textContent = data.loPhone;
+      document.getElementById('loNmls').textContent = "NMLS: " + data.nmls;
+      document.getElementById('loDre').textContent = "DRE: " + data.dre;
+      document.getElementById('greeting').textContent = data.greeting || "";
+      document.getElementById('proposalIntro').textContent = data.proposalIntro || "";
+    }
 
-(function main() {
-  // Получить id из query
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id') || 'test2';
-  fetch(`https://marketing2025.blob.core.windows.net/proposals/${id}.json`)
-    .then(r => {
-      if (!r.ok) throw new Error("Not found");
-      return r.json();
-    })
-    .then(json => {
-      document.getElementById('main-container').style.display = '';
-      fillStaticFields(json);
-      renderProposalTables(json);
-    })
-    .catch(e => {
-      document.body.innerHTML = '<div style="text-align:center;color:#b22;margin-top:70px;font-size:1.3em">Proposal not found or unavailable.</div>';
-    });
-})();
-</script>
+    // --- Генерация таблицы
+    function renderTable(data) {
+      let html = '';
+      // Первая строка — заголовки колонок
+      html += '<tr>';
+      html += `<th style="width:20%"> </th>`;
+      data.columns.forEach(col => html += `<th style="width:26.66%">${col}</th>`);
+      html += '</tr>';
+
+      data.sections.forEach(section => {
+        // Заголовок секции
+        html += `<tr class="section-row"><td colspan="4">${section.name}</td></tr>`;
+        section.rows.forEach(row => {
+          let highlight = row.highlight ? 'highlight-row' : '';
+          html += `<tr class="${highlight}">`;
+          html += `<td class="field">${row.label}</td>`;
+          row.values.forEach(v => html += `<td class="value">${v}</td>`);
+          html += `</tr>`;
+        });
+      });
+      document.getElementById('proposalTable').innerHTML = html;
+    }
+
+    // --- Пример: замени на fetch(jsonUrl).then...
+    fillHeader(proposalJson);
+    renderTable(proposalJson);
+
+    // // Если нужен реальный fetch:
+    // fetch('https://.../test.json').then(resp => resp.json()).then(data => {
+    //   fillHeader(data); renderTable(data);
+    // });
+  </script>
 </body>
 </html>
