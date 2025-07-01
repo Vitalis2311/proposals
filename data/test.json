@@ -1,5 +1,10 @@
 {
   "brandCompanyName": "Arbor Financial Group",
+  "logoUrl": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/226af836-8d63-ee11-be6d-6045bdd9d8e6?ts=638321136716666331",
+  "loPhotoUrl": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/d0be8632-7db8-ed11-83fe-0022482a02ce?ts=638133051492563277",
+  "backgroundColor": "#f6f8fc",
+  "brandColor2": "#2a7be4",
+  "fontColor": "#222",
   "loFullName": "John Doe",
   "loAddress": "1234 Main St, Irvine, CA 92614",
   "loEmail": "jdoe@arborfg.com",
@@ -9,17 +14,14 @@
   "greeting": "Hi Jane Smith!",
   "fullName": "Jane Smith",
   "coBorrowerFullName": "Bob Smith",
-
   "program1": "Refinance Special",
   "appraisedValue1": "$650,000",
   "loanAmount1": "$520,000",
   "equity1": "$130,000",
   "loanToValue1": "80%",
-
   "rate1": "5.25%",
   "apr1": "5.42%",
   "term1": "30 years",
-
   "pi1": "$2,512.34",
   "hazardInsurance1": "$120.00",
   "mortgageInsurance1": "$0.00",
@@ -27,13 +29,11 @@
   "propertyTaxes1": "$540.00",
   "extraMonthlyPayment1": "$0.00",
   "totalMonthlyPayment1": "$3,207.34",
-
   "points1": "1.0",
   "discountPoint1": "-$2,000",
   "lenderFees1": "$900",
   "thirdPartyFees1": "$750",
   "closingCosts1": "$3,500",
-
   "escrowsAndPrepaid1": "$3,900",
   "cashToClose1": "$12,000",
   "closingCostsInLoan1": "$1,500",
