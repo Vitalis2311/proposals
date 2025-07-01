@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <title>Refi Proposal</title>
   <style>
+    :root {
+      --backgroundColor: #f8f9fa;
+      --brandColor2: #3864be;
+      --fontColor: #222;
+    }
     body {
       font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      color: #222;
+      background: var(--backgroundColor);
+      color: var(--fontColor);
+      margin: 0; padding: 0;
     }
     .container {
       max-width: 720px;
@@ -19,29 +23,79 @@
       box-shadow: 0 4px 24px #0001;
       padding: 32px 32px 24px 32px;
     }
-    .top-block {
-      border-bottom: 2px solid #eee;
-      margin-bottom: 24px;
-      padding-bottom: 18px;
+    .top-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 10px;
+    }
+    .logo-block {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .logo-block img {
+      max-height: 46px;
+      margin-bottom: 8px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      padding: 2px;
     }
     .company {
-      font-size: 1.15em;
+      font-size: 1.18em;
       font-weight: bold;
-      color: #3864be;
+      color: var(--brandColor2);
+      margin-bottom: 7px;
+    }
+    .lo-block {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .lo-photo {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--brandColor2);
+      background: #eee;
+    }
+    .lo-info {
+      font-size: 0.98em;
+    }
+    .lo-info .name { font-weight: bold; color: var(--brandColor2); }
+    .row2 {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 10px 0 8px 0;
+    }
+    .info-block {
+      flex: 1;
+      font-size: 0.96em;
+      margin-bottom: 7px;
+      color: #365;
+    }
+    .info-block span {
+      font-weight: bold;
+      color: #254571;
+    }
+    .greeting {
+      margin: 24px 0 12px 0;
+      font-size: 1.15em;
+      color: var(--brandColor2);
+      font-weight: bold;
     }
     .section-title {
-      font-size: 1.1em;
+      font-size: 1.09em;
       margin-top: 26px;
       margin-bottom: 6px;
       color: #235;
       font-weight: bold;
       letter-spacing: 0.5px;
-    }
-    .greeting {
-      margin: 24px 0 12px 0;
-      font-size: 1.14em;
-      color: #225c8a;
-      font-weight: bold;
     }
     table {
       width: 100%;
@@ -72,44 +126,35 @@
       margin-top: 32px;
       line-height: 1.5;
     }
-    .row2 {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      margin: 10px 0 8px 0;
-    }
-    .info-block {
-      flex: 1;
-      font-size: 0.96em;
-      margin-bottom: 7px;
-      color: #365;
-    }
-    .info-block span {
-      font-weight: bold;
-      color: #254571;
-    }
     @media (max-width: 720px) {
       .container { padding: 8vw 2vw; }
       table, th, td { font-size: 0.98em; }
-      .row2 { flex-direction: column; }
+      .top-flex, .row2 { flex-direction: column; gap: 10px; align-items: stretch; }
+      .lo-block { flex-direction: row; }
+      .logo-block img { max-width: 150px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="top-block">
-      <div class="company" id="brandCompanyName">Brand Company Name</div>
-      <div class="row2" style="margin-top:10px;">
-        <div class="info-block"><span id="loFullName">LO Full Name</span></div>
-        <div class="info-block">
-          <span id="loEmail">LO Email</span> | <span id="loPhone">LO Phone</span>
+    <div class="top-flex">
+      <div class="logo-block">
+        <img id="brandLogo" src="" alt="Logo">
+        <div class="company" id="brandCompanyName">Brand Company Name</div>
+      </div>
+      <div class="lo-block">
+        <img id="loPhoto" class="lo-photo" src="" alt="LO Photo">
+        <div class="lo-info">
+          <div class="name" id="loFullName">LO Full Name</div>
+          <div id="loEmail">LO Email</div>
+          <div id="loPhone">LO Phone</div>
         </div>
       </div>
-      <div class="row2">
-        <div class="info-block">Address: <span id="loAddress">LO Address</span></div>
-        <div class="info-block">
-          nmls: <span id="nmls">nmls</span> | DRE: <span id="dre">dre</span>
-        </div>
+    </div>
+    <div class="row2">
+      <div class="info-block">Address: <span id="loAddress">LO Address</span></div>
+      <div class="info-block">
+        nmls: <span id="nmls">nmls</span> | DRE: <span id="dre">dre</span>
       </div>
     </div>
     <div class="greeting" id="greeting">Hi Full Name CoBorrower Full Name!</div>
@@ -168,6 +213,10 @@
       const el = document.getElementById(id);
       if (el) el.textContent = text ?? "-";
     }
+    function setImg(id, url, fallback) {
+      const el = document.getElementById(id);
+      if (el) el.src = url || fallback || "";
+    }
     if (!id) {
       setText('program1', "Нет ID в ссылке");
     } else {
@@ -177,6 +226,16 @@
           return resp.json();
         })
         .then(data => {
+          // Динамические цвета
+          if (data.backgroundColor) document.documentElement.style.setProperty('--backgroundColor', data.backgroundColor);
+          if (data.brandColor2) document.documentElement.style.setProperty('--brandColor2', data.brandColor2);
+          if (data.fontColor) document.documentElement.style.setProperty('--fontColor', data.fontColor);
+
+          // Картинки
+          setImg('brandLogo', data.logoUrl, 'https://dummyimage.com/200x40/ddd/222&text=Logo');
+          setImg('loPhoto', data.loPhotoUrl, 'https://dummyimage.com/54x54/ccc/666&text=LO');
+
+          // Тексты
           setText('brandCompanyName', data.brandCompanyName);
           setText('loFullName', data.loFullName);
           setText('loAddress', data.loAddress);
