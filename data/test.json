@@ -1,5 +1,45 @@
 {
-  "client": "Test Client",
-  "rate": "4.9%",
-  "term": "20 лет"
+  "brandCompanyName": "Arbor Financial Group",
+  "loFullName": "John Doe",
+  "loAddress": "1234 Main St, Irvine, CA 92614",
+  "loEmail": "jdoe@arborfg.com",
+  "loPhone": "(555) 555-5555",
+  "nmls": "123456",
+  "dre": "DRE1234",
+  "greeting": "Hi Jane Smith!",
+  "fullName": "Jane Smith",
+  "coBorrowerFullName": "Bob Smith",
+
+  "program1": "Refinance Special",
+  "appraisedValue1": "$650,000",
+  "loanAmount1": "$520,000",
+  "equity1": "$130,000",
+  "loanToValue1": "80%",
+
+  "rate1": "5.25%",
+  "apr1": "5.42%",
+  "term1": "30 years",
+
+  "pi1": "$2,512.34",
+  "hazardInsurance1": "$120.00",
+  "mortgageInsurance1": "$0.00",
+  "hoa1": "$35.00",
+  "propertyTaxes1": "$540.00",
+  "extraMonthlyPayment1": "$0.00",
+  "totalMonthlyPayment1": "$3,207.34",
+
+  "points1": "1.0",
+  "discountPoint1": "-$2,000",
+  "lenderFees1": "$900",
+  "thirdPartyFees1": "$750",
+  "closingCosts1": "$3,500",
+
+  "escrowsAndPrepaid1": "$3,900",
+  "cashToClose1": "$12,000",
+  "closingCostsInLoan1": "$1,500",
+  "prepaidsInLoan1": "$500",
+  "paymentSavings1": "$150/mo",
+  "powerRefiSavings1": "$5,000",
+  "interestSaved5Years1": "$8,000",
+  "interestSavedLife1": "$28,000"
 }
