@@ -155,16 +155,26 @@
       word-break: break-word;
       padding: 13px 10px;
     }
-    .proposal-table .section-row {
+    .proposal-table th {
       background: var(--mainCellColor, #4C514F);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.18em;
+      text-align: center;
+      letter-spacing: 0.5px;
+      border-bottom: 2.5px solid #fff;
     }
     .proposal-table .section-row td {
+      background: var(--mainCellColor, #4C514F);
       color: #fff;
       font-weight: bold;
       font-size: 1.17em;
-      text-align: center;
-      border: none;
-      padding: 17px 10px 16px 10px;
+      border-top: 7px solid #fff;
+      border-bottom: 1px solid var(--mainCellColor, #4C514F);
+      text-align: left;
+      padding-top: 16px;
+      padding-bottom: 10px;
+      letter-spacing: 0.3px;
     }
     .proposal-table tr.gap-row td {
       background: #fff !important;
@@ -242,6 +252,7 @@
     </div>
   </div>
   <script>
+    // --- Функция для установки CSS-переменных из JSON
     function setColorsFromJson(data) {
       if(data.mainCellColor)  document.documentElement.style.setProperty('--mainCellColor', data.mainCellColor);
       if(data.cellBackground)  document.documentElement.style.setProperty('--cellBackground', data.cellBackground);
@@ -250,7 +261,7 @@
       if(data.mainFontColor)   document.documentElement.style.setProperty('--mainFontColor', data.mainFontColor);
     }
 
-    // твой JSON
+    // --- Демо-JSON (замени на fetch)
     const proposalJson = {
       "mainCellColor": "#4C514F",
       "cellBackground": "#f3f3f3",
@@ -328,6 +339,7 @@
       ]
     };
 
+    // --- Заполняем шапку (логотип, LO, и т.д.)
     function fillHeader(data) {
       document.getElementById('brandLogo').src = data.brandLogo;
       document.getElementById('loPhoto').src = data.loPhoto;
@@ -342,21 +354,22 @@
       document.getElementById('proposalIntro').textContent = data.proposalIntro || "";
     }
 
-    // ФИКС! Только шапка, секции — без внутренних заголовков!
+    // --- Генерация таблицы
     function renderTable(data) {
       let html = '';
-      html += `<table class="proposal-table">`;
-
-      // ОДНА шапка: Loan Info | Program 1 | Program 2 | Program 3
-      html += `<tr class="section-row">`;
-      html += `<td style="color:#fff;font-weight:bold;font-size:1.17em;">Loan Info</td>`;
-      data.columns.forEach(col => html += `<td style="color:#fff;font-weight:bold;font-size:1.17em;text-align:center;">${col}</td>`);
-      html += `</tr>`;
+      // Первая строка — заголовки колонок
+      html += '<tr>';
+      html += `<th style="width:19.5%"> </th>`;
+      data.columns.forEach(col => html += `<th style="width:26.5%">${col}</th>`);
+      html += '</tr>';
 
       data.sections.forEach((section, secIdx) => {
+        // Разрыв между секциями (кроме первой)
         if (secIdx !== 0) {
           html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
         }
+        // Заголовок секции
+        html += `<tr class="section-row"><td colspan="${data.columns.length + 1}">${section.name}</td></tr>`;
         section.rows.forEach(row => {
           let highlight = row.highlight ? 'highlight-row' : '';
           html += `<tr class="${highlight}">`;
@@ -365,11 +378,13 @@
           html += `</tr>`;
         });
       });
-      html += `</table>`;
-      document.getElementById('proposalTableWrap').innerHTML = html;
+      document.getElementById('proposalTableWrap').innerHTML = `<table class="proposal-table">${html}</table>`;
     }
 
+    // --- Основная инициализация
     (function main() {
+      // Используй свой fetch, пример:
+      // fetch('https://.../test.json').then(r=>r.json()).then(data=>{ setColorsFromJson(data); fillHeader(data); renderTable(data); });
       setColorsFromJson(proposalJson);
       fillHeader(proposalJson);
       renderTable(proposalJson);
