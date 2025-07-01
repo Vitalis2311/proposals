@@ -8,7 +8,7 @@
     :root {
       --mainCellColor: #363636;
       --cellBackground: #f3f3f3;
-      --cellSecondColor: #e5ecfb;
+      --cellSecondColor: #8cd448;
       --brandFontColor: #41a100;
       --mainFontColor: #222;
     }
@@ -90,18 +90,27 @@
       margin-bottom: 12px;
     }
     .greeting {
-      margin: 28px 0 18px 0;
-      font-size: 1.20em;
-      color: var(--brandFontColor);
+      margin: 18px 0 5px 0;
+      font-size: 1.16em;
+      color: var(--mainFontColor);
       font-weight: bold;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
-    .big-title {
+    .proposal-desc {
+      margin-bottom: 18px;
+      font-size: 1.13em;
+      color: #444;
+      font-family: inherit;
+      line-height: 1.6;
+    }
+    .big-title-wide {
+      width: 100%;
+      text-align: center;
       color: var(--brandFontColor);
-      font-size: 1.32em;
+      font-size: 2.2em;
       font-weight: bold;
-      margin: 0 0 18px 0;
       letter-spacing: 1px;
+      margin: 32px 0 28px 0;
       text-transform: uppercase;
     }
     .section {
@@ -137,9 +146,10 @@
       font-weight: 700;
       background: var(--cellBackground);
     }
-    td.cellsecond {
-      background: var(--cellSecondColor);
+    tr.full-green th, tr.full-green td {
+      background: var(--cellSecondColor) !important;
       font-weight: 700;
+      color: #222 !important;
     }
     tr:last-child td {
       border-bottom: 2px solid #e5e5e5;
@@ -158,7 +168,7 @@
     }
     @media (max-width: 700px) {
       .container { padding: 8vw 1vw; }
-      .company, .big-title { font-size: 1em; }
+      .company, .big-title-wide { font-size: 1em; }
       table, th, td { font-size: 0.96em; }
     }
   </style>
@@ -187,9 +197,13 @@
         </div>
       </div>
     </div>
-    <!-- Приветствие и заголовок -->
+    <!-- Приветствие и текст -->
     <div class="greeting" id="greeting"></div>
-    <div class="big-title">Rate & Closing Cost Options</div>
+    <div class="proposal-desc">
+      Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.
+    </div>
+    <!-- Большой зелёный заголовок -->
+    <div class="big-title-wide">RATE & CLOSING COST OPTIONS</div>
     <!-- Loan Info -->
     <div class="section">
       <div class="section-title">Loan Information</div>
@@ -205,7 +219,7 @@
     <div class="section">
       <div class="section-title">Rate & Term</div>
       <table>
-        <tr><th class="label">Rate</th><td class="cellsecond" id="rate1"></td></tr>
+        <tr class="full-green"><th class="label">Rate</th><td id="rate1"></td></tr>
         <tr><th class="label">APR</th><td id="apr1"></td></tr>
         <tr><th class="label">Term</th><td id="term1"></td></tr>
       </table>
@@ -220,7 +234,7 @@
         <tr><th class="label">HOA</th><td id="hoa1"></td></tr>
         <tr><th class="label">Property Taxes</th><td id="propertyTaxes1"></td></tr>
         <tr><th class="label">Extra Monthly Payment</th><td id="extraMonthlyPayment1"></td></tr>
-        <tr><th class="label">Total Monthly Payment</th><td class="cellsecond" id="totalMonthlyPayment1"></td></tr>
+        <tr class="full-green"><th class="label">Total Monthly Payment</th><td id="totalMonthlyPayment1"></td></tr>
       </table>
     </div>
     <!-- Closing Costs -->
@@ -231,7 +245,7 @@
         <tr><th class="label">Lender Credit</th><td id="discountPoint1"></td></tr>
         <tr><th class="label">Lender Fees</th><td id="lenderFees1"></td></tr>
         <tr><th class="label">3rd Party Fees</th><td id="thirdPartyFees1"></td></tr>
-        <tr><th class="label">Total Closing Costs</th><td class="cellsecond" id="closingCosts1"></td></tr>
+        <tr class="full-green"><th class="label">Total Closing Costs</th><td id="closingCosts1"></td></tr>
       </table>
     </div>
     <!-- Final Calculations -->
@@ -239,10 +253,10 @@
       <div class="section-title">Final Calculations</div>
       <table>
         <tr><th class="label">Escrows & Prepaid Interest</th><td id="escrowsAndPrepaid1"></td></tr>
-        <tr><th class="label">Estimated Total Cash to Close</th><td class="cellsecond" id="cashToClose1"></td></tr>
+        <tr class="full-green"><th class="label">Estimated Total Cash to Close</th><td id="cashToClose1"></td></tr>
         <tr><th class="label">Closing Costs Included in Loan</th><td id="closingCostsInLoan1"></td></tr>
         <tr><th class="label">Pre-Paids and Impounds in Loan</th><td id="prepaidsInLoan1"></td></tr>
-        <tr><th class="label">Payment Savings</th><td id="paymentSavings1"></td></tr>
+        <tr class="full-green"><th class="label">Payment Savings</th><td id="paymentSavings1"></td></tr>
         <tr><th class="label">Power Refi Savings</th><td id="powerRefiSavings1"></td></tr>
         <tr><th class="label">Interest Saved over 5 Years</th><td id="interestSaved5Years1"></td></tr>
         <tr><th class="label">Interest Saved over Life of Loan</th><td id="interestSavedLife1"></td></tr>
