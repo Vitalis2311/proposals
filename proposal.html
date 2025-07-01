@@ -2,42 +2,225 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Loan Proposal</title>
+  <title>Refi Proposal</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; }
-    .container { max-width: 500px; background: #fff; margin: 32px auto; border-radius: 10px; box-shadow: 0 4px 20px #0002; padding: 32px; }
-    h1 { color: #3a8f2d; }
-    .error { color: #b00; font-weight: bold; }
-    .field { font-size: 1.2em; margin-bottom: 12px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    .container {
+      max-width: 720px;
+      background: #fff;
+      margin: 40px auto 24px auto;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #0001;
+      padding: 32px 32px 24px 32px;
+    }
+    .top-block {
+      border-bottom: 2px solid #eee;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+    }
+    .company {
+      font-size: 1.15em;
+      font-weight: bold;
+      color: #3864be;
+    }
+    .section-title {
+      font-size: 1.1em;
+      margin-top: 26px;
+      margin-bottom: 6px;
+      color: #235;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .greeting {
+      margin: 24px 0 12px 0;
+      font-size: 1.14em;
+      color: #225c8a;
+      font-weight: bold;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 16px 0;
+      background: #fafdff;
+      font-size: 0.97em;
+    }
+    th, td {
+      border: 1px solid #e3e3e3;
+      padding: 10px 9px;
+      text-align: left;
+    }
+    th {
+      background: #e5ecfb;
+      font-weight: bold;
+      color: #2b4263;
+    }
+    tr.section-header th {
+      background: #c3d6ee;
+      font-size: 1em;
+      color: #333;
+      text-align: left;
+    }
+    .disclaimer {
+      font-size: 0.89em;
+      color: #777;
+      margin-top: 32px;
+      line-height: 1.5;
+    }
+    .row2 {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 10px 0 8px 0;
+    }
+    .info-block {
+      flex: 1;
+      font-size: 0.96em;
+      margin-bottom: 7px;
+      color: #365;
+    }
+    .info-block span {
+      font-weight: bold;
+      color: #254571;
+    }
+    @media (max-width: 720px) {
+      .container { padding: 8vw 2vw; }
+      table, th, td { font-size: 0.98em; }
+      .row2 { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Loan Proposal</h1>
-    <div id="proposal">Loading...</div>
+    <div class="top-block">
+      <div class="company" id="brandCompanyName">Brand Company Name</div>
+      <div class="row2" style="margin-top:10px;">
+        <div class="info-block"><span id="loFullName">LO Full Name</span></div>
+        <div class="info-block">
+          <span id="loEmail">LO Email</span> | <span id="loPhone">LO Phone</span>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="info-block">Address: <span id="loAddress">LO Address</span></div>
+        <div class="info-block">
+          nmls: <span id="nmls">nmls</span> | DRE: <span id="dre">dre</span>
+        </div>
+      </div>
+    </div>
+    <div class="greeting" id="greeting">Hi Full Name CoBorrower Full Name!</div>
+    <div>Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.</div>
+
+    <div class="section-title">RATE & CLOSING COST OPTIONS</div>
+    <table>
+      <tr class="section-header"><th colspan="2">Program</th></tr>
+      <tr><th>Program</th><td id="program1">-</td></tr>
+      <tr><th>Appraised Value</th><td id="appraisedValue1">-</td></tr>
+      <tr><th>Loan Amount</th><td id="loanAmount1">-</td></tr>
+      <tr><th>Equity</th><td id="equity1">-</td></tr>
+      <tr><th>Loan-To-Value</th><td id="loanToValue1">-</td></tr>
+
+      <tr class="section-header"><th colspan="2">Rate Details</th></tr>
+      <tr><th>Rate</th><td id="rate1">-</td></tr>
+      <tr><th>APR</th><td id="apr1">-</td></tr>
+      <tr><th>Term</th><td id="term1">-</td></tr>
+
+      <tr class="section-header"><th colspan="2">Monthly Payments</th></tr>
+      <tr><th>Principle & Interest</th><td id="pi1">-</td></tr>
+      <tr><th>Hazard Insurance</th><td id="hazardInsurance1">-</td></tr>
+      <tr><th>Mortgage Insurance</th><td id="mortgageInsurance1">-</td></tr>
+      <tr><th>HOA</th><td id="hoa1">-</td></tr>
+      <tr><th>Property Taxes</th><td id="propertyTaxes1">-</td></tr>
+      <tr><th>Extra Monthly Payment</th><td id="extraMonthlyPayment1">-</td></tr>
+      <tr><th>Total Monthly Payment</th><td id="totalMonthlyPayment1">-</td></tr>
+
+      <tr class="section-header"><th colspan="2">Closing Costs</th></tr>
+      <tr><th>Points</th><td id="points1">-</td></tr>
+      <tr><th>Lender Credit</th><td id="discountPoint1">-</td></tr>
+      <tr><th>Lender Fees</th><td id="lenderFees1">-</td></tr>
+      <tr><th>3rd Party Fees</th><td id="thirdPartyFees1">-</td></tr>
+      <tr><th>Total Closing Costs</th><td id="closingCosts1">-</td></tr>
+
+      <tr class="section-header"><th colspan="2">Final Calculations</th></tr>
+      <tr><th>Escrows & Prepaid Interest</th><td id="escrowsAndPrepaid1">-</td></tr>
+      <tr><th>Estimated Total Cash to Close</th><td id="cashToClose1">-</td></tr>
+      <tr><th>Closing Costs Included in Loan</th><td id="closingCostsInLoan1">-</td></tr>
+      <tr><th>Pre-Paids and Impounds in Loan</th><td id="prepaidsInLoan1">-</td></tr>
+      <tr><th>Payment Savings</th><td id="paymentSavings1">-</td></tr>
+      <tr><th>Power Refi Savings</th><td id="powerRefiSavings1">-</td></tr>
+      <tr><th>Interest Saved over 5 Years</th><td id="interestSaved5Years1">-</td></tr>
+      <tr><th>Interest Saved over Life of Loan</th><td id="interestSavedLife1">-</td></tr>
+    </table>
+
+    <div class="disclaimer">
+      The results provided above are intended for comparison purposes only and accuracy is not guaranteed. The loan comparison does not ensure the availability of, or your eligibility for, any specific product offered by any particular lender and/or is not a commitment to lend. Rates are subject to change based off credit score. The APR is estimated. Lender closing cost credits are not guaranteed and can change without notice.
+    </div>
   </div>
   <script>
     // Получаем id из ссылки (?id=test)
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
+    function setText(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text ?? "-";
+    }
     if (!id) {
-      document.getElementById('proposal').innerHTML = '<div class="error">Нет ID в ссылке!</div>';
+      setText('program1', "Нет ID в ссылке");
     } else {
-      // Подгружаем json из папки data
-      const jsonUrl = `data/${id}.json`;
-      fetch(jsonUrl)
+      fetch(`data/${id}.json`)
         .then(resp => {
           if (!resp.ok) throw new Error("Not found");
           return resp.json();
         })
         .then(data => {
-          let html = `<div class="field"><b>Client:</b> ${data.client}</div>
-            <div class="field"><b>Rate:</b> ${data.rate}</div>
-            <div class="field"><b>Term:</b> ${data.term}</div>`;
-          document.getElementById('proposal').innerHTML = html;
+          setText('brandCompanyName', data.brandCompanyName);
+          setText('loFullName', data.loFullName);
+          setText('loAddress', data.loAddress);
+          setText('loEmail', data.loEmail);
+          setText('loPhone', data.loPhone);
+          setText('nmls', data.nmls);
+          setText('dre', data.dre);
+          setText('greeting', data.greeting || `Hi ${data.fullName}${data.coBorrowerFullName ? ' & ' + data.coBorrowerFullName : ''}!`);
+
+          setText('program1', data.program1);
+          setText('appraisedValue1', data.appraisedValue1);
+          setText('loanAmount1', data.loanAmount1);
+          setText('equity1', data.equity1);
+          setText('loanToValue1', data.loanToValue1);
+
+          setText('rate1', data.rate1);
+          setText('apr1', data.apr1);
+          setText('term1', data.term1);
+
+          setText('pi1', data.pi1);
+          setText('hazardInsurance1', data.hazardInsurance1);
+          setText('mortgageInsurance1', data.mortgageInsurance1);
+          setText('hoa1', data.hoa1);
+          setText('propertyTaxes1', data.propertyTaxes1);
+          setText('extraMonthlyPayment1', data.extraMonthlyPayment1);
+          setText('totalMonthlyPayment1', data.totalMonthlyPayment1);
+
+          setText('points1', data.points1);
+          setText('discountPoint1', data.discountPoint1);
+          setText('lenderFees1', data.lenderFees1);
+          setText('thirdPartyFees1', data.thirdPartyFees1);
+          setText('closingCosts1', data.closingCosts1);
+
+          setText('escrowsAndPrepaid1', data.escrowsAndPrepaid1);
+          setText('cashToClose1', data.cashToClose1);
+          setText('closingCostsInLoan1', data.closingCostsInLoan1);
+          setText('prepaidsInLoan1', data.prepaidsInLoan1);
+          setText('paymentSavings1', data.paymentSavings1);
+          setText('powerRefiSavings1', data.powerRefiSavings1);
+          setText('interestSaved5Years1', data.interestSaved5Years1);
+          setText('interestSavedLife1', data.interestSavedLife1);
         })
         .catch(() => {
-          document.getElementById('proposal').innerHTML = '<div class="error">Данные не найдены или ссылка устарела!</div>';
+          setText('program1', "Данные не найдены или ссылка устарела!");
         });
     }
   </script>
