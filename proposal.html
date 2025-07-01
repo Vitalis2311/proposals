@@ -1,444 +1,294 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Refi Proposal</title>
+  <title>Refi Proposal - Multi-Scenario</title>
+  <meta name="viewport" content="width=900, initial-scale=1">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap');
-    :root {
-      --mainCellColor: #363636;
-      --cellBackground: #f3f3f3;
-      --cellSecondColor: #8cd448;
-      --brandFontColor: #41a100;
-      --mainFontColor: #222;
-    }
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #fff;
-      color: var(--mainFontColor);
+      font-family: Aptos, Arial, sans-serif;
+      background: #f3f3f3;
+      color: var(--mainFontColor, #444);
       margin: 0;
       padding: 0;
     }
     .container {
-      max-width: 1150px;
-      margin: 44px auto 28px auto;
+      max-width: 900px;
+      margin: 40px auto;
       background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 4px 24px #0002;
-      padding: 38px 46px 28px 46px;
+      border-radius: 24px;
+      box-shadow: 0 6px 38px #0001;
+      padding: 32px 36px 44px 36px;
     }
-    /* Новая шапка */
-    .header-row2 {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
-      margin-bottom: 18px;
-      gap: 20px;
-    }
-    .logo-box2 {
-      background: #fff;
+    .header-true {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 16px 36px;
-      border-radius: 8px;
-      border: 1.5px dashed #bbb;
-      min-width: 340px;
-      min-height: 120px;
+      justify-content: space-between;
+      gap: 48px;
+      margin-bottom: 28px;
     }
-    .logo-box2 img {
-      max-height: 78px;
-      max-width: 100%;
+    .logo-true img {
+      height: 120px;
+      width: auto;
       display: block;
-    }
-    .lo-card {
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
+      border-radius: 18px;
       background: #fff;
-      border-radius: 8px;
-      border: 1.5px dashed #bbb;
-      min-width: 370px;
-      min-height: 120px;
-      padding: 16px 18px;
+      border: none;
+    }
+    .lo-true {
+      display: flex;
+      align-items: center;
       gap: 18px;
     }
-    .lo-photo-square {
-      background: #eef3fa;
-      border-radius: 7px;
-      width: 72px;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
-      border: 1.5px solid #dde4ea;
-    }
-    .lo-photo {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
+    .lo-photo-true {
+      height: 120px;
+      width: 120px;
       object-fit: cover;
-      background: #eee;
-      border: 2px solid #fff;
+      border-radius: 50%;
+      border: 3px solid #eee;
+      box-shadow: 0 1px 8px #0001;
+      background: #fff;
     }
-    .lo-details {
+    .lo-details-true {
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 1.5px;
-      font-size: 1.01em;
     }
-    .lo-created {
-      font-size: 0.95em;
-      color: #555;
-      margin-bottom: 1px;
-      letter-spacing: 0.7px;
-    }
-    .lo-fullname {
-      color: var(--brandFontColor);
-      font-weight: bold;
-      font-size: 1.18em;
+    .lo-report-by {
+      font-size: 0.86em;
+      color: #888;
+      font-weight: 400;
+      letter-spacing: 0.09em;
       margin-bottom: 2px;
     }
-    .lo-company {
+    .lo-fullname-true {
+      color: var(--brandFontColor, #7CC242);
+      font-size: 1.55em;
       font-weight: bold;
-      color: #333;
       margin-bottom: 2px;
     }
-    .lo-address, .lo-email, .lo-phone {
-      color: #444;
-      font-size: 1em;
+    .lo-company-true {
+      font-size: 1.07em;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 2px;
     }
-    .lo-numbers {
-      color: #555;
+    .lo-address-true, .lo-email-true, .lo-phone-true {
       font-size: 0.97em;
+      color: #444;
+    }
+    .lo-numbers-true {
+      font-size: 0.97em;
+      color: #666;
       margin-top: 2px;
     }
-    /* --- остальное --- */
     .greeting {
-      margin: 18px 0 5px 0;
-      font-size: 1.16em;
-      color: var(--mainFontColor);
+      font-size: 1.2em;
+      color: var(--brandFontColor, #7CC242);
+      margin-top: 24px;
+      margin-bottom: 8px;
       font-weight: bold;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.01em;
     }
-    .proposal-desc {
-      margin-bottom: 18px;
-      font-size: 1.13em;
-      color: #444;
-      font-family: inherit;
-      line-height: 1.6;
-    }
-    .big-title-wide {
-      width: 100%;
-      text-align: center;
-      color: var(--brandFontColor);
-      font-size: 2.2em;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin: 32px 0 28px 0;
-      text-transform: uppercase;
-    }
-    .section {
-      margin: 30px 0 0 0;
+    .description {
+      font-size: 1.05em;
+      margin-bottom: 16px;
+      color: #555;
     }
     .section-title {
-      background: var(--mainCellColor);
-      color: #fff;
-      font-size: 1.10em;
+      margin-top: 28px;
+      margin-bottom: 8px;
+      font-size: 1.22em;
+      color: var(--brandFontColor, #7CC242);
       font-weight: bold;
-      padding: 9px 16px;
-      border-radius: 7px 7px 0 0;
-      letter-spacing: 0.7px;
-      margin-bottom: -6px;
+      letter-spacing: 0.01em;
+      border-left: 7px solid var(--brandFontColor, #7CC242);
+      padding-left: 9px;
     }
-    table {
+    table.proposal-table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-bottom: 26px;
       background: #fff;
-      font-size: 1.01em;
-      margin-bottom: 14px;
+      font-size: 1.07em;
+      box-shadow: 0 1px 7px #0001;
+      border-radius: 14px;
+      overflow: hidden;
     }
-    th, td {
-      border: 1px solid #e3e3e3;
-      padding: 10px 14px;
+    table.proposal-table th, table.proposal-table td {
+      padding: 10px 12px;
       text-align: left;
-      background: var(--cellBackground);
-      color: var(--mainFontColor);
-      vertical-align: middle;
+      border: none;
+      transition: background 0.1s;
     }
-    th.label {
-      width: 250px;
-      font-weight: 700;
-      background: var(--cellBackground);
+    table.proposal-table th {
+      background: var(--mainCellColor, #4C514F);
+      color: #fff;
+      font-size: 1.12em;
+      font-weight: bold;
+      border-bottom: 1.5px solid #d8d8d8;
+      letter-spacing: 0.02em;
     }
-    tr.full-green th, tr.full-green td {
-      background: var(--cellSecondColor) !important;
-      font-weight: 700;
-      color: #222 !important;
+    table.proposal-table td {
+      background: var(--cellBackground, #f3f3f3);
+      color: var(--mainFontColor, #4E5351);
+      font-size: 1.04em;
+      font-weight: 500;
     }
-    tr:last-child td {
-      border-bottom: 2px solid #e5e5e5;
+    table.proposal-table tr.highlight td {
+      background: var(--cellSecondColor, #7CC242) !important;
+      color: #fff !important;
+      font-weight: bold;
     }
-    .disclaimer {
-      font-size: 0.91em;
-      color: #888;
-      margin-top: 38px;
-      line-height: 1.5;
+    table.proposal-table tr.section-divider td {
+      background: #fff;
+      border-top: 2.5px solid #eee;
+      height: 12px;
+      padding: 0;
     }
-    @media (max-width: 1200px) {
-      .container { padding: 3vw 1vw; }
-      .header-row2 { flex-direction: column; gap: 10px; align-items: stretch; }
-      .lo-card { min-width: unset; flex-direction: row; }
-      .lo-photo-square { width: 56px; height: 56px; }
-      .lo-photo { width: 44px; height: 44px; }
-      .logo-box2 { min-width: unset; min-height: 70px; padding: 10px 10px; }
+    @media (max-width: 1000px) {
+      .container { max-width: 100vw; padding: 9px; }
     }
-    @media (max-width: 700px) {
-      .container { padding: 8vw 1vw; }
-      .logo-box2 { padding: 4vw 2vw; }
-      .company, .big-title-wide { font-size: 1em; }
-      table, th, td { font-size: 0.96em; }
-    }
-.header-true {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 56px;
-  margin-bottom: 24px;
-}
-.logo-true img {
-  height: 120px;    /* только высота */
-  width: auto;      /* ширина авто — пропорции не ломаются */
-  max-width: 100%;  /* чтобы не вылезала за контейнер */
-  display: block;
-}
-.lo-true {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-.lo-photo-true {
-  height: 120px;  /* Ровно как у лого! */
-  width: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #eee;
-  box-shadow: 0 1px 8px #0001;
-}
-.lo-details-true {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.5px;
-}
-.lo-report-by {
-  font-size: 0.80em;
-  color: #888;
-  font-weight: 400;
-  letter-spacing: 0.09em;
-  margin-bottom: 2px;
-}
-.lo-fullname-true {
-  color: var(--brandFontColor);
-  font-size: 1.55em;
-  font-weight: bold;
-  margin-bottom: 2px;
-}
-.lo-company-true {
-  font-size: 1.05em;
-  font-weight: bold;
-  color: #222;
-  margin-bottom: 2px;
-}
-.lo-address-true, .lo-email-true, .lo-phone-true {
-  font-size: 0.97em;
-  color: #444;
-}
-.lo-numbers-true {
-  font-size: 0.97em;
-  color: #666;
-  margin-top: 2px;
-}
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Новая шапка -->
-<div class="header-true">
-  <div class="logo-true">
-    <img id="brandLogo" src="" alt="Logo">
-  </div>
-  <div class="lo-true">
-    <img id="loPhoto" class="lo-photo-true" src="" alt="LO Photo">
-    <div class="lo-details-true">
-      <div class="lo-report-by">THE REPORT WAS CREATED FOR YOU BY</div>
-      <div class="lo-fullname-true" id="loFullName"></div>
-      <div class="lo-company-true" id="brandCompanyName"></div>
-      <div class="lo-address-true" id="loAddress"></div>
-      <div class="lo-email-true" id="loEmail"></div>
-      <div class="lo-phone-true" id="loPhone"></div>
-      <div class="lo-numbers-true">
-        <span id="nmls"></span> | DRE: <span id="dre"></span>
+<div class="container" id="main-container" style="display:none;">
+  <div class="header-true">
+    <div class="logo-true">
+      <img id="brandLogo" src="" alt="Logo">
+    </div>
+    <div class="lo-true">
+      <img id="loPhoto" class="lo-photo-true" src="" alt="LO Photo">
+      <div class="lo-details-true">
+        <div class="lo-report-by">THE REPORT WAS CREATED FOR YOU BY</div>
+        <div class="lo-fullname-true" id="loFullName"></div>
+        <div class="lo-company-true" id="brandCompanyName"></div>
+        <div class="lo-address-true" id="loAddress"></div>
+        <div class="lo-email-true" id="loEmail"></div>
+        <div class="lo-phone-true" id="loPhone"></div>
+        <div class="lo-numbers-true">
+          <span id="nmls"></span> | DRE: <span id="dre"></span>
+        </div>
       </div>
     </div>
   </div>
+  <div class="greeting" id="greeting"></div>
+  <div class="description">Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.</div>
+  <div id="proposal-tables"></div>
 </div>
-    <!-- Приветствие и текст -->
-    <div class="greeting" id="greeting"></div>
-    <div class="proposal-desc">
-      Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.
-    </div>
-    <!-- Большой зелёный заголовок -->
-    <div class="big-title-wide">RATE & CLOSING COST OPTIONS</div>
-    <!-- Loan Info -->
-    <div class="section">
-      <div class="section-title">Loan Information</div>
-      <table>
-        <tr><th class="label">Program</th><td id="program1"></td></tr>
-        <tr><th class="label">Appraised Value</th><td id="appraisedValue1"></td></tr>
-        <tr><th class="label">Loan Amount</th><td id="loanAmount1"></td></tr>
-        <tr><th class="label">Equity</th><td id="equity1"></td></tr>
-        <tr><th class="label">Loan-To-Value</th><td id="loanToValue1"></td></tr>
-      </table>
-    </div>
-    <!-- Rate & Term -->
-    <div class="section">
-      <div class="section-title">Rate & Term</div>
-      <table>
-        <tr class="full-green"><th class="label">Rate</th><td id="rate1"></td></tr>
-        <tr><th class="label">APR</th><td id="apr1"></td></tr>
-        <tr><th class="label">Term</th><td id="term1"></td></tr>
-      </table>
-    </div>
-    <!-- Payments -->
-    <div class="section">
-      <div class="section-title">Monthly Payments</div>
-      <table>
-        <tr><th class="label">Principal & Interest</th><td id="pi1"></td></tr>
-        <tr><th class="label">Hazard Insurance</th><td id="hazardInsurance1"></td></tr>
-        <tr><th class="label">Mortgage Insurance</th><td id="mortgageInsurance1"></td></tr>
-        <tr><th class="label">HOA</th><td id="hoa1"></td></tr>
-        <tr><th class="label">Property Taxes</th><td id="propertyTaxes1"></td></tr>
-        <tr><th class="label">Extra Monthly Payment</th><td id="extraMonthlyPayment1"></td></tr>
-        <tr class="full-green"><th class="label">Total Monthly Payment</th><td id="totalMonthlyPayment1"></td></tr>
-      </table>
-    </div>
-    <!-- Closing Costs -->
-    <div class="section">
-      <div class="section-title">Closing Costs</div>
-      <table>
-        <tr><th class="label">Points</th><td id="points1"></td></tr>
-        <tr><th class="label">Lender Credit</th><td id="discountPoint1"></td></tr>
-        <tr><th class="label">Lender Fees</th><td id="lenderFees1"></td></tr>
-        <tr><th class="label">3rd Party Fees</th><td id="thirdPartyFees1"></td></tr>
-        <tr class="full-green"><th class="label">Total Closing Costs</th><td id="closingCosts1"></td></tr>
-      </table>
-    </div>
-    <!-- Final Calculations -->
-    <div class="section">
-      <div class="section-title">Final Calculations</div>
-      <table>
-        <tr><th class="label">Escrows & Prepaid Interest</th><td id="escrowsAndPrepaid1"></td></tr>
-        <tr class="full-green"><th class="label">Estimated Total Cash to Close</th><td id="cashToClose1"></td></tr>
-        <tr><th class="label">Closing Costs Included in Loan</th><td id="closingCostsInLoan1"></td></tr>
-        <tr><th class="label">Pre-Paids and Impounds in Loan</th><td id="prepaidsInLoan1"></td></tr>
-        <tr class="full-green"><th class="label">Payment Savings</th><td id="paymentSavings1"></td></tr>
-        <tr><th class="label">Power Refi Savings</th><td id="powerRefiSavings1"></td></tr>
-        <tr><th class="label">Interest Saved over 5 Years</th><td id="interestSaved5Years1"></td></tr>
-        <tr><th class="label">Interest Saved over Life of Loan</th><td id="interestSavedLife1"></td></tr>
-      </table>
-    </div>
-    <!-- Disclaimer -->
-    <div class="disclaimer">
-      The results provided above are intended for comparison purposes only and accuracy is not guaranteed. The loan comparison does not ensure the availability of, or your eligibility for, any specific product offered by any particular lender and/or is not a commitment to lend. Rates are subject to change based off credit score. The APR is estimated. Lender closing cost credits are not guaranteed and can change without notice.
-    </div>
-  </div>
-  <script>
-    // --- Colors and dynamic content ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-    function setText(id, text) {
-      const el = document.getElementById(id);
-      if (el) el.textContent = text ?? "-";
-    }
-    function setImg(id, url, fallback) {
-      const el = document.getElementById(id);
-      if (el) el.src = url || fallback || "";
-    }
-    if (!id) {
-      setText('program1', "Нет ID в ссылке");
-    } else {
-     fetch(`https://marketing2025.blob.core.windows.net/proposals/${id}.json`)
-        .then(resp => {
-          if (!resp.ok) throw new Error("Not found");
-          return resp.json();
-        })
-        .then(data => {
-          // --- Цвета ---
-          if (data.mainCellColor) document.documentElement.style.setProperty('--mainCellColor', data.mainCellColor);
-          if (data.cellBackground) document.documentElement.style.setProperty('--cellBackground', data.cellBackground);
-          if (data.cellSecondColor) document.documentElement.style.setProperty('--cellSecondColor', data.cellSecondColor);
-          if (data.brandFontColor) document.documentElement.style.setProperty('--brandFontColor', data.brandFontColor);
-          if (data.mainFontColor) document.documentElement.style.setProperty('--mainFontColor', data.mainFontColor);
+<script>
+const sectionMap = [
+  {
+    title: "Loan Info",
+    fields: [
+      "Program", "Appraised Value", "Loan Amount", "Equity", "Loan-To-Value"
+    ]
+  },
+  {
+    title: "Rate & Term",
+    fields: [
+      "Rate", "APR", "Term", "Points", "Discount Point"
+    ]
+  },
+  {
+    title: "Monthly Payment",
+    fields: [
+      "PI", "Hazard Insurance", "Mortgage Insurance", "HOA", "Property Taxes", "Extra Monthly Payment", "Total Monthly Payment"
+    ]
+  },
+  {
+    title: "Closing Costs",
+    fields: [
+      "Closing Costs", "Lender Fees", "3Rd Party Fees", "Escrows & Prepaid Interest", "Cash to Close", "Closing Costs Included in Loan", "Pre-Paids and Impounds in Loan"
+    ]
+  },
+  {
+    title: "Final Calculations",
+    fields: [
+      "Payment Savings", "Power Refi Savings", "Interest Saved in 5 Years", "Interest Saved over Life of Loan"
+    ]
+  }
+];
 
-          // --- Картинки ---
-          setImg('brandLogo', data.logoUrl, 'https://dummyimage.com/200x40/ddd/222&text=Logo');
-          setImg('loPhoto', data.loPhotoUrl, 'https://dummyimage.com/54x54/ccc/666&text=LO');
+function fillStaticFields(json) {
+  // Цвета
+  for (const k of [
+    "mainCellColor", "cellBackground", "cellSecondColor", "brandFontColor", "mainFontColor"
+  ]) {
+    if (json[k]) document.documentElement.style.setProperty('--'+k, json[k]);
+  }
+  // Лого и LO
+  document.getElementById('brandLogo').src = json.logoUrl || '';
+  document.getElementById('loPhoto').src = json.loPhotoUrl || '';
+  document.getElementById('loFullName').textContent = json.loFullName || '';
+  document.getElementById('brandCompanyName').textContent = json.brandCompanyName || '';
+  document.getElementById('loAddress').textContent = json.loAddress || '';
+  document.getElementById('loEmail').textContent = json.loEmail || '';
+  document.getElementById('loPhone').textContent = json.loPhone || '';
+  document.getElementById('nmls').textContent = json.nmls || '';
+  document.getElementById('dre').textContent = json.dre || '';
+  document.getElementById('greeting').textContent = json.greeting || '';
+}
 
-          // --- LO данные ---
-          setText('brandCompanyName', data.brandCompanyName);
-          setText('loFullName', data.loFullName);
-          setText('loAddress', data.loAddress);
-          setText('loEmail', data.loEmail);
-          setText('loPhone', data.loPhone);
-          setText('nmls', data.nmls);
-          setText('dre', data.dre);
-          setText('greeting', data.greeting || `Hi ${data.fullName}${data.coBorrowerFullName ? ' & ' + data.coBorrowerFullName : ''}!`);
+function getNumScenarios(json) {
+  let count = 0;
+  for (let i = 1; i <= 3; i++) {
+    if (json[`Scenario ${i} Name`] || json[`Program ${i}`]) count = i;
+  }
+  return count || 1;
+}
 
-          // --- Loan Info секция ---
-          setText('program1', data.program1);
-          setText('appraisedValue1', data.appraisedValue1);
-          setText('loanAmount1', data.loanAmount1);
-          setText('equity1', data.equity1);
-          setText('loanToValue1', data.loanToValue1);
+function renderProposalTables(json) {
+  const numScenarios = getNumScenarios(json);
+  const scenarioNames = [];
+  for (let i = 1; i <= numScenarios; i++) {
+    scenarioNames.push(json[`Scenario ${i} Name`] || `Option ${i}`);
+  }
+  const tablesDiv = document.getElementById('proposal-tables');
+  tablesDiv.innerHTML = "";
+  sectionMap.forEach((section, idx) => {
+    const table = document.createElement('table');
+    table.className = "proposal-table";
+    let thead = `<thead><tr><th></th>`;
+    scenarioNames.forEach(n => {
+      thead += `<th>${n}</th>`;
+    });
+    thead += `</tr></thead>`;
+    let tbody = `<tbody>`;
+    section.fields.forEach(fld => {
+      let isHighlight = (fld === "Total Monthly Payment" || fld === "Cash to Close" || fld === "Power Refi Savings" || fld === "Payment Savings" || fld === "Interest Saved over Life of Loan" || fld === "Interest Saved in 5 Years");
+      tbody += `<tr${isHighlight ? ' class="highlight"' : ''}><td>${fld}</td>`;
+      for (let i = 1; i <= numScenarios; i++) {
+        let val = json[`${fld} ${i}`];
+        tbody += `<td>${val !== undefined ? val : ""}</td>`;
+      }
+      tbody += `</tr>`;
+    });
+    tbody += `</tbody>`;
+    tablesDiv.innerHTML += `<div class="section-title">${section.title}</div>` + table.outerHTML.replace("</table>", thead + tbody + "</table>");
+  });
+}
 
-          // --- Rate & Term ---
-          setText('rate1', data.rate1);
-          setText('apr1', data.apr1);
-          setText('term1', data.term1);
-
-          // --- Payments ---
-          setText('pi1', data.pi1);
-          setText('hazardInsurance1', data.hazardInsurance1);
-          setText('mortgageInsurance1', data.mortgageInsurance1);
-          setText('hoa1', data.hoa1);
-          setText('propertyTaxes1', data.propertyTaxes1);
-          setText('extraMonthlyPayment1', data.extraMonthlyPayment1);
-          setText('totalMonthlyPayment1', data.totalMonthlyPayment1);
-
-          // --- Closing Costs ---
-          setText('points1', data.points1);
-          setText('discountPoint1', data.discountPoint1);
-          setText('lenderFees1', data.lenderFees1);
-          setText('thirdPartyFees1', data.thirdPartyFees1);
-          setText('closingCosts1', data.closingCosts1);
-
-          // --- Final Calculations ---
-          setText('escrowsAndPrepaid1', data.escrowsAndPrepaid1);
-          setText('cashToClose1', data.cashToClose1);
-          setText('closingCostsInLoan1', data.closingCostsInLoan1);
-          setText('prepaidsInLoan1', data.prepaidsInLoan1);
-          setText('paymentSavings1', data.paymentSavings1);
-          setText('powerRefiSavings1', data.powerRefiSavings1);
-          setText('interestSaved5Years1', data.interestSaved5Years1);
-          setText('interestSavedLife1', data.interestSavedLife1);
-        })
-        .catch(() => {
-          setText('program1', "Данные не найдены или ссылка устарела!");
-        });
-    }
-  </script>
+(function main() {
+  // Получить id из query
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || 'test';
+  fetch(`https://marketing2025.blob.core.windows.net/proposals/${id}.json`)
+    .then(r => {
+      if (!r.ok) throw new Error("Not found");
+      return r.json();
+    })
+    .then(json => {
+      document.getElementById('main-container').style.display = '';
+      fillStaticFields(json);
+      renderProposalTables(json);
+    })
+    .catch(e => {
+      document.body.innerHTML = '<div style="text-align:center;color:#b22;margin-top:70px;font-size:1.3em">Proposal not found or unavailable.</div>';
+    });
+})();
+</script>
 </body>
 </html>
