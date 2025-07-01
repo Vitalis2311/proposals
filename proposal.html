@@ -370,7 +370,7 @@
     if (!id) {
       setText('program1', "Нет ID в ссылке");
     } else {
-      fetch(`data/${id}.json`)
+     fetch(`https://marketing2025.blob.core.windows.net/proposals/${id}.json`)
         .then(resp => {
           if (!resp.ok) throw new Error("Not found");
           return resp.json();
