@@ -360,18 +360,21 @@ function renderTable(data) {
   let html = '';
   html += '<table class="proposal-table">';
 
-  // Loan Info + Program 1, 2, 3 в одной строке
+  // Верхняя строка - Program и названия программ из первой строки первой секции
+  const firstRow = data.sections[0].rows[0];
   html += '<tr>';
-  html += `<th style="width:19.5%">Loan Info</th>`;
-  data.columns.forEach(col => html += `<th style="width:26.5%">${col}</th>`);
+  html += `<th style="width:19.5%">${firstRow.label}</th>`;
+  firstRow.values.forEach(v => html += `<th style="width:26.5%">${v}</th>`);
   html += '</tr>';
 
+  // Проходим по секциям и строкам, но в первой секции пропускаем первую строку (она уже в шапке)
   data.sections.forEach((section, secIdx) => {
     if (secIdx !== 0) {
-      html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
+      html += `<tr class="gap-row"><td colspan="${firstRow.values.length + 1}"></td></tr>`;
     }
-    // НЕ выводим строку-секцию, только строки данных
-    section.rows.forEach(row => {
+    section.rows.forEach((row, rowIdx) => {
+      // Пропускаем первую строку первой секции (она уже выведена как шапка)
+      if (secIdx === 0 && rowIdx === 0) return;
       let highlight = row.highlight ? 'highlight-row' : '';
       html += `<tr class="${highlight}">`;
       html += `<td class="field">${row.label}</td>`;
