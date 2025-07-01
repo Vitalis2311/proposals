@@ -1,1 +1,45 @@
-<html><body>Hello, Proposal!</body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Loan Proposal</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; }
+    .container { max-width: 500px; background: #fff; margin: 32px auto; border-radius: 10px; box-shadow: 0 4px 20px #0002; padding: 32px; }
+    h1 { color: #3a8f2d; }
+    .error { color: #b00; font-weight: bold; }
+    .field { font-size: 1.2em; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Loan Proposal</h1>
+    <div id="proposal">Loading...</div>
+  </div>
+  <script>
+    // Получаем id из ссылки (?id=test)
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if (!id) {
+      document.getElementById('proposal').innerHTML = '<div class="error">Нет ID в ссылке!</div>';
+    } else {
+      // Подгружаем json из папки data
+      const jsonUrl = `data/${id}.json`;
+      fetch(jsonUrl)
+        .then(resp => {
+          if (!resp.ok) throw new Error("Not found");
+          return resp.json();
+        })
+        .then(data => {
+          let html = `<div class="field"><b>Client:</b> ${data.client}</div>
+            <div class="field"><b>Rate:</b> ${data.rate}</div>
+            <div class="field"><b>Term:</b> ${data.term}</div>`;
+          document.getElementById('proposal').innerHTML = html;
+        })
+        .catch(() => {
+          document.getElementById('proposal').innerHTML = '<div class="error">Данные не найдены или ссылка устарела!</div>';
+        });
+    }
+  </script>
+</body>
+</html>
