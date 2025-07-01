@@ -1,48 +1,296 @@
-<style>
-  .proposal-table {
-    width: 1500px;
-    margin: 0 auto;
-    border-collapse: separate;
-    border-spacing: 0;
-    font-family: Aptos, Arial, sans-serif;
-    background: #fff;
-  }
-  .section-header {
-    background: #4C514F; /* Брендовый тёмный фон из JSON */
-  }
-  .section-header td {
-    color: #fff; /* Белый текст */
-    font-weight: bold;
-    font-size: 1.15em;
-    padding: 18px 10px;
-    border: none;
-  }
-  .section-name {
-    text-align: left;
-    min-width: 250px;
-    font-size: 1.15em;
-    letter-spacing: 0.01em;
-  }
-  .program-name {
-    text-align: center;
-    font-size: 1.15em;
-    letter-spacing: 0.01em;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loan Proposal Example</title>
+  <style>
+    body {
+      background: #f5f5f5;
+      font-family: Aptos, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .proposal-wrap {
+      width: 1500px;
+      margin: 32px auto 24px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 24px #0001;
+      padding: 0 0 16px 0;
+      overflow: hidden;
+    }
+    .proposal-header {
+      display: flex;
+      align-items: center;
+      padding: 36px 48px 0 48px;
+      justify-content: space-between;
+    }
+    .logo-true img {
+      height: 110px;
+      max-width: 420px;
+      object-fit: contain;
+    }
+    .lo-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      max-width: 440px;
+    }
+    .lo-photo img {
+      border-radius: 50%;
+      border: 3px solid #7CC242;
+      width: 88px;
+      height: 88px;
+      object-fit: cover;
+    }
+    .lo-details {
+      font-size: 1.03em;
+      color: #4E5351;
+      margin-top: 3px;
+    }
+    .lo-details .lo-name {
+      font-size: 1.18em;
+      font-weight: bold;
+      color: #7CC242;
+      margin-bottom: 2px;
+      margin-top: 1px;
+      display: block;
+    }
+    .lo-details .lo-label {
+      font-size: 0.88em;
+      color: #999;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .proposal-intro {
+      font-size: 1.29em;
+      margin: 18px 0 0 60px;
+      color: #222;
+      font-weight: 500;
+    }
+    .proposal-greeting {
+      margin: 24px 0 0 60px;
+      font-size: 1.09em;
+      color: #222;
+      font-weight: 500;
+    }
+    .proposal-table {
+      width: 1440px;
+      margin: 34px auto 0 auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      font-size: 1.07em;
+    }
+    .section-header {
+      background: #4C514F; /* Брендовый тёмный фон (mainCellColor) */
+    }
+    .section-header td {
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.15em;
+      padding: 18px 10px 15px 16px;
+      border: none;
+    }
+    .section-name {
+      text-align: left;
+      min-width: 260px;
+      font-size: 1.15em;
+      letter-spacing: 0.01em;
+    }
+    .program-name {
+      text-align: center;
+      font-size: 1.15em;
+    }
+    .proposal-table td {
+      padding: 11px 10px;
+      border: none;
+      border-bottom: 1.2px solid #e2e2e2;
+      color: #222;
+    }
+    .proposal-table tr:last-child td {
+      border-bottom: none;
+    }
+    .highlight-row td {
+      background: #7CC242 !important;
+      color: #fff;
+      font-weight: bold;
+    }
+    .section-gap {
+      height: 24px;
+      background: #fff;
+      border: none;
+    }
+    .proposal-title {
+      font-size: 2.1em;
+      color: #7CC242;
+      font-weight: bold;
+      margin: 28px 0 10px 60px;
+      letter-spacing: 0.03em;
+      text-align: left;
+    }
+    .proposal-disclaimer {
+      width: 1440px;
+      margin: 26px auto 28px auto;
+      font-size: 0.99em;
+      color: #888;
+      line-height: 1.5;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="proposal-wrap">
+    <!-- Шапка: Лого слева, LO-данные справа -->
+    <div class="proposal-header">
+      <div class="logo-true">
+        <img id="logoImg" src="https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748" alt="Logo">
+      </div>
+      <div class="lo-info">
+        <div class="lo-photo">
+          <img id="loPhotoImg" src="https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526" alt="LO">
+        </div>
+        <div class="lo-details">
+          <div class="lo-label">THE REPORT WAS CREATED FOR YOU BY</div>
+          <span class="lo-name" id="loFullName">John Doe</span>
+          <b id="brandCompanyName">Arbor Financial Group</b><br>
+          <span id="loAddress">1234 Main St, Irvine, CA 92614</span><br>
+          <span id="loEmail">jdoe@arborfg.com</span><br>
+          <span id="loPhone">(555) 555-5555</span><br>
+          <span id="nmls">NMLS: 123456</span> | <span id="dre">DRE: DRE1234</span>
+        </div>
+      </div>
+    </div>
+    <div class="proposal-greeting" id="proposalGreeting">Hi Jane Smith!</div>
+    <div class="proposal-title" id="proposalTitle">RATE & CLOSING COST OPTIONS</div>
+    <table class="proposal-table">
+      <tbody id="proposalTableWrap"></tbody>
+    </table>
+  </div>
+  <div class="proposal-disclaimer">
+    The results provided above are intended for comparison purposes only and accuracy is not guaranteed. The loan comparison does not ensure the availability of, or your eligibility for, any specific product offered by any particular lender and/or is not a commitment to lend. Rates are subject to change based off credit score. The APR is estimated. Lender closing cost credits are not guaranteed and can change without notice.
+  </div>
+  <script>
+    // --- Пример JSON-конфига ---
+    const proposalJson = {
+      mainCellColor: "#4C514F",
+      cellSecondColor: "#7CC242",
+      programs: ["Program 1", "Program 2", "Program 3"],
+      logoUrl: "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748",
+      loPhotoUrl: "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526",
+      loFullName: "John Doe",
+      brandCompanyName: "Arbor Financial Group",
+      loAddress: "1234 Main St, Irvine, CA 92614",
+      loEmail: "jdoe@arborfg.com",
+      loPhone: "(555) 555-5555",
+      nmls: "123456",
+      dre: "DRE1234",
+      greeting: "Hi Jane Smith!",
+      sections: [
+        {
+          name: "Loan Info",
+          rows: [
+            { label: "Appraised Value", values: ["$999,999.00", "$999,999.00", "$999,999.00"] },
+            { label: "Loan Amount", values: ["$660,000.00", "$660,000.00", "$660,000.00"] },
+            { label: "Equity", values: ["$440,000.00", "$440,000.00", "$440,000.00"] },
+            { label: "Loan-To-Value", values: ["66%", "66%", "66%"] },
+          ]
+        },
+        {
+          name: "Rate, APR, Term",
+          rows: [
+            { label: "Rate", values: ["4%", "4%", "4%"], highlight: true },
+            { label: "APR", values: ["4%", "4%", "4%"] },
+            { label: "Term", values: ["298", "298", "298"] },
+          ]
+        },
+        {
+          name: "Monthly Breakdown",
+          rows: [
+            { label: "PI", values: ["$3,497.00", "$3,497.00", "$3,497.00"] },
+            { label: "Hazard Insurance", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "Mortgage Insurance", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "HOA", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "Property Taxes", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "Extra Monthly Payment", values: ["$261.00", "$261.00", "$261.00"], highlight: true },
+            { label: "Total Monthly Payment", values: ["$3,758.00", "$3,758.00", "$3,758.00"], highlight: true },
+          ]
+        },
+        {
+          name: "Closing Costs",
+          rows: [
+            { label: "Points", values: ["0.00% ($0.00)", "0.00% ($0.00)", "0.00% ($0.00)"] },
+            { label: "Lender Credit", values: ["0.00% ($0.00)", "0.00% ($0.00)", "0.00% ($0.00)"] },
+            { label: "Lender Fees", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "3rd Party Fees", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "Total Closing Costs", values: ["$0.00", "$0.00", "$0.00"], highlight: true },
+            { label: "Escrows & Prepaid Interest", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "Estimated Total Cash to Close", values: ["$0.00", "$0.00", "$0.00"], highlight: true },
+          ]
+        },
+        {
+          name: "Other Savings",
+          rows: [
+            { label: "Closing Costs Included in Loan", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "Pre-Paids and Impounds in Loan", values: ["$0.00", "$0.00", "$0.00"] },
+            { label: "Payment Savings", values: ["$261.00", "$261.00", "$261.00"], highlight: true },
+            { label: "Power Refi Savings", values: ["$154,872.00", "$154,872.00", "$154,872.00"], highlight: true },
+            { label: "Interest Saved over 5 Years", values: ["$34,823.00", "$34,823.00", "$34,823.00"] },
+            { label: "Interest Saved over Life of Loan", values: ["$318,569.00", "$318,569.00", "$318,569.00"], highlight: true },
+          ]
+        }
+      ]
+    };
 
-<table class="proposal-table">
-  <tr class="section-header">
-    <td class="section-name">Loan Info</td>
-    <td class="program-name">Program 1</td>
-    <td class="program-name">Program 2</td>
-    <td class="program-name">Program 3</td>
-  </tr>
-  <!-- Дальше идут обычные строки данных секции Loan Info -->
-  <tr>
-    <td>Appraised Value</td>
-    <td>$999,999.00</td>
-    <td>$999,999.00</td>
-    <td>$999,999.00</td>
-  </tr>
-  <!-- ... и так далее -->
-</table>
+    // --- Динамический рендер ---
+    function renderTable(data) {
+      let html = "";
+      data.sections.forEach((section, idx) => {
+        // Разделитель между секциями
+        if (idx !== 0) {
+          html += `<tr class="section-gap"><td colspan="${1 + data.programs.length}"></td></tr>`;
+        }
+        // Шапка секции: одна строка
+        html += `<tr class="section-header" style="background:${data.mainCellColor};">`;
+        html += `<td class="section-name">${section.name}</td>`;
+        data.programs.forEach(pr => {
+          html += `<td class="program-name">${pr}</td>`;
+        });
+        html += `</tr>`;
+        // Контент секции
+        section.rows.forEach(row => {
+          const rowClass = row.highlight ? 'highlight-row' : '';
+          html += `<tr class="${rowClass}">`;
+          html += `<td>${row.label}</td>`;
+          row.values.forEach(v => html += `<td>${v}</td>`);
+          html += `</tr>`;
+        });
+      });
+      document.getElementById('proposalTableWrap').innerHTML = html;
+    }
+
+    // --- Инициализация всего ---
+    function fillProposal(proposalJson) {
+      // Картинки
+      document.getElementById('logoImg').src = proposalJson.logoUrl;
+      document.getElementById('loPhotoImg').src = proposalJson.loPhotoUrl;
+      // LO данные
+      document.getElementById('loFullName').textContent = proposalJson.loFullName;
+      document.getElementById('brandCompanyName').textContent = proposalJson.brandCompanyName;
+      document.getElementById('loAddress').textContent = proposalJson.loAddress;
+      document.getElementById('loEmail').textContent = proposalJson.loEmail;
+      document.getElementById('loPhone').textContent = proposalJson.loPhone;
+      document.getElementById('nmls').textContent = "NMLS: " + proposalJson.nmls;
+      document.getElementById('dre').textContent = "DRE: " + proposalJson.dre;
+      // Greeting
+      document.getElementById('proposalGreeting').textContent = proposalJson.greeting;
+      // Таблица
+      renderTable(proposalJson);
+    }
+
+    fillProposal(proposalJson);
+  </script>
+</body>
+</html>
