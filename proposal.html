@@ -111,7 +111,6 @@
       color: #666;
       margin-top: 4px;
     }
-
     .greeting {
       margin-bottom: 8px;
       font-weight: 600;
@@ -121,7 +120,7 @@
     .proposal-intro {
       color: #444;
       margin-bottom: 32px;
-      font-size: 22px; /* Легко меняется! */
+      font-size: 22px;
       line-height: 1.5;
     }
     .section-title {
@@ -159,12 +158,21 @@
       border: none;
       padding: 17px 10px 16px 10px;
     }
-    .proposal-table td,
-    .proposal-table th {
-      border: 1px solid #33333322;
-      text-align: left;
-      word-break: break-word;
-      padding: 13px 10px;
+    .proposal-table tr.gap-row td {
+      background: #fff !important;
+      height: 24px;
+      border: none;
+      padding: 0;
+    }
+    .proposal-table .highlight-row td {
+      background: var(--cellSecondColor, #7CC242) !important;
+      font-weight: bold;
+      color: #fff !important;
+    }
+    .proposal-table td {
+      background: var(--cellBackground, #f3f3f3);
+      font-weight: 400;
+      color: #1e1e1e;
     }
     .proposal-table td.field {
       font-weight: 600;
@@ -234,6 +242,7 @@
       if(data.mainFontColor)   document.documentElement.style.setProperty('--mainFontColor', data.mainFontColor);
     }
 
+    // пример JSON, все секции
     const proposalJson = {
       "mainCellColor": "#4C514F",
       "cellBackground": "#f3f3f3",
@@ -264,6 +273,49 @@
             { label: "Equity", values: ["$339,999.00", "$399,000.00", "$349,000.00"] },
             { label: "Loan-To-Value", values: ["66%", "56%", "56%"] }
           ]
+        },
+        {
+          "name": "Rate & Term",
+          "rows": [
+            { label: "Rate", highlight: true, values: ["4.0%", "4.5%", "3.8%"] },
+            { label: "APR", values: ["4.05%", "4.5%", "3.95%"] },
+            { label: "Term", values: ["298", "300", "295"] },
+            { label: "Points", values: ["1.0", "1.0", "0.5"] },
+            { label: "Discount Point", values: ["0.0%", "0.0%", "0.2%"] }
+          ]
+        },
+        {
+          "name": "Monthly Payment",
+          "rows": [
+            { label: "PI", values: ["$3,497.00", "$3,250.00", "$3,100.00"] },
+            { label: "Hazard Insurance", values: ["$85.00", "$100.00", "$100.00"] },
+            { label: "Mortgage Insurance", values: ["$0.00", "$120.00", "$0.00"] },
+            { label: "HOA", values: ["$0.00", "$50.00", "$0.00"] },
+            { label: "Property Taxes", values: ["$800.00", "$720.00", "$600.00"] },
+            { label: "Extra Monthly Payment", highlight: true, values: ["$261.00", "$0.00", "$0.00"] },
+            { label: "Total Monthly Payment", highlight: true, values: ["$4,643.00", "$4,230.00", "$3,800.00"] }
+          ]
+        },
+        {
+          "name": "Closing Costs",
+          "rows": [
+            { label: "Closing Costs", values: ["$5,000.00", "$7,500.00", "$6,000.00"] },
+            { label: "Lender Fees", values: ["$2,500.00", "$2,500.00", "$2,400.00"] },
+            { label: "3Rd Party Fees", values: ["$1,200.00", "$1,300.00", "$1,200.00"] },
+            { label: "Escrows & Prepaid Interest", values: ["$800.00", "$850.00", "$900.00"] },
+            { label: "Cash to Close", highlight: true, values: ["$10,800.00", "$12,200.00", "$11,300.00"] },
+            { label: "Closing Costs Included in Loan", values: ["No", "Yes", "No"] },
+            { label: "Pre-Paids and Impounds in Loan", values: ["No", "Yes", "No"] }
+          ]
+        },
+        {
+          "name": "Payment Savings",
+          "rows": [
+            { label: "Payment Savings", highlight: true, values: ["$261.00", "$261.00", "$261.00"] },
+            { label: "Power Refi Savings", highlight: true, values: ["$154,872.00", "$154,872.00", "$154,872.00"] },
+            { label: "Interest Saved over 5 Years", highlight: true, values: ["$34,823.00", "$34,823.00", "$34,823.00"] },
+            { label: "Interest Saved over Life of Loan", highlight: true, values: ["$318,569.00", "$318,569.00", "$318,569.00"] }
+          ]
         }
       ]
     };
@@ -282,19 +334,28 @@
       document.getElementById('proposalIntro').textContent = data.proposalIntro || "";
     }
 
-    // ВНИМАНИЕ: только одна секция — Loan Info, одна строка-шапка!
     function renderTable(data) {
       let html = '';
+      // Одна строка-шапка (название секции слева)
       html += `<table class="proposal-table"><tr class="section-row">`;
       html += `<td style="color:#fff;font-weight:bold;font-size:1.15em;">Loan Info</td>`;
       data.columns.forEach(col => html += `<td style="color:#fff;font-weight:bold;font-size:1.15em;text-align:center;">${col}</td>`);
       html += `</tr>`;
-      data.sections[0].rows.forEach(row => {
-        html += `<tr>`;
-        html += `<td class="field">${row.label}</td>`;
-        row.values.forEach(v => html += `<td class="value">${v}</td>`);
-        html += `</tr>`;
+
+      // Все секции подряд, без внутренних заголовков, но с gap между секциями
+      data.sections.forEach((section, idx) => {
+        if (idx !== 0) {
+          html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
+        }
+        section.rows.forEach(row => {
+          let highlight = row.highlight ? 'highlight-row' : '';
+          html += `<tr class="${highlight}">`;
+          html += `<td class="field">${row.label}</td>`;
+          row.values.forEach(v => html += `<td class="value">${v}</td>`);
+          html += `</tr>`;
+        });
       });
+
       html += `</table>`;
       document.getElementById('proposalTableWrap').innerHTML = html;
     }
