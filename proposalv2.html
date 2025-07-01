@@ -279,37 +279,61 @@
     }
 
     // --- Новая функция генерации таблицы из плоского JSON
-    function renderTable(data) {
-      // ВАЖНО: Порядок и названия должны совпадать с JSON!
-      const labels = [
-        "Appraised Value", "Loan Amount", "Equity", "Loan-To-Value",
-        "Rate", "APR", "Term", "Points", "Discount Point",
-        "PI", "Hazard Insurance", "Mortgage Insurance", "HOA", "Property Taxes",
-        "Extra Monthly Payment", "Total Monthly Payment",
-        "Closing Costs", "Lender Fees", "3Rd Party Fees", "Escrows & Prepaid Interest",
-        "Cash to Close", "Closing Costs Included in Loan", "Pre-Paids and Impounds in Loan",
-        "Payment Savings", "Power Refi Savings", "Interest Saved over 5 Years", "Interest Saved over Life of Loan"
-      ];
-
-      // Строки, которые выделяются цветом
-      const green = [
-        "Rate", "Extra Monthly Payment", "Total Monthly Payment", "Cash to Close",
-        "Payment Savings", "Power Refi Savings", "Interest Saved over 5 Years", "Interest Saved over Life of Loan"
-      ];
-
-      let html = '<table class="proposal-table">';
-      html += '<tr><th>Program</th>';
-      data.programs.forEach(p => html += `<th>${p}</th>`);
-      html += '</tr>';
-      labels.forEach(label => {
-        let highlight = green.includes(label) ? 'highlight-row' : '';
-        html += `<tr class="${highlight}"><td class="field">${label}</td>`;
-        data[label].forEach(val => html += `<td class="value">${val}</td>`);
-        html += '</tr>';
-      });
-      html += '</table>';
-      document.getElementById('proposalTableWrap').innerHTML = html;
+// --- Генерация таблицы с разрывами между секциями!
+function renderTable(data) {
+  // Описание секций и порядок строк
+  const sections = [
+    {
+      name: "Loan Info",
+      fields: ["Appraised Value", "Loan Amount", "Equity", "Loan-To-Value"]
+    },
+    {
+      name: "Rate & Term",
+      fields: ["Rate", "APR", "Term", "Points", "Discount Point"]
+    },
+    {
+      name: "Monthly Payment",
+      fields: ["PI", "Hazard Insurance", "Mortgage Insurance", "HOA", "Property Taxes", "Extra Monthly Payment", "Total Monthly Payment"]
+    },
+    {
+      name: "Closing Costs",
+      fields: ["Closing Costs", "Lender Fees", "3Rd Party Fees", "Escrows & Prepaid Interest", "Cash to Close", "Closing Costs Included in Loan", "Pre-Paids and Impounds in Loan"]
+    },
+    {
+      name: "Payment Savings",
+      fields: ["Payment Savings", "Power Refi Savings", "Interest Saved over 5 Years", "Interest Saved over Life of Loan"]
     }
+  ];
+
+  // Какие строки должны быть выделены цветом
+  const green = [
+    "Rate", "Extra Monthly Payment", "Total Monthly Payment", "Cash to Close",
+    "Payment Savings", "Power Refi Savings", "Interest Saved over 5 Years", "Interest Saved over Life of Loan"
+  ];
+
+  let html = '<table class="proposal-table">';
+  html += '<tr><th>Program</th>';
+  data.programs.forEach(p => html += `<th>${p}</th>`);
+  html += '</tr>';
+
+  // Теперь выводим секции и поля
+  sections.forEach((section, secIdx) => {
+    // Вставляем разрыв между секциями, кроме первой
+    if (secIdx !== 0) {
+      html += `<tr class="gap-row"><td colspan="${data.programs.length + 1}"></td></tr>`;
+    }
+    section.fields.forEach(label => {
+      let highlight = green.includes(label) ? 'highlight-row' : '';
+      html += `<tr class="${highlight}"><td class="field">${label}</td>`;
+      data[label].forEach(val => html += `<td class="value">${val}</td>`);
+      html += '</tr>';
+    });
+  });
+
+  html += '</table>';
+  document.getElementById('proposalTableWrap').innerHTML = html;
+}
+
 
     // --- Основная инициализация
     function getUrlParameter(name) {
