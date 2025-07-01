@@ -355,32 +355,32 @@
     }
 
     // --- Генерация таблицы
-    function renderTable(data) {
-      let html = '';
-      // Первая строка — заголовки колонок
-      html += '<tr>';
-      html += `<th style="width:19.5%"> </th>`;
-      data.columns.forEach(col => html += `<th style="width:26.5%">${col}</th>`);
-      html += '</tr>';
+function renderTable(data) {
+  let html = '';
+  html += '<table class="proposal-table">';
 
-      data.sections.forEach((section, secIdx) => {
-        // Разрыв между секциями (кроме первой)
-        if (secIdx !== 0) {
-          html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
-        }
-        // Заголовок секции
-        html += `<tr class="section-row"><td colspan="${data.columns.length + 1}">${section.name}</td></tr>`;
-        section.rows.forEach(row => {
-          let highlight = row.highlight ? 'highlight-row' : '';
-          html += `<tr class="${highlight}">`;
-          html += `<td class="field">${row.label}</td>`;
-          row.values.forEach(v => html += `<td class="value">${v}</td>`);
-          html += `</tr>`;
-        });
-      });
-      document.getElementById('proposalTableWrap').innerHTML = `<table class="proposal-table">${html}</table>`;
+  // Loan Info + Program 1, 2, 3 в одной строке
+  html += '<tr>';
+  html += `<th style="width:19.5%">Loan Info</th>`;
+  data.columns.forEach(col => html += `<th style="width:26.5%">${col}</th>`);
+  html += '</tr>';
+
+  data.sections.forEach((section, secIdx) => {
+    if (secIdx !== 0) {
+      html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
     }
-
+    // НЕ выводим строку-секцию, только строки данных
+    section.rows.forEach(row => {
+      let highlight = row.highlight ? 'highlight-row' : '';
+      html += `<tr class="${highlight}">`;
+      html += `<td class="field">${row.label}</td>`;
+      row.values.forEach(v => html += `<td class="value">${v}</td>`);
+      html += `</tr>`;
+    });
+  });
+  html += '</table>';
+  document.getElementById('proposalTableWrap').innerHTML = html;
+}
     // --- Основная инициализация
     (function main() {
       // Используй свой fetch, пример:
