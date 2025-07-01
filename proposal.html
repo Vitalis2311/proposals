@@ -201,32 +201,89 @@
       .company, .big-title-wide { font-size: 1em; }
       table, th, td { font-size: 0.96em; }
     }
+.header-true {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 56px;
+  margin-bottom: 24px;
+}
+.logo-true img {
+  height: 105px; /* подбери под свой логотип */
+  max-width: 400px;
+  display: block;
+}
+.lo-true {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.lo-photo-true {
+  height: 105px;  /* Ровно как у лого! */
+  width: 105px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #eee;
+  box-shadow: 0 1px 8px #0001;
+}
+.lo-details-true {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5px;
+}
+.lo-report-by {
+  font-size: 0.80em;
+  color: #888;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  margin-bottom: 2px;
+}
+.lo-fullname-true {
+  color: var(--brandFontColor);
+  font-size: 1.55em;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.lo-company-true {
+  font-size: 1.05em;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 2px;
+}
+.lo-address-true, .lo-email-true, .lo-phone-true {
+  font-size: 0.97em;
+  color: #444;
+}
+.lo-numbers-true {
+  font-size: 0.97em;
+  color: #666;
+  margin-top: 2px;
+}
   </style>
 </head>
 <body>
   <div class="container">
     <!-- Новая шапка -->
-    <div class="header-row2">
-      <div class="logo-box2">
-        <img id="brandLogo" src="" alt="Logo" />
-      </div>
-      <div class="lo-card">
-        <div class="lo-photo-square">
-          <img id="loPhoto" class="lo-photo" src="" alt="LO Photo" />
-        </div>
-        <div class="lo-details">
-          <div class="lo-created">THE REPORT WAS CREATED FOR YOU BY</div>
-          <div class="lo-fullname" id="loFullName"></div>
-          <div class="lo-company" id="brandCompanyName"></div>
-          <div class="lo-address" id="loAddress"></div>
-          <div class="lo-email" id="loEmail"></div>
-          <div class="lo-phone" id="loPhone"></div>
-          <div class="lo-numbers">
-            <span id="nmls"></span> | DRE: <span id="dre"></span>
-          </div>
-        </div>
+<div class="header-true">
+  <div class="logo-true">
+    <img id="brandLogo" src="" alt="Logo">
+  </div>
+  <div class="lo-true">
+    <img id="loPhoto" class="lo-photo-true" src="" alt="LO Photo">
+    <div class="lo-details-true">
+      <div class="lo-report-by">THE REPORT WAS CREATED FOR YOU BY</div>
+      <div class="lo-fullname-true" id="loFullName"></div>
+      <div class="lo-company-true" id="brandCompanyName"></div>
+      <div class="lo-address-true" id="loAddress"></div>
+      <div class="lo-email-true" id="loEmail"></div>
+      <div class="lo-phone-true" id="loPhone"></div>
+      <div class="lo-numbers-true">
+        <span id="nmls"></span> | DRE: <span id="dre"></span>
       </div>
     </div>
+  </div>
+</div>
     <!-- Приветствие и текст -->
     <div class="greeting" id="greeting"></div>
     <div class="proposal-desc">
