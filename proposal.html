@@ -2,295 +2,393 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Loan Proposal Example</title>
+  <title>Loan Proposal</title>
+  <meta name="viewport" content="width=1500">
   <style>
+    :root {
+      --mainCellColor: #4C514F;
+      --cellBackground: #f3f3f3;
+      --cellSecondColor: #7CC242;
+      --brandFontColor: #7CC242;
+      --mainFontColor: #4E5351;
+    }
     body {
-      background: #f5f5f5;
-      font-family: Aptos, Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7f7f7;
       margin: 0;
       padding: 0;
+      color: var(--mainFontColor);
     }
-    .proposal-wrap {
-      width: 1500px;
-      margin: 32px auto 24px auto;
+    .container {
+      max-width: 1500px;
+      margin: 40px auto;
       background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 2px 24px #0001;
-      padding: 0 0 16px 0;
-      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      padding: 40px 50px 35px 50px;
+      box-sizing: border-box;
     }
     .proposal-header {
       display: flex;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      gap: 40px;
+    }
+    .logo-block {
+      width: 380px;
+      min-width: 300px;
+      max-width: 400px;
+      display: flex;
       align-items: center;
-      padding: 36px 48px 0 48px;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
-    .logo-true img {
+    .logo-block img {
       height: 110px;
-      max-width: 420px;
-      object-fit: contain;
+      width: auto;
+      max-width: 350px;
+      display: block;
+      border-radius: 14px;
+      background: #fff;
     }
-    .lo-info {
+    .lo-block {
+      flex: 1;
       display: flex;
       align-items: flex-start;
-      gap: 18px;
-      max-width: 440px;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+    .lo-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--brandFontColor, #7CC242);
+      background: #fff;
+      margin-right: 18px;
+      flex-shrink: 0;
     }
     .lo-photo img {
-      border-radius: 50%;
-      border: 3px solid #7CC242;
-      width: 88px;
-      height: 88px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
-    .lo-details {
-      font-size: 1.03em;
-      color: #4E5351;
-      margin-top: 3px;
+    .lo-info {
+      line-height: 1.45;
+      font-size: 16.5px;
+      min-width: 300px;
+      max-width: 470px;
     }
-    .lo-details .lo-name {
-      font-size: 1.18em;
-      font-weight: bold;
-      color: #7CC242;
-      margin-bottom: 2px;
-      margin-top: 1px;
-      display: block;
-    }
-    .lo-details .lo-label {
-      font-size: 0.88em;
-      color: #999;
-      letter-spacing: 0.06em;
-      margin-bottom: 3px;
+    .lo-info .label {
+      color: #b2b2b2;
+      font-size: 11px;
       font-weight: 500;
       text-transform: uppercase;
+      margin-bottom: 2px;
+      letter-spacing: 0.7px;
+      display: block;
+    }
+    .lo-info .lo-name {
+      font-size: 23px;
+      font-weight: bold;
+      color: var(--brandFontColor, #7CC242);
+      margin-bottom: 2px;
+      line-height: 1.1;
+    }
+    .lo-info .company {
+      font-weight: bold;
+      color: #222;
+    }
+    .lo-info .lo-contact {
+      margin-top: 3px;
+      color: #1a1a1a;
+    }
+    .lo-info .lo-contact span {
+      display: block;
+      font-size: 15px;
+    }
+    .lo-info .lo-contact .nmls-dre {
+      font-size: 13px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .greeting {
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #222;
+      font-size: 21px;
     }
     .proposal-intro {
-      font-size: 1.29em;
-      margin: 18px 0 0 60px;
-      color: #222;
-      font-weight: 500;
+      color: #444;
+      margin-bottom: 32px;
+      font-size: 22px; /* Легко меняется! */
+      line-height: 1.5;
     }
-    .proposal-greeting {
-      margin: 24px 0 0 60px;
-      font-size: 1.09em;
-      color: #222;
-      font-weight: 500;
+    .section-title {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--brandFontColor, #7CC242);
+      margin: 30px 0 20px 0;
+      text-align: left;
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+    .proposal-table-wrap {
+      margin-bottom: 28px;
+      margin-top: 18px;
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
     }
     .proposal-table {
-      width: 1440px;
-      margin: 34px auto 0 auto;
+      width: 100%;
       border-collapse: separate;
       border-spacing: 0;
       background: #fff;
-      font-size: 1.07em;
+      font-size: 17px;
+      table-layout: fixed;
     }
-    .section-header {
-      background: #4C514F; /* Брендовый тёмный фон (mainCellColor) */
+    .proposal-table th,
+    .proposal-table td {
+      border: 1px solid #33333322;
+      text-align: left;
+      word-break: break-word;
+      padding: 13px 10px;
     }
-    .section-header td {
+    .proposal-table th {
+      background: var(--mainCellColor, #4C514F);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.18em;
+      text-align: center;
+      letter-spacing: 0.5px;
+      border-bottom: 2.5px solid #fff;
+    }
+    .proposal-table .section-row td {
+      background: var(--mainCellColor, #4C514F);
       color: #fff;
       font-weight: bold;
-      font-size: 1.15em;
-      padding: 18px 10px 15px 16px;
-      border: none;
-    }
-    .section-name {
+      font-size: 1.17em;
+      border-top: 7px solid #fff;
+      border-bottom: 1px solid var(--mainCellColor, #4C514F);
       text-align: left;
-      min-width: 260px;
-      font-size: 1.15em;
-      letter-spacing: 0.01em;
+      padding-top: 16px;
+      padding-bottom: 10px;
+      letter-spacing: 0.3px;
     }
-    .program-name {
-      text-align: center;
-      font-size: 1.15em;
+    .proposal-table tr.gap-row td {
+      background: #fff !important;
+      height: 24px;
+      border: none;
+      padding: 0;
+    }
+    .proposal-table .highlight-row td {
+      background: var(--cellSecondColor, #7CC242) !important;
+      font-weight: bold;
+      color: #fff !important;
     }
     .proposal-table td {
-      padding: 11px 10px;
-      border: none;
-      border-bottom: 1.2px solid #e2e2e2;
-      color: #222;
+      background: var(--cellBackground, #f3f3f3);
+      font-weight: 400;
+      color: #1e1e1e;
     }
-    .proposal-table tr:last-child td {
-      border-bottom: none;
+    .proposal-table td.field {
+      font-weight: 600;
+      color: #353535;
+      background: #f8f8f8;
+      width: 19.5%;
+      text-align: left;
     }
-    .highlight-row td {
-      background: #7CC242 !important;
-      color: #fff;
-      font-weight: bold;
+    .proposal-table td.value {
+      width: 26.5%;
+      text-align: right;
     }
-    .section-gap {
-      height: 24px;
+    .footer-note {
+      margin-top: 38px;
+      color: #636363;
       background: #fff;
-      border: none;
-    }
-    .proposal-title {
-      font-size: 2.1em;
-      color: #7CC242;
-      font-weight: bold;
-      margin: 28px 0 10px 60px;
-      letter-spacing: 0.03em;
+      font-size: 13.6px;
       text-align: left;
+      padding: 20px 28px 0 3px;
+      border-top: 1.7px solid #e5e5e5;
+      opacity: 0.85;
+      line-height: 1.45;
+      border-radius: 0 0 12px 12px;
     }
-    .proposal-disclaimer {
-      width: 1440px;
-      margin: 26px auto 28px auto;
-      font-size: 0.99em;
-      color: #888;
-      line-height: 1.5;
-      text-align: left;
+    @media (max-width: 1520px) {
+      .container { max-width: 99vw; padding: 1vw; }
     }
   </style>
 </head>
 <body>
-  <div class="proposal-wrap">
-    <!-- Шапка: Лого слева, LO-данные справа -->
+  <div class="container">
     <div class="proposal-header">
-      <div class="logo-true">
-        <img id="logoImg" src="https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748" alt="Logo">
+      <div class="logo-block">
+        <img src="" id="brandLogo" alt="Company Logo">
       </div>
-      <div class="lo-info">
+      <div class="lo-block">
         <div class="lo-photo">
-          <img id="loPhotoImg" src="https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526" alt="LO">
+          <img src="" id="loPhoto" alt="LO Photo">
         </div>
-        <div class="lo-details">
-          <div class="lo-label">THE REPORT WAS CREATED FOR YOU BY</div>
-          <span class="lo-name" id="loFullName">John Doe</span>
-          <b id="brandCompanyName">Arbor Financial Group</b><br>
-          <span id="loAddress">1234 Main St, Irvine, CA 92614</span><br>
-          <span id="loEmail">jdoe@arborfg.com</span><br>
-          <span id="loPhone">(555) 555-5555</span><br>
-          <span id="nmls">NMLS: 123456</span> | <span id="dre">DRE: DRE1234</span>
+        <div class="lo-info">
+          <span class="label">THE REPORT WAS CREATED FOR YOU BY</span>
+          <div class="lo-name" id="loName"></div>
+          <div class="company" id="brandCompanyName"></div>
+          <div class="lo-contact">
+            <span id="loAddress"></span>
+            <span id="loEmail"></span>
+            <span id="loPhone"></span>
+            <span class="nmls-dre"><span id="loNmls"></span> | <span id="loDre"></span></span>
+          </div>
         </div>
       </div>
     </div>
-    <div class="proposal-greeting" id="proposalGreeting">Hi Jane Smith!</div>
-    <div class="proposal-title" id="proposalTitle">RATE & CLOSING COST OPTIONS</div>
-    <table class="proposal-table">
-      <tbody id="proposalTableWrap"></tbody>
-    </table>
-  </div>
-  <div class="proposal-disclaimer">
-    The results provided above are intended for comparison purposes only and accuracy is not guaranteed. The loan comparison does not ensure the availability of, or your eligibility for, any specific product offered by any particular lender and/or is not a commitment to lend. Rates are subject to change based off credit score. The APR is estimated. Lender closing cost credits are not guaranteed and can change without notice.
+    <div class="greeting" id="greeting"></div>
+    <div class="proposal-intro" id="proposalIntro"></div>
+    <div class="section-title">RATE & CLOSING COST OPTIONS</div>
+    <div class="proposal-table-wrap" id="proposalTableWrap"></div>
+    <div class="footer-note" id="footerNote">
+      The results provided above are intended for comparison purposes only and accuracy is not guaranteed. The loan comparison does not ensure the availability of, or your eligibility for, any specific product offered by any particular lender and/or is not a commitment to lend. Rates are subject to change based off credit score. The APR is estimated. Lender closing cost credits are not guaranteed and can change without notice.
+    </div>
   </div>
   <script>
-    // --- Пример JSON-конфига ---
+    // --- Функция для установки CSS-переменных из JSON
+    function setColorsFromJson(data) {
+      if(data.mainCellColor)  document.documentElement.style.setProperty('--mainCellColor', data.mainCellColor);
+      if(data.cellBackground)  document.documentElement.style.setProperty('--cellBackground', data.cellBackground);
+      if(data.cellSecondColor) document.documentElement.style.setProperty('--cellSecondColor', data.cellSecondColor);
+      if(data.brandFontColor)  document.documentElement.style.setProperty('--brandFontColor', data.brandFontColor);
+      if(data.mainFontColor)   document.documentElement.style.setProperty('--mainFontColor', data.mainFontColor);
+    }
+
+    // --- Демо-JSON (замени на fetch)
     const proposalJson = {
-      mainCellColor: "#4C514F",
-      cellSecondColor: "#7CC242",
-      programs: ["Program 1", "Program 2", "Program 3"],
-      logoUrl: "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748",
-      loPhotoUrl: "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526",
-      loFullName: "John Doe",
-      brandCompanyName: "Arbor Financial Group",
-      loAddress: "1234 Main St, Irvine, CA 92614",
-      loEmail: "jdoe@arborfg.com",
-      loPhone: "(555) 555-5555",
-      nmls: "123456",
-      dre: "DRE1234",
-      greeting: "Hi Jane Smith!",
-      sections: [
+      "mainCellColor": "#4C514F",
+      "cellBackground": "#f3f3f3",
+      "cellSecondColor": "#7CC242",
+      "brandFontColor": "#7CC242",
+      "mainFontColor": "#4E5351",
+      "brandLogo": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748",
+      "loPhoto": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526",
+      "loFullName": "John Doe",
+      "brandCompanyName": "Arbor Financial Group",
+      "loAddress": "1234 Main St, Irvine, CA 92614",
+      "loEmail": "jdoe@arborfg.com",
+      "loPhone": "(555) 555-5555",
+      "nmls": "123456",
+      "dre": "DRE1234",
+      "greeting": "Hi Jane Smith!",
+      "proposalIntro": "Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.",
+      "columns": [
+        "Program 1", "Program 2", "Program 3"
+      ],
+      "sections": [
         {
-          name: "Loan Info",
-          rows: [
-            { label: "Appraised Value", values: ["$999,999.00", "$999,999.00", "$999,999.00"] },
-            { label: "Loan Amount", values: ["$660,000.00", "$660,000.00", "$660,000.00"] },
-            { label: "Equity", values: ["$440,000.00", "$440,000.00", "$440,000.00"] },
-            { label: "Loan-To-Value", values: ["66%", "66%", "66%"] },
+          "name": "Loan Info",
+          "rows": [
+            { label: "Program", values: ["Conv 30 Yr Fixed", "FHA 30 Yr Fixed", "VA 30 Yr Fixed"] },
+            { label: "Appraised Value", values: ["$999,999.00", "$899,000.00", "$799,000.00"] },
+            { label: "Loan Amount", values: ["$660,000.00", "$500,000.00", "$450,000.00"] },
+            { label: "Equity", values: ["$339,999.00", "$399,000.00", "$349,000.00"] },
+            { label: "Loan-To-Value", values: ["66%", "56%", "56%"] }
           ]
         },
         {
-          name: "Rate, APR, Term",
-          rows: [
-            { label: "Rate", values: ["4%", "4%", "4%"], highlight: true },
-            { label: "APR", values: ["4%", "4%", "4%"] },
-            { label: "Term", values: ["298", "298", "298"] },
+          "name": "Rate & Term",
+          "rows": [
+            { label: "Rate", highlight: true, values: ["4.0%", "4.5%", "3.8%"] },
+            { label: "APR", values: ["4.05%", "4.5%", "3.95%"] },
+            { label: "Term", values: ["298", "300", "295"] },
+            { label: "Points", values: ["1.0", "1.0", "0.5"] },
+            { label: "Discount Point", values: ["0.0%", "0.0%", "0.2%"] }
           ]
         },
         {
-          name: "Monthly Breakdown",
-          rows: [
-            { label: "PI", values: ["$3,497.00", "$3,497.00", "$3,497.00"] },
-            { label: "Hazard Insurance", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Mortgage Insurance", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "HOA", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Property Taxes", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Extra Monthly Payment", values: ["$261.00", "$261.00", "$261.00"], highlight: true },
-            { label: "Total Monthly Payment", values: ["$3,758.00", "$3,758.00", "$3,758.00"], highlight: true },
+          "name": "Monthly Payment",
+          "rows": [
+            { label: "PI", values: ["$3,497.00", "$3,250.00", "$3,100.00"] },
+            { label: "Hazard Insurance", values: ["$85.00", "$100.00", "$100.00"] },
+            { label: "Mortgage Insurance", values: ["$0.00", "$120.00", "$0.00"] },
+            { label: "HOA", values: ["$0.00", "$50.00", "$0.00"] },
+            { label: "Property Taxes", values: ["$800.00", "$720.00", "$600.00"] },
+            { label: "Extra Monthly Payment", highlight: true, values: ["$261.00", "$0.00", "$0.00"] },
+            { label: "Total Monthly Payment", highlight: true, values: ["$4,643.00", "$4,230.00", "$3,800.00"] }
           ]
         },
         {
-          name: "Closing Costs",
-          rows: [
-            { label: "Points", values: ["0.00% ($0.00)", "0.00% ($0.00)", "0.00% ($0.00)"] },
-            { label: "Lender Credit", values: ["0.00% ($0.00)", "0.00% ($0.00)", "0.00% ($0.00)"] },
-            { label: "Lender Fees", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "3rd Party Fees", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Total Closing Costs", values: ["$0.00", "$0.00", "$0.00"], highlight: true },
-            { label: "Escrows & Prepaid Interest", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Estimated Total Cash to Close", values: ["$0.00", "$0.00", "$0.00"], highlight: true },
+          "name": "Closing Costs",
+          "rows": [
+            { label: "Closing Costs", values: ["$5,000.00", "$7,500.00", "$6,000.00"] },
+            { label: "Lender Fees", values: ["$2,500.00", "$2,500.00", "$2,400.00"] },
+            { label: "3Rd Party Fees", values: ["$1,200.00", "$1,300.00", "$1,200.00"] },
+            { label: "Escrows & Prepaid Interest", values: ["$800.00", "$850.00", "$900.00"] },
+            { label: "Cash to Close", highlight: true, values: ["$10,800.00", "$12,200.00", "$11,300.00"] },
+            { label: "Closing Costs Included in Loan", values: ["No", "Yes", "No"] },
+            { label: "Pre-Paids and Impounds in Loan", values: ["No", "Yes", "No"] }
           ]
         },
         {
-          name: "Other Savings",
-          rows: [
-            { label: "Closing Costs Included in Loan", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Pre-Paids and Impounds in Loan", values: ["$0.00", "$0.00", "$0.00"] },
-            { label: "Payment Savings", values: ["$261.00", "$261.00", "$261.00"], highlight: true },
-            { label: "Power Refi Savings", values: ["$154,872.00", "$154,872.00", "$154,872.00"], highlight: true },
-            { label: "Interest Saved over 5 Years", values: ["$34,823.00", "$34,823.00", "$34,823.00"] },
-            { label: "Interest Saved over Life of Loan", values: ["$318,569.00", "$318,569.00", "$318,569.00"], highlight: true },
+          "name": "Payment Savings",
+          "rows": [
+            { label: "Payment Savings", highlight: true, values: ["$261.00", "$261.00", "$261.00"] },
+            { label: "Power Refi Savings", highlight: true, values: ["$154,872.00", "$154,872.00", "$154,872.00"] },
+            { label: "Interest Saved over 5 Years", highlight: true, values: ["$34,823.00", "$34,823.00", "$34,823.00"] },
+            { label: "Interest Saved over Life of Loan", highlight: true, values: ["$318,569.00", "$318,569.00", "$318,569.00"] }
           ]
         }
       ]
     };
 
-    // --- Динамический рендер ---
+    // --- Заполняем шапку (логотип, LO, и т.д.)
+    function fillHeader(data) {
+      document.getElementById('brandLogo').src = data.brandLogo;
+      document.getElementById('loPhoto').src = data.loPhoto;
+      document.getElementById('loName').textContent = data.loFullName || "";
+      document.getElementById('brandCompanyName').textContent = data.brandCompanyName || "";
+      document.getElementById('loAddress').textContent = data.loAddress || "";
+      document.getElementById('loEmail').textContent = data.loEmail || "";
+      document.getElementById('loPhone').textContent = data.loPhone || "";
+      document.getElementById('loNmls').textContent = "NMLS: " + (data.nmls || "");
+      document.getElementById('loDre').textContent = "DRE: " + (data.dre || "");
+      document.getElementById('greeting').textContent = data.greeting || "";
+      document.getElementById('proposalIntro').textContent = data.proposalIntro || "";
+    }
+
+    // --- Генерация таблицы
     function renderTable(data) {
-      let html = "";
-      data.sections.forEach((section, idx) => {
-        // Разделитель между секциями
-        if (idx !== 0) {
-          html += `<tr class="section-gap"><td colspan="${1 + data.programs.length}"></td></tr>`;
+      let html = '';
+      // Первая строка — заголовки колонок
+      html += '<tr>';
+      html += `<th style="width:19.5%"> </th>`;
+      data.columns.forEach(col => html += `<th style="width:26.5%">${col}</th>`);
+      html += '</tr>';
+
+      data.sections.forEach((section, secIdx) => {
+        // Разрыв между секциями (кроме первой)
+        if (secIdx !== 0) {
+          html += `<tr class="gap-row"><td colspan="${data.columns.length + 1}"></td></tr>`;
         }
-        // Шапка секции: одна строка
-        html += `<tr class="section-header" style="background:${data.mainCellColor};">`;
-        html += `<td class="section-name">${section.name}</td>`;
-        data.programs.forEach(pr => {
-          html += `<td class="program-name">${pr}</td>`;
-        });
-        html += `</tr>`;
-        // Контент секции
+        // Заголовок секции
+        html += `<tr class="section-row"><td colspan="${data.columns.length + 1}">${section.name}</td></tr>`;
         section.rows.forEach(row => {
-          const rowClass = row.highlight ? 'highlight-row' : '';
-          html += `<tr class="${rowClass}">`;
-          html += `<td>${row.label}</td>`;
-          row.values.forEach(v => html += `<td>${v}</td>`);
+          let highlight = row.highlight ? 'highlight-row' : '';
+          html += `<tr class="${highlight}">`;
+          html += `<td class="field">${row.label}</td>`;
+          row.values.forEach(v => html += `<td class="value">${v}</td>`);
           html += `</tr>`;
         });
       });
-      document.getElementById('proposalTableWrap').innerHTML = html;
+      document.getElementById('proposalTableWrap').innerHTML = `<table class="proposal-table">${html}</table>`;
     }
 
-    // --- Инициализация всего ---
-    function fillProposal(proposalJson) {
-      // Картинки
-      document.getElementById('logoImg').src = proposalJson.logoUrl;
-      document.getElementById('loPhotoImg').src = proposalJson.loPhotoUrl;
-      // LO данные
-      document.getElementById('loFullName').textContent = proposalJson.loFullName;
-      document.getElementById('brandCompanyName').textContent = proposalJson.brandCompanyName;
-      document.getElementById('loAddress').textContent = proposalJson.loAddress;
-      document.getElementById('loEmail').textContent = proposalJson.loEmail;
-      document.getElementById('loPhone').textContent = proposalJson.loPhone;
-      document.getElementById('nmls').textContent = "NMLS: " + proposalJson.nmls;
-      document.getElementById('dre').textContent = "DRE: " + proposalJson.dre;
-      // Greeting
-      document.getElementById('proposalGreeting').textContent = proposalJson.greeting;
-      // Таблица
+    // --- Основная инициализация
+    (function main() {
+      // Используй свой fetch, пример:
+      // fetch('https://.../test.json').then(r=>r.json()).then(data=>{ setColorsFromJson(data); fillHeader(data); renderTable(data); });
+      setColorsFromJson(proposalJson);
+      fillHeader(proposalJson);
       renderTable(proposalJson);
-    }
-
-    fillProposal(proposalJson);
+    })();
   </script>
 </body>
 </html>
