@@ -1,0 +1,253 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --mainCellColor: #4C514F;
+  --cellBackground: #f3f3f3;
+  --cellSecondColor: #7CC242;
+  --brandFontColor: #7CC242;
+  --mainFontColor: #4E5351;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  min-width: 500px;
+  color: var(--mainFontColor);
+}
+
+.container {
+  /*max-width: 1600px;*/
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* ===== Logo Center ===== */
+.logo-center {
+  text-align: center;
+  padding: 15px 0 5px;
+  background: white;
+}
+
+.logo-center img {
+  max-width: 300px;
+}
+
+/* ===== Header Content (Greeting + Contact) ===== */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* padding: 10px 0; */
+  background-color: white;
+  align-items: end;
+}
+
+.greeting-container {
+  /* by default: max-width for large screens */
+  /*max-width: 600px;*/
+  flex: 2 1 0;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1 1 0;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.contact-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid var(--brandFontColor);
+}
+
+.contact-info {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #222;
+}
+
+.contact-info-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--brandFontColor);
+}
+
+.contact-info-company {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.contact-info-contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px;
+}
+
+.contacts-nmls-dre {
+  color: #666;
+}
+
+/* ===== Main Content ===== */
+main {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/**/
+.summary-chart-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.summary-table {
+  flex: 2 1 0;
+  background: white;
+  /* border: 1px solid #ddd; */
+  /* padding: 15px; */
+  /* border-radius: 4px; */
+}
+
+.subject-rate-cost {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  color: var(--brandFontColor);
+}
+
+.rate-cost-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-section {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 14px;
+  /* border-radius: 8px; */
+  overflow: hidden;
+  table-layout: fixed;
+  /* ÐžÐ‘ÐžÐ’â€™Ð¯Ð—ÐšÐžÐ’Ðž Ð´Ð»Ñ colgroup */
+}
+
+.table-section:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.table-section thead th {
+  background-color: var(--mainCellColor);
+  color: white;
+  padding: 10px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.table-section td,
+.table-section th {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  background-color: #f9fcfd;
+}
+
+.table-section td:first-child {
+  text-align: left;
+  font-weight: 500;
+  /* white-space: nowrap; */
+}
+
+.table-section td:not(:first-child),
+.table-section th:not(:first-child) {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.highlight-row td {
+  background-color: var(--cellSecondColor);
+  font-weight: 600;
+  color: white;
+}
+
+
+/**/
+
+.charts {
+  flex: 1 1 0;
+  background: white;
+  margin-top: 74px;
+}
+
+.chart-header {
+  font-weight: 500;
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+
+.chart-container {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+/*.chart {
+      margin-top: 20px;
+      background: #f1f1f1;
+      padding: 20px;
+      border-radius: 8px;
+    }*/
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+  .summary-chart-wrapper {
+    flex-direction: column;
+  }
+
+  .summary-table,
+  .charts,
+  .greeting-container {
+    flex: 1 1 100%;
+    max-width: 100%;
+    /* gap: 30px; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .contact-card {
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .contact-card {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .summary-chart-wrapper {
+    flex-direction: column;
+  }
+}
