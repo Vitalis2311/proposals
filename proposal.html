@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Total Cost Analysis</title>
+  <link rel="stylesheet" href="css/index.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <script src="js/index.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="header-container">
+      <div class="logo-center">
+        <img id="logo">
+      </div>
+      <div class="contact-card">
+        <img id="photo">
+        <div class="contact-info">
+          <div id="loFullName" class="contact-info-name"></div>
+          <div id="brandCompanyName" class="contact-info-company"></div>
+          <div id="loPhone" class="contact-info-contacts">
+            <div id="loAddress" class="contacts-address"></div>
+            <div id="loEmail" class="contacts-email"></div>
+            <div class="contacts-phone"></div>
+            <div class="contacts-nmls-dre">
+              <span id="nmls"></span>
+              <span class="divider"> | </span>
+              <span id="dre"></span>
+            </div>
+          </div>
+          <div class="comunicate">
+            <a href="tel:">&#128222; Call</a> | <a href="sms:">&#128172; Text</a> | <a
+              href="mailto:vitalis@arborfg.com">&#128233; Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header with Greeting and Contact -->
+    <div class="header-content">
+      <div class="greeting-container">
+        <h2 id="greeting"></h2>
+        <p id="proposalIntro"></p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+      <div class="subject-rate-cost">RATE & CLOSING COST OPTIONS</div>
+      <div class="summary-chart-wrapper">
+        <div class="summary-tables">
+          <div class="current-loan-table"> </div>
+          <!-- Summary Table -->
+          <div class="summary-table">
+            <div class="rate-cost-table"></div>
+          </div>
+        </div>
+        <!-- Charts -->
+        <div class="charts">
+          <div class="chart-container">
+            <div class="chart-header">Monthly Payment Difference</div>
+            <!--<button class="view-button">View details</button>-->
+            <canvas id="MonthlyPaymentDifference" height="125"></canvas>
+          </div>
+          <div class="chart-container">
+            <div class="chart-header">Interest Saved over 5 Years</div>
+            <!--<button class="view-button">View details</button>-->
+            <canvas id="InterestSavedOver5Years" height="125"></canvas>
+          </div>
+          <div class="chart-container">
+            <div class="chart-header">Interest Saved over Life of Loan</div>
+            <!--<button class="view-button">View details</button>-->
+            <canvas id="InterestSavedOverLifeOfLoan" height="125"></canvas>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
