@@ -146,7 +146,7 @@ main {
 }
 
 .current-loan thead th {
-  background-color: var(--mainCellColor);
+  background-color: #acacac;
   color: white;
   padding: 10px;
   text-align: left;
