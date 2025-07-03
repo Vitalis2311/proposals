@@ -9,7 +9,7 @@ a {
 
 :root {
   --mainCellColor: #4C514F;
-  --cellBackground: #f3f3f3;
+  --cellBackground: #fcfcfc;
   --cellSecondColor: #7CC242;
   --brandFontColor: #7CC242;
   --mainFontColor: #4E5351;
@@ -209,7 +209,7 @@ main {
 .table-section th {
   padding: 10px 12px;
   border: 1px solid #ddd;
-  background-color: #f9fcfd;
+  background-color: var(--cellBackground);
   font-weight: 500;
 }
 
