@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: #666;
+}
+
 :root {
   --mainCellColor: #4C514F;
   --cellBackground: #f3f3f3;
@@ -20,36 +25,31 @@ body {
 }
 
 .container {
-  /*max-width: 1600px;*/
   margin: 0 auto;
   padding: 0 30px;
 }
 
-/* ===== Logo Center ===== */
+.header-container {
+  display: flex;
+  margin-top: 20px;
+}
+
 .logo-center {
-  text-align: center;
-  padding: 15px 0 5px;
+  text-align: left;
   background: white;
+  flex: 1 1 0;
 }
 
 .logo-center img {
-  max-width: 300px;
+  max-height: 130px;
 }
 
-/* ===== Header Content (Greeting + Contact) ===== */
 .header-content {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  /* padding: 10px 0; */
   background-color: white;
   align-items: end;
-}
-
-.greeting-container {
-  /* by default: max-width for large screens */
-  /*max-width: 600px;*/
-  flex: 2 1 0;
 }
 
 .contact-card {
@@ -94,11 +94,17 @@ body {
   font-size: 16px;
 }
 
+.comunicate {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
 .contacts-nmls-dre {
   color: #666;
 }
 
-/* ===== Main Content ===== */
 main {
   padding: 20px 0;
   display: flex;
@@ -106,19 +112,57 @@ main {
   gap: 20px;
 }
 
-/**/
 .summary-chart-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 20px;
 }
 
+.summary-tables {
+  display: flex;
+  gap: 20px;
+  flex: 0 1 70%;
+  min-width: 0;
+}
+
+.current-loan-table {
+  flex: 1 1 30%;
+  min-width: 280px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.current-loan {
+  width: 100%;
+  border-collapse: collapse;
+
+  margin-bottom: 20px;
+}
+
+.current-loan thead th {
+  background-color: var(--mainCellColor);
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+.current-loan td {
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.current-loan td:first-child {
+  color: #444;
+  width: 60%;
+}
+
 .summary-table {
-  flex: 2 1 0;
+  flex: 1 1 70%;
   background: white;
-  /* border: 1px solid #ddd; */
-  /* padding: 15px; */
-  /* border-radius: 4px; */
+  min-width: 490px;
 }
 
 .subject-rate-cost {
@@ -139,10 +183,8 @@ main {
   border-collapse: collapse;
   margin-bottom: 20px;
   font-size: 14px;
-  /* border-radius: 8px; */
   overflow: hidden;
   table-layout: fixed;
-  /* ÐžÐ‘ÐžÐ’â€™Ð¯Ð—ÐšÐžÐ’Ðž Ð´Ð»Ñ colgroup */
 }
 
 .table-section:first-child {
@@ -168,7 +210,6 @@ main {
 .table-section td:first-child {
   text-align: left;
   font-weight: 500;
-  /* white-space: nowrap; */
 }
 
 .table-section td:not(:first-child),
@@ -183,13 +224,10 @@ main {
   color: white;
 }
 
-
-/**/
-
 .charts {
-  flex: 1 1 0;
+  flex: 0 1 30%;
   background: white;
-  margin-top: 74px;
+  min-width: 320px;
 }
 
 .chart-header {
@@ -205,49 +243,56 @@ main {
   margin-bottom: 20px;
 }
 
-/*.chart {
-      margin-top: 20px;
-      background: #f1f1f1;
-      padding: 20px;
-      border-radius: 8px;
-    }*/
-
-/* ===== Responsive ===== */
-@media (max-width: 1200px) {
+/* RESPONSIVE */
+@media (max-width: 1400px) {
   .summary-chart-wrapper {
     flex-direction: column;
   }
 
-  .summary-table,
+  .summary-tables,
+  .charts {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+
   .charts,
   .greeting-container {
     flex: 1 1 100%;
     max-width: 100%;
-    /* gap: 30px; */
     display: flex;
     flex-direction: column;
     margin-top: 0;
   }
-
-  .contact-card {
-    justify-content: flex-start;
-    text-align: left;
-  }
 }
 
-@media (max-width: 768px) {
-  .header-content {
+@media (max-width: 1000px) {
+  .summary-tables {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo-center,
+  .contact-card {
+    flex: 1 1 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .contact-info,
+  .contact-info-contacts {
+    align-items: center;
   }
 
   .contact-card {
-    justify-content: flex-start;
-    text-align: left;
-  }
-
-  .summary-chart-wrapper {
     flex-direction: column;
+    gap: 15px;
   }
 }
