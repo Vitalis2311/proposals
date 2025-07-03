@@ -172,7 +172,7 @@ $(document).ready(async () => {
         canvasId: 'MonthlyPaymentDifference',
         labels: data.programs,
         data: parseDollarArray(data.tables["Total Monthly Payment"]),
-        color: '#4c514f'
+        color: '#acacac'
       },
       {
         canvasId: 'InterestSavedOver5Years',
