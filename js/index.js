@@ -99,6 +99,7 @@ $(document).ready(async () => {
       wrapper.append(table);
     });
   }
+
   function createBarChart({
     canvasId,
     labels,
@@ -123,7 +124,7 @@ $(document).ready(async () => {
           data: data,
           backgroundColor: color,
           borderRadius: 2,
-          barThickness: 100
+          barThickness: 40
         }]
       },
       options: {
@@ -164,24 +165,25 @@ $(document).ready(async () => {
       plugins: [ChartDataLabels]
     });
   }
-  function renderCharts(tables) {
+
+  function renderCharts(data) {
     const charts = [
       {
         canvasId: 'MonthlyPaymentDifference',
-        labels: ['1.1m w/ 20% down', '1.05 m w/ 20% down', '1.01m w/ 20% down'],
-        data: parseDollarArray(tables["Total Monthly Payment"]),
-        color: '#2c84c5'
+        labels: data.programs,
+        data: parseDollarArray(data.tables["Total Monthly Payment"]),
+        color: '#4c514f'
       },
       {
         canvasId: 'InterestSavedOver5Years',
-        labels: ['1.1m w/ 20% down', '1.05 m w/ 20% down', '1.01m w/ 20% down'],
-        data: parseDollarArray(tables["Interest Saved over 5 Years"]),
-        color: '#2c84c5'
+        labels: data.programs,
+        data: parseDollarArray(data.tables["Interest Saved over 5 Years"]),
+        color: '#7cc242'
       },
       {
         canvasId: 'InterestSavedOverLifeOfLoan',
-        labels: ['1.1m w/ 20% down', '1.05 m w/ 20% down', '1.01m w/ 20% down'],
-        data: parseDollarArray(tables["Interest Saved over Life of Loan"]),
+        labels: data.programs,
+        data: parseDollarArray(data.tables["Interest Saved over Life of Loan"]),
         color: '#2c84c5'
       }
     ]
@@ -190,11 +192,13 @@ $(document).ready(async () => {
       createBarChart(f);
     });
   }
+
   function parseDollarArray(arr) {
     return arr.map(str =>
       parseFloat(str.replace(/\$/g, '').replace(/,/g, ''))
     );
   }
+
   function setColorsFromJson(data) {
     const root = $(':root'); // посилання на document.documentElement
 
@@ -204,20 +208,19 @@ $(document).ready(async () => {
     if (data.brandFontColor) root.css('--brandFontColor', data.brandFontColor);
     if (data.mainFontColor) root.css('--mainFontColor', data.mainFontColor);
   }
+
   function renderCurrentLoanTable(data) {
     const container = $('.current-loan-table');
     container.empty();
 
-    if (!data || !data.ContactName) return;
-
     const table = $('<table>').addClass('current-loan');
-    const thead = $('<thead><tr><th colspan="2">' + data.ContactName + '</th></tr></thead>');
+    const thead = $('<thead><tr><th colspan="2">Current Loan</th></tr></thead>');
     table.append(thead);
 
     const tbody = $('<tbody>');
 
     Object.entries(data).forEach(([key, value]) => {
-      if (key === 'ContactName') return; // skip title row
+      //if (key === 'ContactName') return; // skip title row
 
       const row = $('<tr>');
       row.append(`<td>${key}</td>`);
@@ -253,7 +256,7 @@ $(document).ready(async () => {
       renderHeaderFromJson(data);
       renderCurrentLoanTable(data.currentLoan);
       renderTablesFromJson(data);
-      renderCharts(data.tables);
+      renderCharts(data);
     } catch (err) {
       document.body.innerHTML = "<h2>Proposal not found</h2>";
     }

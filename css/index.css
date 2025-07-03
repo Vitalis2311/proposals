@@ -26,7 +26,7 @@ body {
 
 .container {
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 20px 50px;
 }
 
 .header-container {
@@ -37,7 +37,7 @@ body {
 .logo-center {
   text-align: left;
   background: white;
-  flex: 1 1 0;
+  flex: 3 1 0;
 }
 
 .logo-center img {
@@ -52,13 +52,17 @@ body {
   align-items: end;
 }
 
+.greeting-container {
+  flex: 0 1 75%;
+}
+
 .contact-card {
   display: flex;
   align-items: center;
   gap: 30px;
   flex: 1 1 0;
-  justify-content: flex-end;
-  text-align: right;
+  justify-content: center;
+  min-width: 400px;
 }
 
 .contact-card img {
@@ -121,14 +125,14 @@ main {
 .summary-tables {
   display: flex;
   gap: 20px;
-  flex: 0 1 70%;
+  flex: 0 1 75%;
   min-width: 0;
 }
 
 .current-loan-table {
   flex: 1 1 30%;
   min-width: 280px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   overflow: hidden;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -137,8 +141,8 @@ main {
 .current-loan {
   width: 100%;
   border-collapse: collapse;
-
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  /* border: 1px solid #ccc; */
 }
 
 .current-loan thead th {
@@ -146,10 +150,11 @@ main {
   color: white;
   padding: 10px;
   text-align: left;
+  font-size: 14px;
 }
 
 .current-loan td {
-  border-bottom: 1px solid #eee;
+  border: 1px solid #eee;
   padding: 10px;
   font-size: 14px;
 }
@@ -162,7 +167,7 @@ main {
 .summary-table {
   flex: 1 1 70%;
   background: white;
-  min-width: 490px;
+  min-width: 450px;
 }
 
 .subject-rate-cost {
@@ -205,6 +210,7 @@ main {
   padding: 10px 12px;
   border: 1px solid #ddd;
   background-color: #f9fcfd;
+  font-weight: 500;
 }
 
 .table-section td:first-child {
@@ -225,7 +231,7 @@ main {
 }
 
 .charts {
-  flex: 0 1 30%;
+  flex: 0 1 25%;
   background: white;
   min-width: 320px;
 }
@@ -294,5 +300,11 @@ main {
   .contact-card {
     flex-direction: column;
     gap: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
   }
 }
