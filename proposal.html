@@ -10,21 +10,15 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script
     src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/index_d.js"></script>
 </head>
 
 <body>
   <div class="container">
     <!-- Logo -->
-    <div class="logo-center">
-      <img id="logo">
-    </div>
-
-    <!-- Header with Greeting and Contact -->
-    <div class="header-content">
-      <div class="greeting-container">
-        <h2 id="greeting"></h2>
-        <p id="proposalIntro"></p>
+    <div class="header-container">
+      <div class="logo-center">
+        <img id="logo">
       </div>
       <div class="contact-card">
         <img id="photo">
@@ -42,256 +36,30 @@
             </div>
           </div>
           <div class="comunicate">
-            <a href="tel:">Call</a> | <a href="sms:">Text</a> | <a href="mailto:vitalis@arborfg.com">Email</a>
+            <a href="tel:">&#128222; Call</a> | <a href="sms:">&#128172; Text</a> | <a
+              href="mailto:vitalis@arborfg.com">&#128233; Email</a>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Header with Greeting and Contact -->
+    <div class="header-content">
+      <div class="greeting-container">
+        <h2 id="greeting"></h2>
+        <p id="proposalIntro"></p>
+      </div>
+    </div>
+
     <!-- Main Content -->
     <main>
+      <div class="subject-rate-cost">RATE & CLOSING COST OPTIONS</div>
       <div class="summary-chart-wrapper">
-        <!-- Summary Table -->
-        <div class="summary-table">
-          <div class="subject-rate-cost">RATE & CLOSING COST OPTIONS</div>
-          <div class="rate-cost-table">
-            <!-- 
-            <table class="table-section">
-              <colgroup>
-                <col style="width: 40%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>Program</th>
-                  <th>Conv 30 Yr Fixed</th>
-                  <th>FHA 30 Yr Fixed</th>
-                  <th>VA 30 Yr Fixed</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Appraised Value</td>
-                  <td>$999,999.00</td>
-                  <td>$999,999.00</td>
-                  <td>$999,999.00</td>
-                </tr>
-                <tr>
-                  <td>Loan Amount</td>
-                  <td>$660,000.00</td>
-                  <td>$660,000.00</td>
-                  <td>$660,000.00</td>
-                </tr>
-                <tr>
-                  <td>Equity</td>
-                  <td>$440,000.00</td>
-                  <td>$440,000.00</td>
-                  <td>$440,000.00</td>
-                </tr>
-                <tr>
-                  <td>Loan-To-Value</td>
-                  <td>66%</td>
-                  <td>66%</td>
-                  <td>66%</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <table class="table-section">
-              <colgroup>
-                <col style="width: 40%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-              </colgroup>
-              <tbody>
-                <tr class="highlight-row">
-                  <td>Rate</td>
-                  <td>4%</td>
-                  <td>4%</td>
-                  <td>4%</td>
-                </tr>
-                <tr>
-                  <td>APR</td>
-                  <td>4%</td>
-                  <td>4%</td>
-                  <td>4%</td>
-                </tr>
-                <tr>
-                  <td>Term</td>
-                  <td>298</td>
-                  <td>298</td>
-                  <td>298</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <table class="table-section">
-              <colgroup>
-                <col style="width: 40%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-              </colgroup>
-              <tbody>
-                <tr>
-                  <td>Principle & Interest</td>
-                  <td>$3,497.00</td>
-                  <td>$3,497.00</td>
-                  <td>$3,497.00</td>
-                </tr>
-                <tr>
-                  <td>Hazard Insurance</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr>
-                  <td>Mortgage Insurance</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr>
-                  <td>HOA</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr>
-                  <td>Property Taxes</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr class="highlight-row">
-                  <td>Extra Monthly Payment</td>
-                  <td>$261.00</td>
-                  <td>$261.00</td>
-                  <td>$261.00</td>
-                </tr>
-                <tr class="highlight-row">
-                  <td>Total Monthly Payment</td>
-                  <td>$3,758.00</td>
-                  <td>$3,758.00</td>
-                  <td>$3,758.00</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <table class="table-section">
-              <colgroup>
-                <col style="width: 40%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-              </colgroup>
-              <tbody>
-                <tr>
-                  <td>Points</td>
-                  <td>0.00% ($0.00)</td>
-                  <td>0.00% ($0.00)</td>
-                  <td>0.00% ($0.00)</td>
-                </tr>
-                <tr>
-                  <td>Lender Credit</td>
-                  <td>0.00% ($0.00)</td>
-                  <td>0.00% ($0.00)</td>
-                  <td>0.00% ($0.00)</td>
-                </tr>
-                <tr>
-                  <td>Lender Fees</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr>
-                  <td>3rd Party Fees</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr class="highlight-row">
-                  <td>Total Closing Costs</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <table class="table-section">
-              <colgroup>
-                <col style="width: 40%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-              </colgroup>
-              <tbody>
-                <tr>
-                  <td>Escrows & Prepaid Interest</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr class="highlight-row">
-                  <td>Estimated Total Cash to Close</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <table class="table-section">
-              <colgroup>
-                <col style="width: 40%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-                <col style="width: 20%">
-              </colgroup>
-              <tbody>
-                <tr>
-                  <td>Closing Costs Included in Loan</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr>
-                  <td>Pre-Paids and Impounds in Loan</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                  <td>$0.00</td>
-                </tr>
-                <tr class="highlight-row">
-                  <td>Payment Savings</td>
-                  <td>$261.00</td>
-                  <td>$261.00</td>
-                  <td>$261.00</td>
-                </tr>
-                <tr class="highlight-row">
-                  <td>Power Refi Savings</td>
-                  <td>$154,872.00</td>
-                  <td>$154,872.00</td>
-                  <td>$154,872.00</td>
-                </tr>
-                <tr class="highlight-row">
-                  <td>Interest Saved over 5 Years</td>
-                  <td>$34,823.00</td>
-                  <td>$34,823.00</td>
-                  <td>$34,823.00</td>
-                </tr>
-                <tr class="highlight-row">
-                  <td>Interest Saved over Life of Loan</td>
-                  <td>$318,569.00</td>
-                  <td>$318,569.00</td>
-                  <td>$318,569.00</td>
-                </tr>
-              </tbody>
-            </table>--->
-
+        <div class="summary-tables">
+          <div class="current-loan-table"> </div>
+          <!-- Summary Table -->
+          <div class="summary-table">
+            <div class="rate-cost-table"></div>
           </div>
         </div>
         <!-- Charts -->
