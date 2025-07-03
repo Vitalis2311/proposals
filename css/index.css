@@ -55,6 +55,9 @@ body {
 .greeting-container {
   flex: 0 1 75%;
 }
+#proposalIntro {
+  font-size: 20px;
+}
 
 .contact-card {
   display: flex;
