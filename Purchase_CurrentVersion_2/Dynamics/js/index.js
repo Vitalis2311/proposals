@@ -256,7 +256,6 @@ $(document).ready(async () => {
       $('body').append($container);
 
       setColorsFromJson(json);
-      renderCurrentLoanTable(json.currentLoan);
       renderTablesFromJson(json);
       renderCharts(json);
     } catch (err) {
