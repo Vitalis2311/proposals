@@ -264,7 +264,7 @@ $(document).ready(async () => {
       return;
     }
 
-    const url = `https://marketing2025.blob.core.windows.net/proposals/${proposalId}.json`;
+    const url = `https://marketing2025.blob.core.windows.net/proposals/Refinance/${proposalId}.json`;
     try {
       const response = await fetch(url);
       if (!response.ok) throw new Error('Data not found');
