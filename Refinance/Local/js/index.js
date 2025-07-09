@@ -37,7 +37,7 @@ function buildHeaderContainer(json) {
   const nmlsDre = $('<div>').addClass('contacts-nmls-dre');
   const nmls = $('<span>').attr('id', 'nmls').text(json.nmls ? `NMLS: ${json.nmls}` : '');
   const divider = $('<span>').addClass('divider').text(' | ');
-  const dre = $('<span>').attr('id', 'dre').text(json.dre || '');
+  const dre = $('<span>').attr('id', 'dre').text(json.dre ? `DRE: ${json.dre}` : '');
   nmlsDre.append(nmls, divider, dre);
 
   contactBlock.append(address, email, phone, nmlsDre);
