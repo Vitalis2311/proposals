@@ -301,8 +301,8 @@ main {
   position: absolute;
   width: 10px;
   height: 10px;
-  border-right: 2px solid var(--highlightFontColor);
-  border-bottom: 2px solid var(--highlightFontColor);
+  border-right: 2px solid var(--mainFontColor);
+  border-bottom: 2px solid var(--mainFontColor);
   transform: rotate(45deg);
   margin-left: 8px;
   transition: transform 0.3s ease;
