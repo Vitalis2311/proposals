@@ -251,7 +251,7 @@ function renderBenefitsFromJson(data) {
   });
 
   renderTableSections(data.benefits, '.benefits-table', {
-    titleText: 'Refinance Benefits',
+    titleText: 'Power Refinance Benefits',
     titleClass: 'benefits-title',
     hideSet,
     titleMap
