@@ -1,57 +1,52 @@
-let __groupAutoId = 1;
-
-/* ---------- theme ---------- */
 function setColorsFromJson(data) {
   if (!data) return;
   const root = $(':root');
+  //if (data.mainCellColor) root.css('--mainCellColor', data.mainCellColor);
   if (data.brandFontColor) root.css('--brandFontColor', data.brandFontColor);
   if (data.mainFontColor) root.css('--mainFontColor', data.mainFontColor);
+
   if (data.reportForYou) root.css('--reportForYou', data.reportForYou);
   if (data.contactInfoFontColor) root.css('--contactInfoFontColor', data.contactInfoFontColor);
+
   if (data.rowSecondColor) root.css('--rowSecondColor', data.rowSecondColor);
   if (data.rowBackground) root.css('--rowBackground', data.rowBackground);
   if (data.highlightFontColor) root.css('--highlightFontColor', data.highlightFontColor);
   if (data.tableBorderColor) root.css('--tableBorderColor', data.tableBorderColor);
 }
 
-/* ---------- header ---------- */
 function buildHeaderContainer(json) {
   const container = $('<div>').addClass('header-container');
 
-  const logoCenter = $('<div>').addClass('logo-center')
-    .append($('<img>').attr('id', 'logo').attr('src', json.brandLogo || ''));
+  const logoCenter = $('<div>').addClass('logo-center');
+  const logoImg = $('<img>').attr('id', 'logo').attr('src', json.brandLogo || '');
+  logoCenter.append(logoImg);
 
   const contactCard = $('<div>').addClass('contact-card');
   const photo = $('<img>').attr('id', 'photo').attr('src', json.loPhoto || '');
 
   const contactInfo = $('<div>').addClass('contact-info');
-  const forYou = $('<div>').attr('id', 'forYou').addClass('contact-info-foryou')
-    .text("THE REPORT WAS CREATED FOR YOU BY");
-  const name = $('<div>').attr('id', 'loFullName').addClass('contact-info-name')
-    .text(json.loFullName || '');
-  const company = $('<div>').attr('id', 'brandCompanyName').addClass('contact-info-company')
-    .text(json.brandCompanyName || '');
+  const forYou = $('<div>').attr('id', 'forYou').addClass('contact-info-foryou').text("THE REPORT WAS CREATED FOR YOU BY");
+  const name = $('<div>').attr('id', 'loFullName').addClass('contact-info-name').text(json.loFullName || '');
+  const company = $('<div>').attr('id', 'brandCompanyName').addClass('contact-info-company').text(json.brandCompanyName || '');
 
-  const contactBlock = $('<div>').attr('id', 'loPhone').addClass('contact-info-contacts')
-    .append(
-      $('<div>').attr('id', 'loAddress').addClass('contacts-address').text(json.loAddress || ''),
-      $('<div>').attr('id', 'loEmail').addClass('contacts-email').text(json.loEmail || ''),
-      $('<div>').addClass('contacts-phone').text(json.loPhone || ''),
-      $('<div>').addClass('contacts-nmls-dre').append(
-        $('<span>').attr('id', 'nmls').text(json.nmls ? `NMLS: ${json.nmls}` : ''),
-        $('<span>').addClass('divider').text(' | '),
-        $('<span>').attr('id', 'dre').text(json.dre ? `DRE: ${json.dre}` : '')
-      )
-    );
+  const contactBlock = $('<div>').attr('id', 'loPhone').addClass('contact-info-contacts');
+  const address = $('<div>').attr('id', 'loAddress').addClass('contacts-address').text(json.loAddress || '');
+  const email = $('<div>').attr('id', 'loEmail').addClass('contacts-email').text(json.loEmail || '');
+  const phone = $('<div>').addClass('contacts-phone').text(json.loPhone || '');
 
-  const comunicate = $('<div>').addClass('comunicate')
-    .append(
-      $('<a>').attr('href', `tel:${json.loPhone || ''}`).html('&#128222; Call'),
-      ' | ',
-      $('<a>').attr('href', `sms:${json.loPhone || ''}`).html('&#128172; Text'),
-      ' | ',
-      $('<a>').attr('href', `mailto:${json.loEmail || ''}`).html('<span class="email-icon">&#128233;</span> Email')
-    );
+  const nmlsDre = $('<div>').addClass('contacts-nmls-dre');
+  const nmls = $('<span>').attr('id', 'nmls').text(json.nmls ? `NMLS: ${json.nmls}` : '');
+  const divider = $('<span>').addClass('divider').text(' | ');
+  const dre = $('<span>').attr('id', 'dre').text(json.dre ? `DRE: ${json.dre}` : '');
+  nmlsDre.append(nmls, divider, dre);
+
+  contactBlock.append(address, email, phone, nmlsDre);
+
+  const comunicate = $('<div>').addClass('comunicate');
+  const call = $('<a>').attr('href', `tel:${json.loPhone || ''}`).html('&#128222; Call');
+  const text = $('<a>').attr('href', `sms:${json.loPhone || ''}`).html('&#128172; Text');
+  const emailLink = $('<a>').attr('href', `mailto:${json.loEmail || ''}`).html('<span class="email-icon">&#128233;</span> Email');
+  comunicate.append(call, ' | ', text, ' | ', emailLink);
 
   contactInfo.append(forYou, name, company, contactBlock, comunicate);
   contactCard.append(photo, contactInfo);
@@ -59,18 +54,14 @@ function buildHeaderContainer(json) {
 
   return container;
 }
-
-/* ---------- greeting ---------- */
 function buildGreetingContainer(json) {
-  const greetingContainer = $('<div>').addClass('greeting-container')
-    .append(
-      $('<h2>').attr('id', 'greeting').text(json.greeting || ''),
-      $('<p>').attr('id', 'proposalIntro').text(json.proposalIntro || '')
-    );
+  const greetingContainer = $('<div>').addClass('greeting-container');
+  const greeting = $('<h2>').attr('id', 'greeting').text(json.greeting || '');
+  const intro = $('<p>').attr('id', 'proposalIntro').text(json.proposalIntro || '');
+  greetingContainer.append(greeting, intro);
+
   return $('<div>').addClass('header-content').append(greetingContainer);
 }
-
-/* ---------- layout ---------- */
 function buildMainContent() {
   const main = $('<main>');
   const title = $('<div>').addClass('subject-rate-cost').text('RATE & CLOSING COST OPTIONS');
@@ -81,11 +72,13 @@ function buildMainContent() {
   const rateCost = $('<div>').addClass('rate-cost-table');
   summary.append(rateCost);
 
-  const disclaimer = $('<div>').addClass('disclaimer').text(
-    'Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before choosing a loan. ' +
-    'This is not a commitment to lend and is not a loan approval. This illustration does not constitute a rate lock ' +
-    'and is only estimated illustration based on information provided and current interest rates.'
-  );
+  const disclaimer = $('<div>')
+    .addClass('disclaimer')
+    .text(
+      'Your actual rate, payment, and costs could be higher. Get an official Loan Estimate before choosing a loan. ' +
+      'This is not a commitment to lend and is not a loan approval. This illustration does not constitute a rate lock ' +
+      'and is only estimated illustration based on information provided and current interest rates.'
+    );
 
   summary.append(disclaimer);
   tables.append(summary);
@@ -97,52 +90,23 @@ function buildMainContent() {
   return main;
 }
 
-/* ---------- helpers ---------- */
-function getRowKey(r) {
-  return Object.keys(r).find(k => !['highlight', 'color', 'slider', 'rows'].includes(k));
-}
+function renderTablesFromJson(data) {
+  if (!Array.isArray(data?.tables)) return;
 
-function normalizeSectionRows(rows) {
-  if (!Array.isArray(rows) || rows.length === 0) return rows;
-  const headerOnly = rows.filter(r => r && r.slider === true && !Array.isArray(r.rows));
-  if (headerOnly.length === 1) {
-    const header = headerOnly[0];
-    const children = rows.filter(r => r !== header);
-    const key = getRowKey(header);
-    return [{ ...header, rows: children, [key]: header[key] }];
-  }
-  return rows;
-}
+  const wrapper = $('.rate-cost-table');
+  wrapper.empty();
 
-function flattenRowsRecursive(rows, out = []) {
-  if (!Array.isArray(rows)) return out;
-  for (const r of rows) {
-    const k = getRowKey(r);
-    if (!k) continue;
-    out.push(r);
-    if (Array.isArray(r.rows) && r.rows.length > 0) {
-      flattenRowsRecursive(r.rows, out);
-    }
-  }
-  return out;
-}
+  const hideSet = new Set(data.hideTablesRows || []);
 
-function getTitleMap(data) {
-  const map = {};
+  // створюємо map із titles
+  const titleMap = {};
   (data.titles || []).forEach(obj => {
     const key = Object.keys(obj)[0];
-    map[key] = obj[key];
+    titleMap[key] = obj[key];
   });
-  return map;
-}
 
-/* ---------- tables ---------- */
-function renderTableSections(dataArray, containerSelector, options = {}) {
-  const { hideSet = new Set(), titleMap = {} } = options;
-  const wrapper = $(containerSelector).empty();
-
-  dataArray.forEach((section) => {
-    let rows = normalizeSectionRows(section?.rows);
+  data.tables.forEach((section) => {
+    const rows = section?.rows;
     if (!Array.isArray(rows)) return;
 
     const tableWrapper = $('<div>').addClass('table-wrapper');
@@ -150,100 +114,88 @@ function renderTableSections(dataArray, containerSelector, options = {}) {
     const colgroup = $('<colgroup>');
     const tbody = $('<tbody>');
 
-    const flat = flattenRowsRecursive(rows);
-    const firstLeaf = flat.find(r => {
-      const key = getRowKey(r);
-      return typeof key !== 'undefined' && Array.isArray(r[key]) && !hideSet.has(key);
+    const firstDataRow = rows.find(r => {
+      const key = Object.keys(r).find(k => !['highlight', 'color', 'slider'].includes(k));
+      return Array.isArray(r[key]) && !hideSet.has(key);
     });
-    const values = firstLeaf ? firstLeaf[getRowKey(firstLeaf)] : [];
+
+    const key = firstDataRow ? Object.keys(firstDataRow).find(k => !['highlight', 'color', 'slider'].includes(k)) : null;
+    const values = key ? firstDataRow[key] : [];
 
     colgroup.append('<col style="width: 25%">');
     values.forEach(() => colgroup.append('<col style="width: auto">'));
     table.append(colgroup);
 
-    function renderRowObject(r, level = 0, parentId = null) {
-      const key = getRowKey(r);
-      if (typeof key === 'undefined' || hideSet.has(key)) return;
-      const vals = r[key];
-      if (!Array.isArray(vals)) return;
+    const hasSliderRow = rows.some(r => r.slider === true);
 
-      const isSlider = r.slider === true;
-      const groupId = isSlider ? `g${__groupAutoId++}` : null;
+    rows.forEach((r) => {
+      const dataKeys = Object.keys(r).filter(k => !['highlight', 'color', 'slider'].includes(k));
+      if (dataKeys.length === 0) return;
 
-      const tdLabel = $('<td>').text(key || '');
-      if (titleMap[key]) tdLabel.attr('title', titleMap[key]);
-      if (isSlider) tdLabel.append($('<span>').addClass('expand-icon'));
+      const key = dataKeys[0];
+      const values = r[key];
 
-      const tr = $('<tr>').append(tdLabel).attr('data-level', level).css('--lvl', level);
+      if (hideSet.has(key)) return;
+      if (!Array.isArray(values)) return;
 
-      if (key === '') {
-        tr.addClass('section-header');
-        if (typeof r.highlight === 'string') tr.css('background-color', r.highlight);
-        if (r.color) tr.css('color', r.color);
+      const td = $('<td>').text(key);
+      if (key === "") {
+        td.text('');
+      } else if (titleMap[key]) {
+        td.attr('title', titleMap[key]);
       }
 
-      vals.forEach(val => tr.append($('<td>').text(val)));
-
-      if (r.highlight === true) tr.addClass('highlight-row');
-      else if (typeof r.highlight === 'string' && key !== '') tr.css('background-color', r.highlight);
-      if (r.color && key !== '') tr.css('color', r.color);
-
-      if (isSlider) tr.addClass('slider-row').attr('data-group-id', groupId);
-      if (parentId) tr.addClass('hidden-row').attr('data-parent-id', parentId);
-
-      tbody.append(tr);
-
-      if (Array.isArray(r.rows) && r.rows.length > 0 && isSlider) {
-        for (const child of r.rows) renderRowObject(child, level + 1, groupId);
+      if (r.slider === true) {
+        td.append($('<span>').addClass('expand-icon'));
       }
-    }
 
-    rows.forEach(r => renderRowObject(r, 0, null));
+      const row = $('<tr>').append(td);
+      values.forEach(val => row.append($('<td>').text(val)));
 
-    tbody.off('click.nested').on('click.nested', 'tr.slider-row', function () {
-      const $header = $(this);
-      const gid = $header.data('group-id');
-      if (!gid) return;
+      if (r.highlight === true) {
+        row.addClass('highlight-row');
+      } else if (typeof r.highlight === 'string') {
+        row.css({ 'background-color': r.highlight });
+      }
 
-      const $children = tbody.find(`tr[data-parent-id='${gid}']`);
-      const isExpanded = $header.hasClass('expanded');
+      if (r.color) {
+        row.css({ color: r.color });
+      }
 
-      if (isExpanded) {
-        const stack = [...$children.get()];
-        while (stack.length) {
-          const node = $(stack.pop());
-          node.stop(true, true).slideUp(200).removeClass('expanded');
-          const childGid = node.data('group-id');
-          if (childGid) {
-            const nested = tbody.find(`tr[data-parent-id='${childGid}']`).get();
-            stack.push(...nested);
-          }
+      if (hasSliderRow) {
+        if (r.slider === true) {
+          row.addClass('slider-row');
+        } else {
+          row.addClass('hidden-row');
         }
-      } else {
-        $children.filter((_, el) => $(el).data('parent-id') === gid).stop(true, true).slideDown(200);
       }
-      $header.toggleClass('expanded');
+
+      tbody.append(row);
     });
 
     table.append(tbody);
     tableWrapper.append(table);
     wrapper.append(tableWrapper);
+
+    if (hasSliderRow) {
+      tableWrapper.addClass('collapsible-table');
+      tableWrapper.on('click', function () {
+        const rows = $(this).find('tr.hidden-row');
+        if ($(this).hasClass('expanded')) {
+          rows.stop(true, true).slideUp(200);
+        } else {
+          rows.stop(true, true).slideDown(200);
+        }
+        $(this).toggleClass('expanded');
+      });
+    }
   });
 }
 
-function renderTablesFromJson(data) {
-  if (!Array.isArray(data?.tables)) return;
-  const hideSet = new Set(data.hideTablesRows || []);
-  renderTableSections(data.tables, '.rate-cost-table', {
-    hideSet,
-    titleMap: getTitleMap(data)
-  });
-}
-
-/* ---------- charts ---------- */
 function createBarChart({ canvasId, labels: rawLabels, color = '#2c84c5', maxY = undefined, rawValues }) {
   const ctx = document.getElementById(canvasId);
   if (!ctx || !Array.isArray(rawValues) || rawValues.length === 0) return;
+
   const numericData = rawValues.map(val => {
     if (typeof val === 'string') {
       const isNegative = val.includes('(') && val.includes(')');
@@ -257,20 +209,42 @@ function createBarChart({ canvasId, labels: rawLabels, color = '#2c84c5', maxY =
   const minVal = Math.min(...numericData);
   const maxVal = Math.max(...numericData);
   const rangePadding = (maxVal - minVal) * 0.2 || Math.abs(maxVal) * 0.2;
+
   const resolvedMinY = minVal >= 0 ? 0 : minVal - rangePadding;
   const resolvedMaxY = maxY ?? (maxVal <= 0 ? 0 : maxVal + rangePadding);
 
-  const shortLabels = rawLabels.map(l => (l.length > 20 ? l.split(' ').slice(0, 3).join(' ') + '…' : l));
-  const fullLabels = rawLabels.map(String);
+  // Shortened labels for display on axis
+  const shortLabels = rawLabels.map(label => {
+    if (label.length > 20) {
+      return label.split(' ').slice(0, 3).join(' ') + '…';
+    }
+    return label;
+  });
+
+  const fullLabels = rawLabels.map(String); // full for tooltip
 
   new Chart(ctx, {
     type: 'bar',
-    data: { labels: shortLabels, datasets: [{ data: numericData, backgroundColor: color, borderRadius: 2, barThickness: 40 }] },
+    data: {
+      labels: shortLabels,
+      datasets: [{
+        data: numericData,
+        backgroundColor: color,
+        borderRadius: 2,
+        barThickness: 40
+      }]
+    },
     options: {
-      layout: { padding: { top: 30, bottom: 30, left: 10, right: 10 } },
+      layout: {
+        padding: { top: 30, bottom: 30, left: 10, right: 10 }
+      },
       plugins: {
         legend: { display: false },
-        tooltip: { callbacks: { title: ctx => fullLabels[ctx[0].dataIndex] } },
+        tooltip: {
+          callbacks: {
+            title: ctx => fullLabels[ctx[0].dataIndex]
+          }
+        },
         datalabels: {
           anchor: ctx => numericData[ctx.dataIndex] >= 0 ? 'end' : 'start',
           align: ctx => numericData[ctx.dataIndex] >= 0 ? 'end' : 'start',
@@ -288,23 +262,32 @@ function createBarChart({ canvasId, labels: rawLabels, color = '#2c84c5', maxY =
             callback: v => {
               const hasPercent = rawValues?.some(val => typeof val === 'string' && val.includes('%'));
               const hasDollar = rawValues?.some(val => typeof val === 'string' && val.includes('$'));
+
               if (hasPercent) return `${v.toFixed(1)}%`;
               if (hasDollar) return `$${Math.abs(v) >= 1000 ? (v / 1000).toFixed(1) + 'k' : v.toFixed(2)}`;
               return v.toFixed(2);
             }
           }
         },
-        x: { ticks: { maxRotation: 0, minRotation: 0, padding: 10 } }
+        x: {
+          ticks: {
+            maxRotation: 0,
+            minRotation: 0,
+            padding: 10
+          }
+        }
       },
       clip: false
     },
     plugins: [ChartDataLabels]
   });
 }
-
 function renderCharts(data) {
   if (!Array.isArray(data?.charts)) return;
-  const chartContainer = $('.charts').empty();
+
+  const chartContainer = $('.charts');
+  chartContainer.empty();
+
   const hiddenRows = data?.hideTablesRows ?? [];
 
   data.charts.forEach((chart, i) => {
@@ -316,6 +299,10 @@ function renderCharts(data) {
     if (!row || !Array.isArray(row[name])) return;
 
     const rawValues = row[name];
+    const numericValues = rawValues.map(val =>
+      parseFloat(val.replace(/[$,%]/g, '').replace(/,/g, '')) || 0
+    );
+
     const canvasId = `chart-${i}`;
     const chartBlock = $(`
       <div class="chart-container">
@@ -325,66 +312,87 @@ function renderCharts(data) {
     `);
     chartContainer.append(chartBlock);
 
-    const programRow = allRows.find(r => Array.isArray(r["Program"]) || Array.isArray(r[""]));
+    const programRow = allRows.find(r =>
+      Array.isArray(r["Program"]) || Array.isArray(r[""])
+    );
     const labels =
       Array.isArray(programRow?.["Program"]) ? programRow["Program"] :
         Array.isArray(programRow?.[""]) ? programRow[""] :
           rawValues.map((_, idx) => `Option ${idx + 1}`);
 
-    createBarChart({ canvasId, labels, color, rawValues });
+    createBarChart({
+      canvasId,
+      labels,
+      data: numericValues,
+      color,
+      rawValues
+    });
   });
 }
 
-/* ---------- PDF ---------- */
+// ==== PDF helpers (jsPDF v2) ====
 function saveAsPdfStrict({ orientation = 'p', fileName = 'report_A4_portrait.pdf', source = '#container', margin = 10 } = {}) {
-  if (!window.jspdf?.jsPDF) { console.error('jsPDF is not loaded'); return; }
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    console.error('jsPDF is not loaded'); return;
+  }
   const { jsPDF } = window.jspdf;
   const el = document.querySelector(source);
   if (!el) { console.error('PDF source element not found:', source); return; }
 
   const domWidthPx = Math.round(el.scrollWidth || el.getBoundingClientRect().width);
+
   const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation });
   const pageWidthMm = doc.internal.pageSize.getWidth();
   const pageHeightMm = doc.internal.pageSize.getHeight();
   const contentWidthMm = pageWidthMm - margin * 2;
   const contentHeightMm = pageHeightMm - margin * 2;
 
-  html2canvas(el, { scale: 1, useCORS: true, allowTaint: true, backgroundColor: '#ffffff', windowWidth: domWidthPx })
-    .then((canvas) => {
-      const pxPerMm = canvas.width / contentWidthMm;
-      const fullHeightMm = canvas.height / pxPerMm;
-
-      if (fullHeightMm <= contentHeightMm) {
-        doc.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', margin, margin, contentWidthMm, fullHeightMm);
-        doc.save(fileName);
-        return;
-      }
-
-      const pageSlicePx = Math.floor(contentHeightMm * pxPerMm);
-      let renderedPx = 0, pageIndex = 0;
-
-      while (renderedPx < canvas.height) {
-        const sliceH = Math.min(pageSlicePx, canvas.height - renderedPx);
-        const tmp = document.createElement('canvas');
-        tmp.width = canvas.width;
-        tmp.height = sliceH;
-        const tctx = tmp.getContext('2d');
-        tctx.drawImage(canvas, 0, renderedPx, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
-
-        const img = tmp.toDataURL('image/jpeg', 0.95);
-        const hMm = sliceH / pxPerMm;
-
-        if (pageIndex > 0) doc.addPage();
-        doc.addImage(img, 'JPEG', margin, margin, contentWidthMm, hMm);
-
-        renderedPx += sliceH;
-        pageIndex++;
-      }
-
+  html2canvas(el, {
+    scale: 1,
+    useCORS: true,
+    allowTaint: true,
+    backgroundColor: '#ffffff',
+    windowWidth: domWidthPx
+  }).then((canvas) => {
+    const pxPerMm = canvas.width / contentWidthMm;
+    const fullHeightMm = canvas.height / pxPerMm;
+    if (fullHeightMm <= contentHeightMm) {
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      doc.addImage(imgData, 'JPEG', margin, margin, contentWidthMm, fullHeightMm);
       doc.save(fileName);
-    });
-}
+      return;
+    }
 
+    const pageSlicePx = Math.floor(contentHeightMm * pxPerMm);
+    let renderedPx = 0, pageIndex = 0;
+
+    while (renderedPx < canvas.height) {
+      const sliceH = Math.min(pageSlicePx, canvas.height - renderedPx);
+
+      const tmp = document.createElement('canvas');
+      tmp.width = canvas.width;
+      tmp.height = sliceH;
+
+      const tctx = tmp.getContext('2d');
+      tctx.drawImage(
+        canvas,
+        0, renderedPx, canvas.width, sliceH,
+        0, 0, canvas.width, sliceH
+      );
+
+      const img = tmp.toDataURL('image/jpeg', 0.95);
+      const hMm = sliceH / pxPerMm;
+
+      if (pageIndex > 0) doc.addPage();
+      doc.addImage(img, 'JPEG', margin, margin, contentWidthMm, hMm);
+
+      renderedPx += sliceH;
+      pageIndex++;
+    }
+
+    doc.save(fileName);
+  });
+}
 function addPdfButton() {
   const $pdfBtnContainer = $(`
     <div class="no-print" style="display:flex;gap:8px;margin:12px 0;">
@@ -400,162 +408,603 @@ function addPdfButton() {
   }));
 }
 
-/* ---------- boot ---------- */
 $(document).ready(async () => {
   const json = {
-    "brandFontColor": "#7CC242",
+    "brandFontColor": "#002262",
     "mainFontColor": "#4E5351",
     "reportForYou": "",
     "contactInfoFontColor": "",
-    "rowSecondColor": "#7CC242",
+    "rowSecondColor": "#002262",
     "rowBackground": "#f3f3f3",
     "highlightFontColor": "",
     "tableBorderColor": "",
-    "brandLogo": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748",
-    "loPhoto": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/c66f2aa1-f4f0-4a16-b71d-8569dce74169?ts=638206678303297526",
-    "loFullName": "Ryan O'Meara",
-    "brandCompanyName": "Arbor Financial Group",
-    "loAddress": "2345 Main St, Irvine, CA 92614",
-    "loEmail": "ryan@arborfg.com",
-    "loPhone": "(949) 242-7266",
-    "nmls": "123456",
-    "dre": "DRE: 02145142",
-    "greeting": "Hi Vitali!",
-    "proposalIntro": "Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.",
+    "brandLogo": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/69f915dc-a442-ef11-8409-7c1e52001521?ts=638566429413613631",
+    "loPhoto": "6",
+    "loFullName": "Vitali Shabashou",
+    "brandCompanyName": "America's Choice Lending Group",
+    "loAddress": "1805 E. Garry Avenue, Santa Ana, CA 92705",
+    "loEmail": "vitalis@arborfg.com",
+    "loPhone": "+1 425 555 0109",
+    "nmls": "23431233",
+    "dre": "45645756",
+    "greeting": "Hi Tom Bricks",
+    "proposalIntro": "",
     "tables": [
-      {
-        "rows": [
-          { "": ["Conv 30 Yr Fixed", "FHA 30 Yr Fixed", "VA 30 Yr Fixed 33333334444"], "highlight": "#4c514f", "color": "#fff" },
-          { "Appraised Value": ["$999,999.00", "$899,000.00", "$799,000.00"] },
-          { "Loan Amount": ["$660,000.00", "$500,000.00", "$450,000.00"] },
-          { "Equity": ["$339,999.00", "$399,000.00", "$349,000.00"] },
-          { "Loan-To-Value": ["66%", "56%", "56%"] }
-        ]
-      },
-      {
-        "rows": [
-          { "Rate": ["4.0%", "4.5%", "3.8%"], "highlight": true },
-          { "APR": ["4.05%", "4.5%", "3.95%"] },
-          { "Term": ["298", "300", "295"] }
-        ]
-      },
-      {
-        "rows": [
-          { "Principle & Interest": ["$3,497.00", "$3,250.00", "$3,100.00"] },
-          { "Hazard Insurance": ["$85.00", "$100.00", "$100.00"] },
-          { "Mortgage Insurance": ["$0.00", "$120.00", "$0.00"] },
-          { "HOA": ["$0.00", "$50.00", "$0.00"] },
-          { "Property Taxes": ["$800.00", "$720.00", "$600.00"] },
-          { "Extra Monthly Payment": ["$261.00", "$0.00", "$0.00"], "highlight": true },
-          { "Total Monthly Payment": ["$4,643.00", "$4,230.00", "$3,800.00"], "highlight": true, "slider": true }
-        ]
-      },
-      {
-        "rows": [
-          { "Points": ["0.00% ($0.00)", "0.00% ($0.00)", "0.00% ($0.00)"] },
-          { "Lender Credit": ["0.00% ($0.00)", "0.00% ($0.00)", "0.00% ($0.00)"] },
-          {
-            "Lender Fees": ["$2,500.00", "$2,500.00", "$2,400.00"],
+        {
             "rows": [
-              {
-                "Loan Origination Fee": [
-                  "$14.00",
-                  "$2.00",
-                  "$2.00"
-                ]
-              },
-              {
-                "Discount Fee": [
-                  "$13.00",
-                  "$100.00",
-                  "$100.00"
-                ]
-              },
-              {
-                "Processing Fee": [
-                  "$64.00",
-                  "$21.45",
-                  "$21.45"
-                ]
-              }
-            ],
-
-            "highlight": "#f5f5f5",
-            "slider": true
-          },
-          {
-            "3Rd Party Fees": ["$1,200.00", "$1,300.00", "$1,200.00"],
+                {
+                    "Program": [
+                        "1",
+                        "2",
+                        "3"
+                    ],
+                    "highlight": "#4c514f",
+                    "color": "#fff"
+                },
+                {
+                    "Purchase Price": [
+                        "$1,200,000.00",
+                        "$1,200,000.00",
+                        "$1,200,000.00"
+                    ]
+                },
+                {
+                    "Down Payment": [
+                        "$240,000.00",
+                        "$240,000.00",
+                        "$240,000.00"
+                    ]
+                },
+                {
+                    "Loan Amount": [
+                        "$960,000.00",
+                        "$960,000.00",
+                        "$960,000.00"
+                    ]
+                },
+                {
+                    "Loan-To-Value": [
+                        "80%",
+                        "80%",
+                        "80%"
+                    ]
+                }
+            ]
+        },
+        {
             "rows": [
-              {
-                "Appraisal Fee": [
-                  "$10.00",
-                  "$27.30",
-                  "$27.30"
-                ]
-              },
-              {
-                "Title - Electronic Document Delivery Fee": [
-                  "$57.00",
-                  "$22.30",
-                  "$22.30"
-                ]
-              }
-            ],
-
-            "highlight": "#f5f5f5",
-            "slider": false
-          },
-          { "Total Closing Costs": ["$0.00", "$0.00", "$0.00"], "highlight": true, "slider": true }
-        ]
-      },
-      {
-        "rows": [
-          { "Escrows & Prepaid Interest": ["$0.00", "$0.00", "$0.00"] },
-          { "Estimated Total Cash to Close": ["$0.00", "$0.00", "$0.00"], "highlight": true }
-        ]
-      },
-      {
-        "rows": [
-          { "Closing Costs Included in Loan": ["$2,000.00", "$1,000.00", "$0.00"] },
-          { "Pre-Paids and Impounds in Loan": ["$3,500.00", "$2,800.00", "$1,000.00"] },
-          { "Payment Savings": ["$261.00", "$261.00", "$261.00"], "highlight": true },
-          { "Power Refi Savings": ["$154,872.00", "$154,872.00", "$154,872.00"], "highlight": true },
-          { "Interest Saved over 5 Years": ["$34,823.00", "$121,234.00", "$11,357.11"], "highlight": true },
-          { "Interest Saved over Life of Loan": ["$318,569.00", "$10,230.00", "$56,011.20"], "highlight": true }
-        ]
-      }
+                {
+                    "Rate": [
+                        "5%",
+                        "6%",
+                        "5%"
+                    ],
+                    "highlight": false
+                },
+                {
+                    "Rate Buydown": [
+                        "Buydown 3-2-1",
+                        "Buydown 1-1",
+                        "None"
+                    ]
+                },
+                {
+                    "Paid By": [
+                        "Lender Paid",
+                        "Seller Paid",
+                        "Seller Paid"
+                    ]
+                },
+                {
+                    "APR": [
+                        "5.01%",
+                        "6.01%",
+                        "5.01%"
+                    ]
+                },
+                {
+                    "Term": [
+                        "380",
+                        "380",
+                        "380"
+                    ]
+                }
+            ]
+        },
+        {
+            "rows": [
+                {
+                    "Principle & Interest": [
+                        "$5,038.00",
+                        "$5,649.00",
+                        "$5,038.00"
+                    ]
+                },
+                {
+                    "Hazard Insurance": [
+                        "$222.00",
+                        "$222.00",
+                        "$222.00"
+                    ]
+                },
+                {
+                    "Mortgage Insurance": [
+                        "",
+                        "",
+                        ""
+                    ]
+                },
+                {
+                    "HOA": [
+                        "$0.00",
+                        "$0.00",
+                        "$0.00"
+                    ]
+                },
+                {
+                    "Property Taxes": [
+                        "$0.00",
+                        "$0.00",
+                        "$0.00"
+                    ]
+                },
+                {
+                    "Total Monthly Payment": [
+                        "$5,265.00",
+                        "$5,876.00",
+                        "$5,265.00"
+                    ],
+                    "highlight": true,
+                    "slider": true
+                }
+            ]
+        },
+        {
+            "rows": [
+                {
+                    "Points": [
+                        "0.00% ($0.00)",
+                        "0.00% ($0.00)",
+                        "0.00% ($0.00)"
+                    ]
+                },
+                {
+                    "Lender Credit": [
+                        "0.08% ($720.00)",
+                        "0.08% ($720.00)",
+                        "0.08% ($720.00)"
+                    ]
+                },
+                {
+                    "Lender Fees": [
+                        "$333.00",
+                        "$333.00",
+                        "$333.00"
+                    ],
+                    "rows": [
+                        {
+                            "Document Preparation Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Processing Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Underwriting Fee": [
+                                "$333.00",
+                                "$333.00",
+                                "$333.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        }
+                    ],
+                    "slider": true
+                },
+                {
+                    "3rd Party Fees": [
+                        "$1,323.00",
+                        "$1,323.00",
+                        "$1,323.00"
+                    ],
+                    "rows": [
+                        {
+                            "Appraisal Fee": [
+                                "$1,223.00",
+                                "$1,223.00",
+                                "$1,223.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Attorney Fee": [
+                                "$100.00",
+                                "$100.00",
+                                "$100.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Credit Report Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Flood Certificate Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "HOA Certification Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "HOA Insurance Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "MERS Registration Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Tax Service": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Verification Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Pest Inspection Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Abstract or Title Search": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Borrower's Closing Protection Letter Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Document Prep Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Endorsement Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Notary Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Recording Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Settlement or Closing Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Sub Escrow Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Title Examination": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Title Insurance Binder": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Courier Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Electronic Document Delivery Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Lender's Title Policy": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Title - Wire Fee": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Recording Fees - Deed": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Recording Fees - Mortgage": [
+                                "$0.00",
+                                "$0.00",
+                                "$0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        }
+                    ],
+                    "slider": true
+                },
+                {
+                    "UFMIP/FF/GF/SP": [
+                        "$0.00",
+                        "$0.00",
+                        "$0.00"
+                    ]
+                },
+                {
+                    "Prepaids": [
+                        "$360.33",
+                        "$0.00",
+                        "$0.00"
+                    ],
+                    "rows": [
+                        {
+                            "Hazard Insurance Premium": [
+                                "1 mo * $222.00 = $222.00",
+                                "0 mo * $222.00 = $0.00",
+                                "0 mo * $222.00 = $0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Mortgage Insurance Premium": [
+                                "1 mo * $5.00 = $5.00",
+                                "0 mo * $5.00 = $0.00",
+                                "0 mo * $5.00 = $0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Property Taxes": [
+                                "1 mo * $0.00 = $0.00",
+                                "0 mo * $0.00 = $0.00",
+                                "0 mo * $0.00 = $0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Prepaid Interest": [
+                                "1 d * $133.33 = $133.33",
+                                "0 d * $160.00 = $0.00",
+                                "0 d * $133.33 = $0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        }
+                    ],
+                    "highlight": false,
+                    "slider": true
+                },
+                {
+                    "Escrows": [
+                        "$0.00",
+                        "$0.00",
+                        "$0.00"
+                    ],
+                    "rows": [
+                        {
+                            "Hazard Insurance Reserve": [
+                                "0 mo * $222.00 = $0.00",
+                                "0 mo * $222.00 = $0.00",
+                                " mo * $0.00 = $0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Mortgage Insurance Reserve": [
+                                "0 mo * $5.00 = $0.00",
+                                "0 mo * $5.00 = $0.00",
+                                "0 mo * $5.00 = $0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        },
+                        {
+                            "Property Taxes Reserve": [
+                                "0 mo * $0.00 = $0.00",
+                                "0 mo * $0.00 = $0.00",
+                                "0 mo * $0.00 = $0.00"
+                            ],
+                            "highlight": "#EBEBEB"
+                        }
+                    ],
+                    "highlight": false,
+                    "slider": true
+                },
+                {
+                    "Estimated Total Cash to Close": [
+                        "$241,296.00",
+                        "$240,936.00",
+                        "$240,936.00"
+                    ],
+                    "highlight": "#EBEBEB"
+                },
+                {
+                    "Total Closing Costs": [
+                        "$936.00",
+                        "$936.00",
+                        "$936.00"
+                    ],
+                    "highlight": false,
+                    "slider": true
+                }
+            ]
+        },
+        {
+            "rows": [
+                {
+                    "Monthly Savings": [
+                        "$611.00",
+                        "$0.00",
+                        "$611.00"
+                    ],
+                    "highlight": false
+                },
+                {
+                    "5 Year Savings": [
+                        "$36,680.00",
+                        "$0.00",
+                        "$36,680.00"
+                    ],
+                    "highlight": false
+                },
+                {
+                    "Closing Cost Savings": [
+                        "$0.00",
+                        "$0.00",
+                        "$0.00"
+                    ],
+                    "highlight": false
+                }
+            ]
+        }
     ],
     "charts": [
-      {
-        "name": "Total Monthly Payment",
-        "color": "#4c514f"
-      },
-      {
-        "name": "Interest Saved over 5 Years",
-        "color": "#7cc242"
-      },
-      {
-        "name": "Interest Saved over Life of Loan",
-        "color": "#2c84c5"
-      }
+        {
+            "name": "Total Monthly Payment",
+            "color": "#4c514f"
+        },
+        {
+            "name": "Monthly Savings",
+            "color": "#7cc242"
+        },
+        {
+            "name": "5 Year Savings",
+            "color": "#FAC898"
+        },
+        {
+            "name": "Closing Cost Savings",
+            "color": "#2c84c5"
+        }
     ],
-    "titles": [
-      { "Rate": "Rate.............." },
-      { "Interest Saved over 5 Years": "Interest Saved over 5 Years................" }
-    ],
-    "hideTablesRows": ["APR", "Rate", "Extra Monthly Payment"]
-  };
+    "hideTablesRows": [
+        "Mortgage Insurance"
+    ]
+};
 
-  if (typeof json !== 'object') { console.error('❌ JSON не визначено або неправильний формат.'); return; }
+  if (typeof json !== 'object') {
+    console.error('❌ JSON не визначено або неправильний формат.');
+    return;
+  }
 
+  // Старт
   const $container = $('<div>').attr("id", "container").addClass('container');
-  $container.append(buildHeaderContainer(json));
-  $container.append(buildGreetingContainer(json));
-  $container.append(buildMainContent());
+
+  const header = buildHeaderContainer(json);
+  $container.append(header);
+
+  const greeting = buildGreetingContainer(json);
+  $container.append(greeting);
+
+  const main = buildMainContent();
+  $container.append(main);
+
   $('body').append($container);
 
   setColorsFromJson(json);
   renderTablesFromJson(json);
   renderCharts(json);
+
   addPdfButton();
 });

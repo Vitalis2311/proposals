@@ -1,0 +1,323 @@
+{
+  "brandFontColor": "#7CC242",
+  "mainFontColor": "#4E5351",
+  "reportForYou": "",
+  "contactInfoFontColor": "",
+  "rowSecondColor": "#7CC242",
+  "rowBackground": "#f3f3f3",
+  "highlightFontColor": "",
+  "tableBorderColor": "",
+  "brandLogo": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/18a98667-226c-ee11-8def-000d3a8e658c?ts=638330573577879748",
+  "loPhoto": "https://assets-usa.mkt.dynamics.com/c9c231cd-6f7f-4e83-a9cc-dfa3c1887e06/digitalassets/images/d5799d46-6c1d-ee11-9cbe-0022482b2789?ts=6382440294531512506",
+  "loFullName": "Vitali Shabashou",
+  "brandCompanyName": "ARBOR FINANCIAL GROUP",
+  "loAddress": "1805 E. Garry Avenue, Santa Ana, CA 92705",
+  "loEmail": "vitalis@arborfg.com",
+  "loPhone": "+1 425 555 0109",
+  "nmls": "23431233",
+  "dre": "45645756",
+  "greeting": "Hi MAGALY ROMAN",
+  "proposalIntro": "Welcome to your personal rate & closing cost worksheet. Here you can compare your different loan, rate, and closing cost options. I am here to help you in any way to make the best decision for your goals. Please don't hesitate to contact me with questions.",
+  "currentLoan": {
+    "Appraised Value": "$680,000.00",
+    "Loan Amount": "$444,444.00",
+    "Equity": "$322,065.00",
+    "Current Loan Amount": "$333,490.00",
+    "Current Rate": "5%",
+    "Current Term": "180",
+    "Remaining Term": "125",
+    "Current Payment (P&I)": "$3,515.00",
+    "Hazard Insurance": "$85.00",
+    "Mortgage Insurance": "$110.00",
+    "HOA": "$13.00",
+    "Flood Insurance": "$356.00",
+    "Property Taxes": "$613.00",
+    "Total Monthly Payment": "$4,679.00",
+    "Interest Paid": "$68,104.00",
+    "Remaining Interest": "$105,885.00",
+    "Total Interest": "$173,989.00"
+  },
+  "tables": [
+    {
+      "rows": [
+        {
+          "": [
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "Excepteur sint occaecat"
+          ],
+          "highlight": "#4c514f",
+          "color": "#fff"
+        },
+        {
+          "Appraised Value": [
+            "$680,000.00",
+            "$680,000.00"
+          ]
+        },
+        {
+          "Loan Amount": [
+            "$333,490.00",
+            "$333,490.00"
+          ]
+        },
+        {
+          "Loan-To-Value": [
+            "49%",
+            "49%"
+          ]
+        }
+      ]
+    },
+    {
+      "rows": [
+        {
+          "Rate": [
+            "4%",
+            "4.25%"
+          ],
+          "highlight": true
+        },
+        {
+          "APR": [
+            "4.04%",
+            "4.29%"
+          ]
+        },
+        {
+          "Term": [
+            "180",
+            "180"
+          ]
+        }
+      ]
+    },
+    {
+      "rows": [
+        {
+          "Principle & Interest": [
+            "$2,467.00",
+            "$2,509.00"
+          ]
+        },
+        {
+          "Hazard Insurance": [
+            "$85.00",
+            "$85.00"
+          ]
+        },
+        {
+          "Mortgage Insurance": [
+            "$110.00",
+            "$110.00"
+          ]
+        },
+        {
+          "HOA": [
+            "$13.00",
+            "$13.00"
+          ]
+        },
+        {
+          "Flood Insurance": [
+            "$356.00",
+            "$356.00"
+          ]
+        },
+        {
+          "Property Taxes": [
+            "$613.00",
+            "$613.00"
+          ]
+        },
+        {
+          "Total Monthly Payment": [
+            "$3,644.00",
+            "$3,686.00"
+          ],
+          "highlight": true,
+          "slider": true
+        }
+      ]
+    },
+    {
+      "rows": [
+        {
+          "Points": [
+            "0.00% ($0.00)",
+            "0.00% ($0.00)"
+          ]
+        },
+        {
+          "Lender Credit": [
+            "0.00% ($0.00)",
+            "0.00% ($0.00)"
+          ]
+        },
+        {
+          "Lender Fees": [
+            "$0.00",
+            "$0.00"
+          ],
+          "rows": [
+            {
+              "Loan Origination Fee": [
+                "$14.00",
+                "$2.00"
+              ]
+            },
+            {
+              "Discount Fee": [
+                "$13.00",
+                "$100.00"
+              ]
+            },
+            {
+              "Processing Fee": [
+                "$64.00",
+                "$21.45"
+              ]
+            }
+          ],
+          "highlight": "#f5f5f5",
+          "slider": true
+        },
+        {
+          "3rd Party Fees": [
+            "$0.00",
+            "$0.00"
+          ],
+          "rows": [
+            {
+              "Appraisal Fee": [
+                "$10.00",
+                "$27.30"
+              ]
+            },
+            {
+              "Title - Electronic Document Delivery Fee": [
+                "$57.00",
+                "$22.30"
+              ]
+            }
+          ],
+          "highlight": "#f5f5f5",
+          "slider": false
+        },
+        {
+          "Total Closing Costs": [
+            "$0.00",
+            "$0.00"
+          ],
+          "highlight": true,
+          "slider": true
+        }
+      ]
+    },
+    {
+      "rows": [
+        {
+          "Escrows & Prepaid Interest": [
+            "$0.00",
+            "$0.00"
+          ]
+        },
+        {
+          "Estimated Total Cash to Close": [
+            "$0.00",
+            "$0.00"
+          ],
+          "highlight": true,
+          "slider": true
+        }
+      ]
+    },
+    {
+      "rows": [
+        {
+          "Closing Costs Included in Loan": [
+            "$0.00",
+            "$0.00"
+          ]
+        },
+        {
+          "Pre-Paids and Impounds in Loan": [
+            "$0.00",
+            "$0.00"
+          ]
+        },
+        {
+          "Payment Savings": [
+            "$1,048.00",
+            "$1,006.00"
+          ],
+          "highlight": true,
+          "slider": true
+        }
+      ]
+    }
+  ],
+  "benefits": [
+    {
+      "rows": [
+        {
+          "Extra Monthly Payment": [
+            "$1,048.00",
+            "$1,006.00"
+          ],
+          "highlight": false
+        },
+        {
+          "New Term": [
+            "81.25",
+            "82.02"
+          ],
+          "highlight": true
+        },
+        {
+          "Interest Saved over 5 Years": [
+            "$20,927.00",
+            "$22,240.00"
+          ],
+          "highlight": true
+        },
+        {
+          "Interest Saved over Life of Loan": [
+            "$62,782.00",
+            "$66,721.00"
+          ],
+          "highlight": true
+        }
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "name": "Total Monthly Payment",
+      "color": "#4c514f"
+    },
+    {
+      "name": "Interest Saved over 5 Years",
+      "color": "#7cc242"
+    },
+    {
+      "name": "HOA",
+      "color": "#FAC898"
+    },
+    {
+      "name": "New Term",
+      "color": "#2c84c5"
+    }
+  ],
+  "titles": [
+    {
+      "Interest Saved over Life of Loan": "The Power Refinance is calculated by taking your monthly refinances savings and applying it to your monthly payment so you continue to make the same payment monthly. This shows you power of lowering your rate while still making the same payment."
+    }
+  ],
+  "hideTablesRows": [],
+  "hideCurrentRows": [
+    "HOA",
+    "Hazard Insurance"
+  ],
+  "showPowerRefinanceBenefits": true,
+  "showCurrentLoanSection": true
+}
